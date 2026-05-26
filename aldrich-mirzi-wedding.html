@@ -6,625 +6,500 @@
 <title>Aldrich & Mirzi — September 8, 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Cormorant+Upright:wght@300;400;500&family=EB+Garamond:ital,wght@0,400;1,400&family=Cinzel+Decorative:wght@400;700&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
 <style>
-:root {
-  --burg: #6B1B2A;
-  --burg-mid: #8B2A3C;
-  --burg-light: #B04458;
-  --burg-dark: #3D0D18;
-  --burg-pale: #F5E8EB;
-  --em: #1B5E3B;
-  --em-mid: #2D7A52;
-  --em-light: #4A9E70;
-  --em-dark: #0A3322;
-  --em-pale: #E8F5EE;
-  --gold: #C9A84C;
-  --gold-light: #E2C97A;
-  --gold-pale: #FBF5E6;
-  --cream: #FDF8F2;
-  --cream2: #F7EFE4;
-  --cream3: #EFE3D2;
-  --white: #FFFFFF;
-  --ink: #1C1008;
-  --ink-mid: #4A3828;
-  --ink-light: #8A7060;
+:root{
+  --burg:#6B1B2A;--burg-mid:#8B2A3C;--burg-light:#B04458;--burg-dark:#3D0D18;--burg-pale:#F5E8EB;
+  --em:#1B5E3B;--em-mid:#2D7A52;--em-light:#4A9E70;--em-dark:#0A3322;--em-pale:#E8F5EE;
+  --gold:#C9A84C;--gold-light:#E2C97A;--gold-pale:#FBF5E6;
+  --cream:#FDF8F2;--cream2:#F7EFE4;--cream3:#EFE3D2;
+  --white:#FFFFFF;--ink:#1C1008;--ink-mid:#4A3828;--ink-light:#8A7060;
 }
-
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden;}
-
-/* ═══ SCROLLBAR ═══ */
 ::-webkit-scrollbar{width:6px;}
 ::-webkit-scrollbar-track{background:var(--cream3);}
 ::-webkit-scrollbar-thumb{background:var(--burg-mid);border-radius:3px;}
 
-/* ═══ NAV ═══ */
+/* ══ LOADING SCREEN ══ */
+#loader{
+  position:fixed;inset:0;z-index:9999;
+  background:var(--burg-dark);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  transition:opacity 0.8s ease,visibility 0.8s ease;
+}
+#loader.hide{opacity:0;visibility:hidden;}
+.loader-names{
+  font-family:'Cinzel Decorative',serif;
+  font-size:clamp(1.8rem,5vw,3.2rem);
+  color:var(--white);letter-spacing:4px;
+  opacity:0;animation:loaderFadeUp 1s 0.3s forwards;
+  text-align:center;
+}
+.loader-amp{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:0.45em;color:var(--gold);
+  display:block;letter-spacing:8px;margin:6px 0;
+}
+.loader-date{
+  font-family:'Jost',sans-serif;font-weight:200;
+  font-size:0.65rem;letter-spacing:6px;text-transform:uppercase;
+  color:rgba(255,255,255,0.4);margin-top:20px;
+  opacity:0;animation:loaderFadeUp 1s 0.8s forwards;
+}
+.loader-bar-wrap{
+  width:200px;height:1px;background:rgba(255,255,255,0.1);
+  margin-top:40px;overflow:hidden;
+  opacity:0;animation:loaderFadeUp 1s 1s forwards;
+}
+.loader-bar{
+  height:100%;width:0;
+  background:linear-gradient(to right,var(--burg-mid),var(--gold));
+  animation:loaderBar 2s 1.2s ease forwards;
+}
+.loader-floral{
+  position:absolute;width:300px;height:300px;opacity:0.08;
+}
+.loader-floral.tl{top:-40px;left:-40px;}
+.loader-floral.br{bottom:-40px;right:-40px;transform:rotate(180deg);}
+@keyframes loaderFadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
+@keyframes loaderBar{from{width:0;}to{width:100%;}}
+
+/* ══ WELCOME OVERLAY ══ */
+#welcome-screen{
+  position:fixed;inset:0;z-index:9998;
+  background:var(--cream);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:24px;text-align:center;
+  transition:opacity 0.8s,visibility 0.8s;
+}
+#welcome-screen.hide{opacity:0;visibility:hidden;pointer-events:none;}
+.ws-pre{
+  font-family:'Jost',sans-serif;font-weight:200;
+  font-size:0.6rem;letter-spacing:6px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:20px;
+}
+.ws-title{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:clamp(1.6rem,4vw,2.8rem);color:var(--burg);
+  margin-bottom:8px;line-height:1.2;
+}
+.ws-sub{
+  font-family:'EB Garamond',serif;font-style:italic;
+  font-size:1.1rem;color:var(--ink-light);margin-bottom:36px;
+}
+.ws-input-wrap{position:relative;margin-bottom:16px;}
+.ws-input{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:1.1rem;color:var(--ink);
+  border:none;border-bottom:1px solid rgba(201,168,76,0.5);
+  background:transparent;padding:12px 4px;width:280px;
+  outline:none;text-align:center;
+  transition:border-color 0.3s;
+}
+.ws-input:focus{border-bottom-color:var(--burg);}
+.ws-input::placeholder{color:var(--ink-light);font-style:italic;}
+.ws-btn{
+  display:inline-block;margin-top:8px;
+  background:var(--burg);color:var(--white);
+  border:none;padding:14px 40px;cursor:pointer;
+  font-family:'Cinzel Decorative',serif;font-size:0.65rem;letter-spacing:2px;
+  transition:all 0.3s;
+}
+.ws-btn:hover{background:var(--burg-mid);transform:translateY(-2px);}
+.ws-skip{
+  margin-top:16px;font-size:0.75rem;color:var(--ink-light);
+  cursor:pointer;text-decoration:underline;
+  font-family:'Jost',sans-serif;font-weight:300;
+}
+.ws-rule{
+  width:60px;height:1px;margin:24px auto;
+  background:linear-gradient(to right,transparent,var(--gold),transparent);
+}
+
+/* ══ GUEST GREETING BANNER ══ */
+#guest-banner{
+  background:linear-gradient(135deg,var(--burg-dark),var(--em-dark));
+  padding:16px 24px;text-align:center;
+  display:none;
+}
+#guest-banner.show{display:block;}
+.gb-text{
+  font-family:'EB Garamond',serif;font-style:italic;
+  font-size:1.1rem;color:rgba(255,255,255,0.85);
+}
+.gb-name{color:var(--gold-light);font-weight:500;}
+
+/* ══ NAV ══ */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:200;
-  padding:16px 48px;
+  padding:14px 40px;
   display:flex;justify-content:space-between;align-items:center;
-  background:rgba(253,248,242,0.95);
-  backdrop-filter:blur(16px);
-  border-bottom:1px solid rgba(201,168,76,0.2);
-  transition:all 0.4s;
+  background:rgba(253,248,242,0.95);backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(201,168,76,0.2);transition:all 0.4s;
 }
-.nav-logo{
-  font-family:'Cinzel Decorative',serif;
-  font-size:0.8rem;color:var(--burg);
-  letter-spacing:2px;
-}
-nav ul{list-style:none;display:flex;gap:36px;}
+.nav-logo{font-family:'Cinzel Decorative',serif;font-size:0.75rem;color:var(--burg);letter-spacing:2px;}
+nav ul{list-style:none;display:flex;gap:28px;flex-wrap:wrap;}
 nav ul a{
   font-family:'Jost',sans-serif;font-weight:300;
-  font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;
-  text-decoration:none;color:var(--ink-mid);
-  transition:color 0.3s;position:relative;
+  font-size:0.62rem;letter-spacing:2.5px;text-transform:uppercase;
+  text-decoration:none;color:var(--ink-mid);transition:color 0.3s;position:relative;
 }
 nav ul a::after{
-  content:'';position:absolute;bottom:-4px;left:0;right:0;
-  height:1px;background:var(--gold);
-  transform:scaleX(0);transition:transform 0.3s;
+  content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;
+  background:var(--gold);transform:scaleX(0);transition:transform 0.3s;
 }
 nav ul a:hover{color:var(--burg);}
 nav ul a:hover::after{transform:scaleX(1);}
 
-/* ═══ HERO ═══ */
+/* ══ HERO ══ */
 #hero{
-  min-height:100vh;
-  display:flex;flex-direction:column;
+  min-height:100vh;display:flex;flex-direction:column;
   align-items:center;justify-content:center;
   position:relative;overflow:hidden;
-  background:var(--burg-dark);
-  text-align:center;padding:120px 24px 80px;
+  background:var(--burg-dark);text-align:center;padding:120px 24px 80px;
 }
-
-/* Texture overlay */
 #hero::before{
   content:'';position:absolute;inset:0;
-  background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  z-index:0;
+  background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");
 }
-
-.hero-gradient{
-  position:absolute;inset:0;z-index:1;
-  background:
-    radial-gradient(ellipse 100% 80% at 50% 0%, rgba(107,27,42,0.8) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 10% 100%, rgba(27,94,59,0.5) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 40% at 90% 80%, rgba(27,94,59,0.4) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 30% at 80% 10%, rgba(201,168,76,0.08) 0%, transparent 50%);
-}
-
-/* Animated rings */
-.hero-ring{
-  position:absolute;border-radius:50%;z-index:2;
-  top:50%;left:50%;transform:translate(-50%,-50%);
-  border:1px solid rgba(201,168,76,0.12);
-  animation:ringPulse 6s ease-in-out infinite;
-}
-.hero-ring:nth-child(1){width:700px;height:700px;animation-delay:0s;}
-.hero-ring:nth-child(2){width:540px;height:540px;border-color:rgba(201,168,76,0.08);animation-delay:2s;}
-.hero-ring:nth-child(3){width:380px;height:380px;border-color:rgba(201,168,76,0.06);animation-delay:4s;}
-@keyframes ringPulse{
-  0%,100%{opacity:0.6;transform:translate(-50%,-50%) scale(1);}
-  50%{opacity:1;transform:translate(-50%,-50%) scale(1.03);}
-}
-
-/* SVG Floral Hero */
-.hero-floral-tl,.hero-floral-br{
-  position:absolute;z-index:2;opacity:0.18;
-  width:320px;height:320px;
-}
-.hero-floral-tl{top:-40px;left:-60px;transform:rotate(0deg);}
+.hero-gradient{position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse 100% 80% at 50% 0%,rgba(107,27,42,0.8) 0%,transparent 60%),radial-gradient(ellipse 60% 50% at 10% 100%,rgba(27,94,59,0.5) 0%,transparent 60%),radial-gradient(ellipse 50% 40% at 90% 80%,rgba(27,94,59,0.4) 0%,transparent 60%);}
+.hero-ring{position:absolute;border-radius:50%;z-index:2;top:50%;left:50%;transform:translate(-50%,-50%);border:1px solid rgba(201,168,76,0.12);animation:ringPulse 6s ease-in-out infinite;}
+.hero-ring:nth-child(2){width:700px;height:700px;}
+.hero-ring:nth-child(3){width:540px;height:540px;border-color:rgba(201,168,76,0.08);animation-delay:2s;}
+.hero-ring:nth-child(4){width:380px;height:380px;border-color:rgba(201,168,76,0.06);animation-delay:4s;}
+@keyframes ringPulse{0%,100%{opacity:0.6;transform:translate(-50%,-50%) scale(1);}50%{opacity:1;transform:translate(-50%,-50%) scale(1.03);}}
+.hero-floral-tl,.hero-floral-br{position:absolute;z-index:2;opacity:0.18;width:320px;height:320px;}
+.hero-floral-tl{top:-40px;left:-60px;}
 .hero-floral-br{bottom:-40px;right:-60px;transform:rotate(180deg);}
-
 .hero-content{position:relative;z-index:3;}
-
-.hero-eyebrow{
-  font-family:'Jost',sans-serif;font-weight:200;
-  font-size:0.65rem;letter-spacing:8px;text-transform:uppercase;
-  color:var(--gold-light);margin-bottom:32px;
-  opacity:0;animation:fadeUp 1.2s 0.4s cubic-bezier(.16,1,.3,1) forwards;
-}
-
-.hero-initial{
-  font-family:'Cinzel Decorative',serif;
-  font-size:clamp(4.5rem,12vw,9rem);
-  color:var(--white);line-height:0.9;
-  letter-spacing:-2px;
-  opacity:0;animation:fadeUp 1.2s 0.7s cubic-bezier(.16,1,.3,1) forwards;
-  text-shadow:0 0 80px rgba(201,168,76,0.2);
-}
-.hero-initial .amp{
-  font-family:'Playfair Display',serif;
-  font-style:italic;font-weight:400;
-  font-size:0.45em;
-  color:var(--gold);
-  display:block;
-  letter-spacing:6px;
-  margin:8px 0;
-  text-shadow:none;
-}
-
-.hero-fullnames{
-  font-family:'EB Garamond',serif;font-style:italic;
-  font-size:clamp(1rem,2.5vw,1.4rem);
-  color:rgba(255,255,255,0.55);
-  letter-spacing:3px;margin-top:8px;
-  opacity:0;animation:fadeUp 1.2s 1s cubic-bezier(.16,1,.3,1) forwards;
-}
-
-.hero-rule{
-  width:120px;height:1px;margin:36px auto;
-  background:linear-gradient(to right,transparent,var(--gold),transparent);
-  opacity:0;animation:fadeUp 1.2s 1.2s cubic-bezier(.16,1,.3,1) forwards;
-  position:relative;
-}
-.hero-rule::before,.hero-rule::after{
-  content:'◆';position:absolute;top:50%;transform:translateY(-50%);
-  color:var(--gold);font-size:0.4rem;
-}
+.hero-eyebrow{font-family:'Jost',sans-serif;font-weight:200;font-size:0.65rem;letter-spacing:8px;text-transform:uppercase;color:var(--gold-light);margin-bottom:32px;opacity:0;animation:fadeUp 1.2s 0.4s cubic-bezier(.16,1,.3,1) forwards;}
+.hero-initial{font-family:'Cinzel Decorative',serif;font-size:clamp(3.5rem,10vw,8rem);color:var(--white);line-height:0.9;letter-spacing:-2px;opacity:0;animation:fadeUp 1.2s 0.7s cubic-bezier(.16,1,.3,1) forwards;text-shadow:0 0 80px rgba(201,168,76,0.2);}
+.hero-initial .amp{font-family:'Playfair Display',serif;font-style:italic;font-weight:400;font-size:0.45em;color:var(--gold);display:block;letter-spacing:6px;margin:8px 0;text-shadow:none;}
+.hero-fullnames{font-family:'EB Garamond',serif;font-style:italic;font-size:clamp(0.9rem,2vw,1.3rem);color:rgba(255,255,255,0.5);letter-spacing:3px;margin-top:8px;opacity:0;animation:fadeUp 1.2s 1s cubic-bezier(.16,1,.3,1) forwards;}
+.hero-rule{width:120px;height:1px;margin:36px auto;background:linear-gradient(to right,transparent,var(--gold),transparent);opacity:0;animation:fadeUp 1.2s 1.2s cubic-bezier(.16,1,.3,1) forwards;position:relative;}
+.hero-rule::before,.hero-rule::after{content:'◆';position:absolute;top:50%;transform:translateY(-50%);color:var(--gold);font-size:0.4rem;}
 .hero-rule::before{left:-12px;}
 .hero-rule::after{right:-12px;}
-
-.hero-date-block{
-  opacity:0;animation:fadeUp 1.2s 1.4s cubic-bezier(.16,1,.3,1) forwards;
-}
-.hero-date-text{
-  font-family:'Cinzel Decorative',serif;
-  font-size:clamp(0.6rem,1.5vw,0.85rem);
-  letter-spacing:5px;color:rgba(255,255,255,0.8);
-  text-transform:uppercase;
-}
-.hero-venue-text{
-  font-family:'EB Garamond',serif;font-style:italic;
-  font-size:clamp(0.9rem,2vw,1.15rem);
-  color:rgba(255,255,255,0.4);margin-top:10px;
-}
-
-.hero-cta{
-  margin-top:48px;
-  opacity:0;animation:fadeUp 1.2s 1.8s cubic-bezier(.16,1,.3,1) forwards;
-}
-.hero-cta a{
-  display:inline-block;
-  font-family:'Jost',sans-serif;font-weight:300;
-  font-size:0.65rem;letter-spacing:4px;text-transform:uppercase;
-  text-decoration:none;color:var(--gold);
-  border:1px solid rgba(201,168,76,0.4);
-  padding:14px 36px;border-radius:1px;
-  transition:all 0.4s;
-}
+.hero-date-block{opacity:0;animation:fadeUp 1.2s 1.4s cubic-bezier(.16,1,.3,1) forwards;}
+.hero-date-text{font-family:'Cinzel Decorative',serif;font-size:clamp(0.55rem,1.5vw,0.8rem);letter-spacing:5px;color:rgba(255,255,255,0.8);text-transform:uppercase;}
+.hero-venue-text{font-family:'EB Garamond',serif;font-style:italic;font-size:clamp(0.85rem,2vw,1.1rem);color:rgba(255,255,255,0.4);margin-top:10px;}
+.hero-cta{margin-top:48px;opacity:0;animation:fadeUp 1.2s 1.8s cubic-bezier(.16,1,.3,1) forwards;}
+.hero-cta a{display:inline-block;font-family:'Jost',sans-serif;font-weight:300;font-size:0.65rem;letter-spacing:4px;text-transform:uppercase;text-decoration:none;color:var(--gold);border:1px solid rgba(201,168,76,0.4);padding:14px 36px;transition:all 0.4s;}
 .hero-cta a:hover{background:rgba(201,168,76,0.1);border-color:var(--gold);}
-
-.hero-scroll{
-  position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
-  display:flex;flex-direction:column;align-items:center;gap:10px;
-  opacity:0;animation:fadeUp 1.2s 2.2s cubic-bezier(.16,1,.3,1) forwards;
-  cursor:pointer;
-}
+.hero-scroll{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;animation:fadeUp 1.2s 2.2s cubic-bezier(.16,1,.3,1) forwards;cursor:pointer;}
 .scroll-label{font-size:0.5rem;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,0.3);}
 .scroll-line{width:1px;height:48px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollDrop 2s ease-in-out infinite;}
 @keyframes scrollDrop{0%{transform:scaleY(0);transform-origin:top;opacity:1;}100%{transform:scaleY(1);transform-origin:top;opacity:0;}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(32px);}to{opacity:1;transform:translateY(0);}}
 
-/* ═══ COUNTDOWN ═══ */
-#countdown{
-  background:var(--em-dark);
-  padding:72px 24px;text-align:center;
-  position:relative;overflow:hidden;
-}
-#countdown::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse 80% 100% at 50% 50%, rgba(45,122,82,0.3) 0%, transparent 70%);
-}
-.cd-label{
-  font-family:'Jost',sans-serif;font-weight:200;
-  font-size:0.6rem;letter-spacing:6px;text-transform:uppercase;
-  color:var(--gold-light);margin-bottom:48px;position:relative;
-}
+/* ══ COUNTDOWN ══ */
+#countdown{background:var(--em-dark);padding:72px 24px;text-align:center;position:relative;overflow:hidden;}
+#countdown::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 100% at 50% 50%,rgba(45,122,82,0.3) 0%,transparent 70%);}
+.cd-label{font-family:'Jost',sans-serif;font-weight:200;font-size:0.6rem;letter-spacing:6px;text-transform:uppercase;color:var(--gold-light);margin-bottom:48px;position:relative;}
 .cd-grid{display:flex;justify-content:center;gap:4px;flex-wrap:wrap;position:relative;}
-.cd-unit{
-  background:rgba(255,255,255,0.04);
-  border:1px solid rgba(201,168,76,0.15);
-  padding:28px 32px;min-width:110px;
-  position:relative;overflow:hidden;
-}
-.cd-unit::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:1px;
-  background:linear-gradient(to right,transparent,rgba(201,168,76,0.4),transparent);
-}
-.cd-num{
-  font-family:'Cormorant Upright',serif;font-weight:300;
-  font-size:4rem;color:var(--white);line-height:1;
-  display:block;
-}
-.cd-word{
-  font-family:'Jost',sans-serif;font-weight:200;
-  font-size:0.5rem;letter-spacing:3px;text-transform:uppercase;
-  color:rgba(255,255,255,0.35);margin-top:10px;display:block;
-}
-.cd-sep{
-  font-family:'Cormorant Upright',serif;font-weight:300;
-  font-size:3rem;color:rgba(201,168,76,0.3);
-  align-self:center;padding:0 4px;
-}
+.cd-unit{background:rgba(255,255,255,0.04);border:1px solid rgba(201,168,76,0.15);padding:28px 32px;min-width:110px;position:relative;overflow:hidden;}
+.cd-unit::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(201,168,76,0.4),transparent);}
+.cd-num{font-family:'Cormorant Upright',serif;font-weight:300;font-size:4rem;color:var(--white);line-height:1;display:block;}
+.cd-word{font-family:'Jost',sans-serif;font-weight:200;font-size:0.5rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-top:10px;display:block;}
+.cd-sep{font-family:'Cormorant Upright',serif;font-weight:300;font-size:3rem;color:rgba(201,168,76,0.3);align-self:center;padding:0 4px;}
 
-/* ═══ SECTION COMMONS ═══ */
+/* ══ SECTION COMMONS ══ */
 .reveal{opacity:0;transform:translateY(40px);transition:opacity 0.9s cubic-bezier(.16,1,.3,1),transform 0.9s cubic-bezier(.16,1,.3,1);}
 .reveal.visible{opacity:1;transform:none;}
-
-.sec-label{
-  font-family:'Jost',sans-serif;font-weight:200;
-  font-size:0.58rem;letter-spacing:6px;text-transform:uppercase;
-  color:var(--gold);text-align:center;margin-bottom:14px;
-}
-.sec-title{
-  font-family:'Playfair Display',serif;font-style:italic;
-  font-size:clamp(2.4rem,5vw,4rem);
-  text-align:center;line-height:1.1;
-  margin-bottom:8px;
-}
-.sec-sub{
-  font-family:'EB Garamond',serif;font-style:italic;
-  font-size:1.1rem;color:var(--ink-light);
-  text-align:center;margin-bottom:16px;
-}
-.sec-rule{
-  display:flex;align-items:center;justify-content:center;
-  gap:16px;margin:0 auto 56px;
-}
+section{padding:100px 24px;}
+.sec-label{font-family:'Jost',sans-serif;font-weight:200;font-size:0.58rem;letter-spacing:6px;text-transform:uppercase;color:var(--gold);text-align:center;margin-bottom:14px;}
+.sec-title{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(2.2rem,5vw,3.8rem);text-align:center;line-height:1.1;margin-bottom:8px;}
+.sec-sub{font-family:'EB Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--ink-light);text-align:center;margin-bottom:16px;}
+.sec-rule{display:flex;align-items:center;justify-content:center;gap:16px;margin:0 auto 56px;}
 .sec-rule-line{width:60px;height:1px;background:linear-gradient(to right,transparent,var(--gold));}
 .sec-rule-line.rev{background:linear-gradient(to left,transparent,var(--gold));}
 .sec-rule-gem{color:var(--gold);font-size:0.5rem;}
 
-/* ═══ STORY ═══ */
+/* ══ STORY TIMELINE ══ */
 #story{background:var(--cream);padding:100px 24px;}
-.story-wrap{
-  max-width:720px;margin:0 auto;
-  background:var(--white);
-  border:1px solid rgba(201,168,76,0.2);
-  padding:64px 56px;position:relative;
-  text-align:center;
+.timeline{max-width:760px;margin:0 auto;position:relative;padding:0 0 40px;}
+.timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,var(--gold),transparent);transform:translateX(-50%);}
+.tl-item{display:flex;gap:40px;margin-bottom:56px;align-items:flex-start;position:relative;}
+.tl-item:nth-child(even){flex-direction:row-reverse;}
+.tl-item:nth-child(even) .tl-content{text-align:right;}
+.tl-dot{
+  position:absolute;left:50%;top:8px;transform:translateX(-50%);
+  width:14px;height:14px;border-radius:50%;
+  background:var(--gold);border:3px solid var(--cream);
+  box-shadow:0 0 0 1px var(--gold);z-index:2;flex-shrink:0;
 }
-.story-wrap::before,.story-wrap::after{
-  content:'';position:absolute;
-  width:60px;height:60px;
-  border-color:var(--gold);border-style:solid;
-  opacity:0.4;
+.tl-content{flex:1;background:var(--white);padding:28px 32px;border:1px solid rgba(201,168,76,0.15);position:relative;}
+.tl-content::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--burg),var(--gold));}
+.tl-year{font-family:'Cinzel Decorative',serif;font-size:0.65rem;letter-spacing:3px;color:var(--gold);margin-bottom:8px;}
+.tl-title{font-family:'Playfair Display',serif;font-style:italic;font-size:1.3rem;color:var(--burg);margin-bottom:8px;}
+.tl-text{font-family:'EB Garamond',serif;font-style:italic;font-size:1rem;color:var(--ink-light);line-height:1.8;}
+.tl-placeholder{
+  max-width:680px;margin:0 auto;text-align:center;
+  background:var(--white);border:1px dashed rgba(107,27,42,0.2);padding:60px 40px;
 }
-.story-wrap::before{top:-1px;left:-1px;border-width:2px 0 0 2px;}
-.story-wrap::after{bottom:-1px;right:-1px;border-width:0 2px 2px 0;}
-.story-icon{font-size:3rem;display:block;margin-bottom:24px;}
-.story-text{
-  font-family:'EB Garamond',serif;font-style:italic;
-  font-size:1.2rem;color:var(--ink-light);line-height:1.9;
-}
+.tl-placeholder p{font-family:'EB Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--ink-light);line-height:1.8;}
 
-/* ═══ DETAILS ═══ */
+/* ══ DETAILS ══ */
 #details{background:var(--cream2);padding:100px 24px;position:relative;overflow:hidden;}
-#details::before{
-  content:'';position:absolute;
-  width:600px;height:600px;border-radius:50%;
-  top:50%;left:50%;transform:translate(-50%,-50%);
-  background:radial-gradient(circle,rgba(201,168,76,0.04) 0%,transparent 70%);
-}
 .details-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:880px;margin:0 auto;}
-.detail-card{
-  background:var(--white);
-  padding:52px 44px;text-align:center;
-  position:relative;overflow:hidden;
-  border:1px solid rgba(201,168,76,0.15);
-}
-.detail-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:3px;
-  background:linear-gradient(to right,transparent,var(--burg),transparent);
-}
+.detail-card{background:var(--white);padding:52px 44px;text-align:center;position:relative;overflow:hidden;border:1px solid rgba(201,168,76,0.15);}
+.detail-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,transparent,var(--burg),transparent);}
 .detail-card.em::before{background:linear-gradient(to right,transparent,var(--em),transparent);}
-.detail-card-corner{
-  position:absolute;width:80px;height:80px;opacity:0.06;
-}
+.detail-card-corner{position:absolute;width:80px;height:80px;opacity:0.06;}
 .detail-card-corner.tl{top:0;left:0;}
 .detail-card-corner.br{bottom:0;right:0;transform:rotate(180deg);}
 .d-icon{font-size:2.2rem;display:block;margin-bottom:20px;}
-.d-tag{
-  font-family:'Jost',sans-serif;font-weight:200;
-  font-size:0.55rem;letter-spacing:5px;text-transform:uppercase;
-  color:var(--gold);margin-bottom:16px;
-}
-.d-name{
-  font-family:'Playfair Display',serif;font-style:italic;
-  font-size:1.6rem;color:var(--ink);
-  line-height:1.25;margin-bottom:20px;
-}
-.d-info{
-  font-family:'Jost',sans-serif;font-weight:300;
-  font-size:0.9rem;color:var(--ink-light);line-height:2;
-}
-.d-time{
-  font-family:'Cormorant Upright',serif;font-weight:300;
-  font-size:2.8rem;color:var(--burg);margin-top:20px;
-}
+.d-tag{font-family:'Jost',sans-serif;font-weight:200;font-size:0.55rem;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
+.d-name{font-family:'Playfair Display',serif;font-style:italic;font-size:1.6rem;color:var(--ink);line-height:1.25;margin-bottom:20px;}
+.d-info{font-family:'Jost',sans-serif;font-weight:300;font-size:0.9rem;color:var(--ink-light);line-height:2;}
+.d-time{font-family:'Cormorant Upright',serif;font-weight:300;font-size:2.8rem;color:var(--burg);margin-top:20px;}
 .detail-card.em .d-time{color:var(--em);}
 
-/* ═══ GALLERY ═══ */
-#gallery{background:var(--burg-dark);padding:100px 24px;position:relative;overflow:hidden;}
-#gallery::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(107,27,42,0.4) 0%,transparent 70%);
-}
-.gallery-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:8px;max-width:920px;margin:0 auto;position:relative;
-}
-.gallery-item{
-  aspect-ratio:3/4;
-  background:rgba(255,255,255,0.03);
-  border:1px dashed rgba(201,168,76,0.15);
-  display:flex;flex-direction:column;align-items:center;
-  justify-content:center;gap:10px;
-  cursor:pointer;transition:all 0.4s;
-  position:relative;overflow:hidden;
-}
-.gallery-item:hover{background:rgba(255,255,255,0.06);border-color:rgba(201,168,76,0.3);}
-.gallery-item img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;}
-.g-ph{
-  font-family:'Jost',sans-serif;font-weight:200;
-  font-size:0.5rem;letter-spacing:3px;text-transform:uppercase;
-  color:rgba(255,255,255,0.2);text-align:center;padding:0 16px;
-}
-.g-ph-icon{font-size:1.5rem;opacity:0.2;}
-.gallery-upload-btn{
-  display:block;margin:32px auto 0;
-  background:transparent;border:1px solid rgba(201,168,76,0.5);
-  color:var(--gold-light);padding:14px 36px;
+/* ══ VENUE MAP ══ */
+#venuemap{background:var(--cream);padding:100px 24px;position:relative;}
+.map-container{max-width:900px;margin:0 auto;}
+.map-venues{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:40px;}
+.map-venue-card{background:var(--white);border:1px solid rgba(201,168,76,0.2);padding:28px 32px;display:flex;flex-direction:column;gap:12px;}
+.mvc-tag{font-family:'Jost',sans-serif;font-weight:200;font-size:0.55rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);}
+.mvc-name{font-family:'Playfair Display',serif;font-style:italic;font-size:1.3rem;color:var(--burg);}
+.mvc-addr{font-family:'Jost',sans-serif;font-weight:300;font-size:0.85rem;color:var(--ink-light);line-height:1.6;}
+.mvc-btn{
+  display:inline-block;margin-top:4px;
+  background:var(--burg);color:var(--white);
+  text-decoration:none;padding:10px 20px;
   font-family:'Jost',sans-serif;font-weight:300;
-  font-size:0.62rem;letter-spacing:4px;text-transform:uppercase;
-  cursor:pointer;transition:all 0.3s;position:relative;
+  font-size:0.6rem;letter-spacing:3px;text-transform:uppercase;
+  transition:all 0.3s;align-self:flex-start;
 }
+.map-venue-card.em .mvc-name{color:var(--em);}
+.map-venue-card.em .mvc-btn{background:var(--em);}
+.mvc-btn:hover{opacity:0.85;transform:translateY(-2px);}
+
+/* SVG MAP */
+.map-svg-wrap{
+  background:var(--white);border:1px solid rgba(201,168,76,0.2);
+  padding:32px;position:relative;overflow:hidden;
+}
+.map-svg-title{
+  font-family:'Jost',sans-serif;font-weight:200;
+  font-size:0.58rem;letter-spacing:4px;text-transform:uppercase;
+  color:var(--gold);text-align:center;margin-bottom:24px;
+}
+#routeMap{width:100%;height:340px;}
+.map-legend{display:flex;justify-content:center;gap:32px;margin-top:20px;flex-wrap:wrap;}
+.ml-item{display:flex;align-items:center;gap:8px;font-family:'Jost',sans-serif;font-weight:300;font-size:0.78rem;color:var(--ink-mid);}
+.ml-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;}
+
+/* ══ DRESS CODE ══ */
+#dresscode{background:var(--burg-dark);padding:100px 24px;position:relative;overflow:hidden;}
+#dresscode::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(107,27,42,0.5) 0%,transparent 70%);}
+.dc-inner{position:relative;max-width:960px;margin:0 auto;}
+.dc-palette{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-bottom:52px;}
+.dc-swatch-wrap{text-align:center;}
+.dc-swatch{width:68px;height:68px;border-radius:50%;margin:0 auto 10px;border:2px solid rgba(255,255,255,0.15);box-shadow:0 4px 20px rgba(0,0,0,0.3);transition:transform 0.3s;}
+.dc-swatch:hover{transform:scale(1.1);}
+.dc-swatch-name{font-family:'Jost',sans-serif;font-weight:200;font-size:0.55rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.45);}
+.dc-swatch-hex{font-family:'Jost',sans-serif;font-weight:300;font-size:0.62rem;color:var(--gold);margin-top:4px;}
+.dc-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-bottom:40px;}
+.dc-card{background:rgba(255,255,255,0.05);border:1px solid rgba(201,168,76,0.2);padding:36px 28px;text-align:center;transition:all 0.3s;position:relative;}
+.dc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--gold),transparent);}
+.dc-card:hover{background:rgba(255,255,255,0.08);}
+.dc-card-icon{font-size:2.2rem;display:block;margin-bottom:16px;}
+.dc-card-title{font-family:'Cinzel Decorative',serif;font-size:0.62rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:20px;}
+.dc-card-body{font-family:'EB Garamond',serif;font-style:italic;font-size:1rem;color:rgba(255,255,255,0.7);line-height:1.9;}
+.dc-donot{background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.06);padding:32px 40px;text-align:center;max-width:680px;margin:0 auto;}
+.dc-donot-title{font-family:'Jost',sans-serif;font-weight:200;font-size:0.58rem;letter-spacing:5px;text-transform:uppercase;color:rgba(255,120,120,0.7);margin-bottom:20px;}
+.dc-donot-list{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;}
+.dc-donot-item{font-family:'EB Garamond',serif;font-style:italic;font-size:0.95rem;color:rgba(255,255,255,0.5);padding:8px 18px;border:1px solid rgba(255,255,255,0.08);}
+.dc-donot-item::before{content:'✕  ';color:rgba(255,120,120,0.5);font-style:normal;font-size:0.7rem;}
+
+/* ══ GALLERY ══ */
+#gallery{background:var(--burg-dark);padding:100px 24px;position:relative;overflow:hidden;}
+#gallery::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 50%,rgba(107,27,42,0.4) 0%,transparent 70%);}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:920px;margin:0 auto;position:relative;}
+.gallery-item{aspect-ratio:3/4;background:rgba(255,255,255,0.03);border:1px dashed rgba(201,168,76,0.15);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;cursor:pointer;transition:all 0.4s;position:relative;overflow:hidden;}
+.gallery-item:hover{background:rgba(255,255,255,0.06);border-color:rgba(201,168,76,0.3);}
+.gallery-item img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;transition:transform 0.5s;}
+.gallery-item:hover img{transform:scale(1.05);}
+.gallery-item .overlay{position:absolute;inset:0;background:rgba(61,13,24,0.4);opacity:0;transition:opacity 0.3s;display:flex;align-items:center;justify-content:center;}
+.gallery-item:hover .overlay{opacity:1;}
+.g-ph{font-family:'Jost',sans-serif;font-weight:200;font-size:0.5rem;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.2);text-align:center;padding:0 16px;}
+.g-ph-icon{font-size:1.5rem;opacity:0.2;}
+.gallery-upload-btn{display:block;margin:32px auto 0;background:transparent;border:1px solid rgba(201,168,76,0.5);color:var(--gold-light);padding:14px 36px;font-family:'Jost',sans-serif;font-weight:300;font-size:0.62rem;letter-spacing:4px;text-transform:uppercase;cursor:pointer;transition:all 0.3s;}
 .gallery-upload-btn:hover{background:rgba(201,168,76,0.1);border-color:var(--gold);}
 #photo-input{display:none;}
 
-/* ═══ ENTOURAGE ═══ */
+/* Lightbox */
+#lightbox{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0.92);display:none;align-items:center;justify-content:center;}
+#lightbox.active{display:flex;}
+#lightbox img{max-width:90vw;max-height:90vh;object-fit:contain;}
+#lightbox-close{position:absolute;top:24px;right:32px;color:rgba(255,255,255,0.6);font-size:2rem;cursor:pointer;line-height:1;}
+#lightbox-close:hover{color:var(--white);}
+
+/* ══ ENTOURAGE CARDS ══ */
 #entourage{background:var(--cream);padding:100px 24px;}
-.ent-section{margin-bottom:60px;}
-.ent-role{
-  font-family:'Jost',sans-serif;font-weight:200;
-  font-size:0.58rem;letter-spacing:5px;text-transform:uppercase;
-  color:var(--em);text-align:center;margin-bottom:28px;
-}
+.ent-section{margin-bottom:64px;}
+.ent-role{font-family:'Jost',sans-serif;font-weight:200;font-size:0.58rem;letter-spacing:5px;text-transform:uppercase;color:var(--em);text-align:center;margin-bottom:12px;}
 .ent-divider{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:28px;}
 .ent-divider-line{width:40px;height:1px;background:rgba(201,168,76,0.3);}
 .ent-divider-gem{color:var(--gold);font-size:0.45rem;}
-.ent-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;max-width:840px;margin:0 auto;}
-.ent-name{
-  font-family:'EB Garamond',serif;font-style:italic;
-  font-size:1.05rem;color:var(--ink-mid);
-  padding:10px 24px;
-  background:var(--white);
-  border:1px solid rgba(201,168,76,0.2);
-  position:relative;transition:all 0.3s;
+.ent-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;max-width:840px;margin:0 auto;}
+.ent-card{
+  background:var(--white);border:1px solid rgba(201,168,76,0.15);
+  padding:20px 28px;text-align:center;
+  transition:all 0.3s;min-width:140px;position:relative;overflow:hidden;
 }
-.ent-name:hover{border-color:rgba(201,168,76,0.5);color:var(--burg);}
+.ent-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--gold),transparent);transform:scaleX(0);transition:transform 0.3s;}
+.ent-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(107,27,42,0.1);}
+.ent-card:hover::before{transform:scaleX(1);}
+.ent-card-icon{font-size:1.4rem;display:block;margin-bottom:8px;}
+.ent-card-name{font-family:'EB Garamond',serif;font-style:italic;font-size:1.05rem;color:var(--ink-mid);}
+.ent-card-role{font-family:'Jost',sans-serif;font-weight:200;font-size:0.55rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-top:4px;}
 
-/* ═══ RSVP ═══ */
-#rsvp{
-  background:var(--em-dark);
-  padding:100px 24px;text-align:center;
-  position:relative;overflow:hidden;
-}
-#rsvp::before{
-  content:'';position:absolute;inset:0;
-  background-image:url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.012'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/svg%3E");
-}
+/* ══ RSVP ══ */
+#rsvp{background:var(--em-dark);padding:100px 24px;text-align:center;position:relative;overflow:hidden;}
+#rsvp::before{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.012'%3E%3Ccircle cx='20' cy='20' r='10'/%3E%3C/g%3E%3C/svg%3E");}
 .rsvp-inner{position:relative;max-width:640px;margin:0 auto;}
-.rsvp-desc{
-  font-family:'EB Garamond',serif;font-style:italic;
-  font-size:1.2rem;color:rgba(255,255,255,0.65);
-  line-height:1.8;margin-bottom:48px;
-}
-.rsvp-btn{
-  display:inline-block;
-  background:var(--gold);color:var(--em-dark);
-  padding:20px 56px;
-  font-family:'Cinzel Decorative',serif;
-  font-size:0.7rem;letter-spacing:2px;
-  text-decoration:none;font-weight:700;
-  transition:all 0.4s;position:relative;overflow:hidden;
-}
-.rsvp-btn::before{
-  content:'';position:absolute;top:0;left:-100%;
-  width:100%;height:100%;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent);
-  transition:left 0.5s;
-}
+.rsvp-desc{font-family:'EB Garamond',serif;font-style:italic;font-size:1.2rem;color:rgba(255,255,255,0.65);line-height:1.8;margin-bottom:48px;}
+.rsvp-btn{display:inline-block;background:var(--gold);color:var(--em-dark);padding:20px 56px;font-family:'Cinzel Decorative',serif;font-size:0.7rem;letter-spacing:2px;text-decoration:none;font-weight:700;transition:all 0.4s;position:relative;overflow:hidden;}
+.rsvp-btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent);transition:left 0.5s;}
 .rsvp-btn:hover{background:var(--gold-light);transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,0.4);}
 .rsvp-btn:hover::before{left:100%;}
 .rsvp-note{margin-top:28px;font-size:0.8rem;color:rgba(255,255,255,0.3);letter-spacing:2px;font-weight:300;}
 
-/* ═══ FAQ ═══ */
-#faq{background:var(--cream2);padding:100px 24px;}
+/* ══ GIFTS ══ */
+#gifts{background:var(--cream2);padding:100px 24px;}
+.gifts-wrap{max-width:760px;margin:0 auto;text-align:center;}
+.gifts-intro{font-family:'EB Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--ink-light);line-height:1.9;margin-bottom:48px;max-width:560px;margin-left:auto;margin-right:auto;}
+.gifts-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:32px;}
+.gift-card{background:var(--white);border:1px solid rgba(201,168,76,0.15);padding:36px 28px;text-align:center;position:relative;transition:all 0.3s;}
+.gift-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--gold),transparent);}
+.gift-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(107,27,42,0.08);}
+.gift-icon{font-size:2.5rem;display:block;margin-bottom:16px;}
+.gift-title{font-family:'Playfair Display',serif;font-style:italic;font-size:1.3rem;color:var(--burg);margin-bottom:8px;}
+.gift-text{font-family:'Jost',sans-serif;font-weight:300;font-size:0.85rem;color:var(--ink-light);line-height:1.8;}
+.gift-note{font-family:'EB Garamond',serif;font-style:italic;font-size:1rem;color:var(--ink-light);margin-top:24px;}
+
+/* ══ FAQ ══ */
+#faq{background:var(--cream);padding:100px 24px;}
 .faq-list{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:4px;}
 .faq-item{background:var(--white);border:1px solid rgba(201,168,76,0.12);overflow:hidden;}
-.faq-q{
-  width:100%;background:none;border:none;
-  padding:22px 28px;text-align:left;
-  font-family:'Playfair Display',serif;font-style:italic;
-  font-size:1.05rem;color:var(--burg);
-  cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;
-  transition:background 0.2s;
-}
+.faq-q{width:100%;background:none;border:none;padding:22px 28px;text-align:left;font-family:'Playfair Display',serif;font-style:italic;font-size:1.05rem;color:var(--burg);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;transition:background 0.2s;}
 .faq-q:hover{background:rgba(107,27,42,0.02);}
 .faq-arrow{color:var(--gold);font-size:0.9rem;transition:transform 0.4s;flex-shrink:0;}
 .faq-item.open .faq-arrow{transform:rotate(180deg);}
-.faq-a{
-  max-height:0;overflow:hidden;transition:max-height 0.5s ease,padding 0.3s;
-  font-family:'Jost',sans-serif;font-weight:300;
-  font-size:0.9rem;color:var(--ink-mid);line-height:1.9;
-  padding:0 28px;border-top:0 solid rgba(201,168,76,0.1);
-}
+.faq-a{max-height:0;overflow:hidden;transition:max-height 0.5s ease,padding 0.3s;font-family:'Jost',sans-serif;font-weight:300;font-size:0.9rem;color:var(--ink-mid);line-height:1.9;padding:0 28px;border-top:0 solid rgba(201,168,76,0.1);}
 .faq-item.open .faq-a{max-height:240px;padding:0 28px 24px;border-top-width:1px;}
 
-/* ═══ FOOTER ═══ */
-footer{
-  background:var(--burg-dark);
-  text-align:center;padding:96px 24px 56px;
-  position:relative;overflow:hidden;
+/* ══ MUSIC PLAYER ══ */
+#music-player{
+  position:fixed;bottom:24px;left:24px;z-index:300;
+  background:rgba(61,13,24,0.92);
+  border:1px solid rgba(201,168,76,0.25);
+  backdrop-filter:blur(12px);
+  padding:14px 18px;
+  display:flex;align-items:center;gap:12px;
+  min-width:220px;
+  transition:all 0.4s;
+  box-shadow:0 8px 32px rgba(0,0,0,0.3);
 }
-footer::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse 60% 40% at 50% 0%,rgba(107,27,42,0.6) 0%,transparent 60%);
+#music-player.minimized{min-width:auto;}
+.mp-vinyl{
+  width:36px;height:36px;border-radius:50%;
+  background:radial-gradient(circle,#1a1a1a 30%,var(--burg-dark) 30%,var(--burg) 60%,var(--burg-dark) 60%);
+  flex-shrink:0;transition:transform 0.1s;
 }
-.footer-floral{
-  position:absolute;opacity:0.08;
-  width:280px;height:280px;
-}
+.mp-vinyl.spinning{animation:vinylSpin 2s linear infinite;}
+@keyframes vinylSpin{to{transform:rotate(360deg);}}
+.mp-info{flex:1;overflow:hidden;}
+.mp-song{font-family:'EB Garamond',serif;font-style:italic;font-size:0.85rem;color:var(--white);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.mp-artist{font-family:'Jost',sans-serif;font-weight:200;font-size:0.6rem;letter-spacing:2px;color:rgba(255,255,255,0.45);text-transform:uppercase;}
+.mp-controls{display:flex;align-items:center;gap:8px;}
+.mp-btn{background:none;border:none;cursor:pointer;color:var(--gold);font-size:1rem;transition:all 0.2s;padding:4px;}
+.mp-btn:hover{color:var(--gold-light);transform:scale(1.1);}
+.mp-toggle{font-size:0.7rem;color:rgba(255,255,255,0.3);cursor:pointer;font-family:'Jost',sans-serif;}
+.mp-toggle:hover{color:rgba(255,255,255,0.6);}
+#music-player.minimized .mp-info,
+#music-player.minimized .mp-controls{display:none;}
+
+/* ══ FOOTER ══ */
+footer{background:var(--burg-dark);text-align:center;padding:96px 24px 56px;position:relative;overflow:hidden;}
+footer::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 50% 0%,rgba(107,27,42,0.6) 0%,transparent 60%);}
+.footer-floral{position:absolute;opacity:0.08;width:280px;height:280px;}
 .footer-floral.l{top:0;left:-40px;}
 .footer-floral.r{bottom:0;right:-40px;transform:rotate(180deg);}
 .footer-inner{position:relative;}
-.footer-names{
-  font-family:'Cinzel Decorative',serif;
-  font-size:clamp(1.6rem,4vw,2.8rem);
-  color:var(--white);line-height:1.15;margin-bottom:4px;
-}
-.footer-amp{
-  font-family:'Playfair Display',serif;font-style:italic;font-weight:400;
-  font-size:0.5em;color:var(--gold);
-  display:block;letter-spacing:6px;
-}
-.footer-date{
-  font-family:'Jost',sans-serif;font-weight:200;
-  font-size:0.65rem;letter-spacing:5px;text-transform:uppercase;
-  color:rgba(255,255,255,0.35);margin-bottom:40px;
-}
-.footer-rule{
-  width:80px;height:1px;margin:0 auto 32px;
-  background:linear-gradient(to right,transparent,var(--gold),transparent);
-}
-.footer-verse{
-  font-family:'EB Garamond',serif;font-style:italic;
-  font-size:1.1rem;color:rgba(255,255,255,0.45);
-  max-width:480px;margin:0 auto 48px;line-height:1.8;
-}
+.footer-names{font-family:'Cinzel Decorative',serif;font-size:clamp(1.5rem,4vw,2.6rem);color:var(--white);line-height:1.15;margin-bottom:4px;}
+.footer-amp{font-family:'Playfair Display',serif;font-style:italic;font-weight:400;font-size:0.5em;color:var(--gold);display:block;letter-spacing:6px;}
+.footer-date{font-family:'Jost',sans-serif;font-weight:200;font-size:0.65rem;letter-spacing:5px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:40px;}
+.footer-rule{width:80px;height:1px;margin:0 auto 32px;background:linear-gradient(to right,transparent,var(--gold),transparent);}
+.footer-verse{font-family:'EB Garamond',serif;font-style:italic;font-size:1.1rem;color:rgba(255,255,255,0.45);max-width:480px;margin:0 auto 48px;line-height:1.8;}
 .footer-copy{font-size:0.7rem;color:rgba(255,255,255,0.15);letter-spacing:1px;font-weight:200;}
 
-
-/* ═══ DRESS CODE ═══ */
-#dresscode{background:var(--burg-dark);padding:100px 24px;position:relative;overflow:hidden;}
-#dresscode::before{
-  content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(107,27,42,0.5) 0%,transparent 70%);
-}
-.dc-inner{position:relative;max-width:960px;margin:0 auto;}
-.dc-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-bottom:48px;}
-.dc-card{
-  background:rgba(255,255,255,0.05);
-  border:1px solid rgba(201,168,76,0.2);
-  padding:36px 28px;text-align:center;
-  transition:all 0.3s;position:relative;overflow:hidden;
-}
-.dc-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(to right,transparent,var(--gold),transparent);
-}
-.dc-card:hover{background:rgba(255,255,255,0.08);border-color:rgba(201,168,76,0.4);}
-.dc-card-icon{font-size:2.2rem;display:block;margin-bottom:16px;}
-.dc-card-title{
-  font-family:'Cinzel Decorative',serif;
-  font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;
-  color:var(--gold);margin-bottom:20px;
-}
-.dc-card-body{
-  font-family:'EB Garamond',serif;font-style:italic;
-  font-size:1rem;color:rgba(255,255,255,0.7);
-  line-height:1.9;
-}
-
-/* Color swatches */
-.dc-palette{
-  display:flex;justify-content:center;gap:20px;
-  flex-wrap:wrap;margin-bottom:48px;
-}
-.dc-swatch-wrap{text-align:center;}
-.dc-swatch{
-  width:72px;height:72px;border-radius:50%;
-  margin:0 auto 12px;
-  border:2px solid rgba(255,255,255,0.15);
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.4rem;
-  box-shadow:0 4px 20px rgba(0,0,0,0.3);
-  transition:transform 0.3s;
-}
-.dc-swatch:hover{transform:scale(1.08);}
-.dc-swatch-name{
-  font-family:'Jost',sans-serif;font-weight:200;
-  font-size:0.58rem;letter-spacing:3px;text-transform:uppercase;
-  color:rgba(255,255,255,0.5);
-}
-.dc-swatch-hex{
-  font-family:'Jost',sans-serif;font-weight:300;
-  font-size:0.65rem;color:var(--gold);
-  margin-top:4px;
-}
-
-/* Do not wear */
-.dc-donot{
-  background:rgba(0,0,0,0.2);
-  border:1px solid rgba(255,255,255,0.06);
-  padding:32px 40px;text-align:center;
-  max-width:640px;margin:0 auto;
-}
-.dc-donot-title{
-  font-family:'Jost',sans-serif;font-weight:200;
-  font-size:0.58rem;letter-spacing:5px;text-transform:uppercase;
-  color:rgba(255,100,100,0.6);margin-bottom:20px;
-}
-.dc-donot-list{
-  display:flex;flex-wrap:wrap;justify-content:center;gap:10px;
-}
-.dc-donot-item{
-  font-family:'EB Garamond',serif;font-style:italic;
-  font-size:0.95rem;color:rgba(255,255,255,0.5);
-  padding:8px 18px;
-  border:1px solid rgba(255,255,255,0.08);
-  position:relative;
-}
-.dc-donot-item::before{
-  content:'✕ ';color:rgba(255,100,100,0.5);font-style:normal;font-size:0.7rem;
-}
-
-@media(max-width:768px){
-  .dc-grid{grid-template-columns:1fr;}
-  .dc-donot{padding:24px 20px;}
-}
-
-/* ═══ FLORAL SVG (reusable) ═══ */
-.floral-svg{width:100%;height:100%;}
-
-/* ═══ RESPONSIVE ═══ */
+/* ══ RESPONSIVE ══ */
 @media(max-width:768px){
   nav ul{display:none;}
   nav{padding:14px 24px;}
-  .details-grid{grid-template-columns:1fr;max-width:420px;}
+  .details-grid,.dc-grid,.gifts-grid,.map-venues{grid-template-columns:1fr;max-width:420px;margin-left:auto;margin-right:auto;}
   .gallery-grid{grid-template-columns:repeat(2,1fr);}
-  .story-wrap{padding:40px 28px;}
   .cd-sep{display:none;}
   .cd-unit{min-width:80px;padding:20px 16px;}
   .cd-num{font-size:2.8rem;}
+  .timeline::before{left:24px;}
+  .tl-item,.tl-item:nth-child(even){flex-direction:column;padding-left:52px;}
+  .tl-item:nth-child(even) .tl-content{text-align:left;}
+  .tl-dot{left:24px;}
+  #music-player{bottom:16px;left:16px;}
+  .map-venues{grid-template-columns:1fr;}
 }
 </style>
 </head>
 <body>
 
+<!-- LOADING SCREEN -->
+<div id="loader">
+  <svg class="loader-floral tl" viewBox="0 0 300 300" fill="none"><path d="M10 290 Q50 200 150 150 Q200 50 290 10" stroke="#C9A84C" stroke-width="1" fill="none"/><circle cx="60" cy="240" r="14" stroke="#C9A84C" stroke-width="0.8" fill="none"/><circle cx="150" cy="150" r="12" stroke="#C9A84C" stroke-width="0.8" fill="none"/><circle cx="240" cy="60" r="11" stroke="#C9A84C" stroke-width="0.8" fill="none"/></svg>
+  <svg class="loader-floral br" viewBox="0 0 300 300" fill="none"><path d="M10 290 Q50 200 150 150 Q200 50 290 10" stroke="#C9A84C" stroke-width="1" fill="none"/><circle cx="60" cy="240" r="14" stroke="#C9A84C" stroke-width="0.8" fill="none"/><circle cx="150" cy="150" r="12" stroke="#C9A84C" stroke-width="0.8" fill="none"/><circle cx="240" cy="60" r="11" stroke="#C9A84C" stroke-width="0.8" fill="none"/></svg>
+  <div class="loader-names">
+    Aldrich
+    <span class="loader-amp">&amp;</span>
+    Mirzi
+  </div>
+  <p class="loader-date">September 8, 2026</p>
+  <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
+</div>
+
+<!-- WELCOME SCREEN -->
+<div id="welcome-screen">
+  <p class="ws-pre">You are invited</p>
+  <h2 class="ws-title">Aldrich <em>&amp;</em> Mirzi</h2>
+  <p class="ws-sub">September 8, 2026 · Tagum City</p>
+  <div class="ws-rule"></div>
+  <p style="font-family:'EB Garamond',serif;font-style:italic;font-size:1rem;color:var(--ink-light);margin-bottom:28px;">May we know your name, dear guest?</p>
+  <div class="ws-input-wrap">
+    <input class="ws-input" id="guestNameInput" type="text" placeholder="Your name here..." maxlength="40">
+  </div>
+  <button class="ws-btn" onclick="enterSite()">Enter</button>
+  <p class="ws-skip" onclick="enterSite()">Skip</p>
+</div>
+
+<!-- GUEST BANNER -->
+<div id="guest-banner">
+  <p class="gb-text">Welcome, <span class="gb-name" id="guestNameDisplay"></span> — thank you for celebrating with us! 💌</p>
+</div>
+
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">A & M</div>
+  <div class="nav-logo">A &amp; M</div>
   <ul>
     <li><a href="#story">Story</a></li>
     <li><a href="#details">Details</a></li>
+    <li><a href="#venuemap">Venue</a></li>
     <li><a href="#dresscode">Attire</a></li>
     <li><a href="#gallery">Gallery</a></li>
     <li><a href="#entourage">Entourage</a></li>
     <li><a href="#rsvp">RSVP</a></li>
+    <li><a href="#gifts">Gifts</a></li>
     <li><a href="#faq">FAQ</a></li>
   </ul>
 </nav>
@@ -632,74 +507,19 @@ footer::before{
 <!-- HERO -->
 <section id="hero">
   <div class="hero-gradient"></div>
-  <div class="hero-ring"></div>
-  <div class="hero-ring"></div>
-  <div class="hero-ring"></div>
-
-  <!-- Floral corners (SVG inline) -->
-  <svg class="hero-floral-tl" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M10 290 Q50 200 150 150 Q200 50 290 10" stroke="#C9A84C" stroke-width="0.8" fill="none"/>
-    <path d="M10 250 Q60 180 130 140 Q180 60 250 10" stroke="#C9A84C" stroke-width="0.5" fill="none"/>
-    <circle cx="60" cy="240" r="12" stroke="#C9A84C" stroke-width="0.6" fill="none"/>
-    <circle cx="60" cy="240" r="6" stroke="#C9A84C" stroke-width="0.4" fill="none"/>
-    <circle cx="100" cy="200" r="8" stroke="#C9A84C" stroke-width="0.6" fill="none"/>
-    <circle cx="150" cy="150" r="10" stroke="#C9A84C" stroke-width="0.6" fill="none"/>
-    <circle cx="200" cy="100" r="7" stroke="#C9A84C" stroke-width="0.5" fill="none"/>
-    <circle cx="240" cy="60" r="9" stroke="#C9A84C" stroke-width="0.6" fill="none"/>
-    <path d="M55 240 Q58 230 65 235" stroke="#C9A84C" stroke-width="0.5" fill="none"/>
-    <path d="M55 240 Q50 232 58 228" stroke="#C9A84C" stroke-width="0.5" fill="none"/>
-    <path d="M95 200 Q98 190 105 195" stroke="#C9A84C" stroke-width="0.5" fill="none"/>
-    <path d="M95 200 Q90 192 98 188" stroke="#C9A84C" stroke-width="0.5" fill="none"/>
-    <path d="M145 150 Q148 140 155 145" stroke="#C9A84C" stroke-width="0.5" fill="none"/>
-    <path d="M145 150 Q140 142 148 138" stroke="#C9A84C" stroke-width="0.5" fill="none"/>
-    <path d="M10 290 Q30 270 20 250" stroke="#C9A84C" stroke-width="0.4" fill="none"/>
-    <path d="M30 270 Q50 260 40 240" stroke="#C9A84C" stroke-width="0.4" fill="none"/>
-    <path d="M80 210 Q100 200 90 180" stroke="#C9A84C" stroke-width="0.4" fill="none"/>
-    <path d="M130 160 Q150 148 140 128" stroke="#C9A84C" stroke-width="0.4" fill="none"/>
-    <path d="M180 110 Q200 98 190 78" stroke="#C9A84C" stroke-width="0.4" fill="none"/>
-    <path d="M230 60 Q250 48 240 28" stroke="#C9A84C" stroke-width="0.4" fill="none"/>
-    <circle cx="30" cy="275" r="3" fill="#C9A84C" opacity="0.4"/>
-    <circle cx="90" cy="215" r="2.5" fill="#C9A84C" opacity="0.4"/>
-    <circle cx="140" cy="163" r="3" fill="#C9A84C" opacity="0.4"/>
-    <circle cx="190" cy="113" r="2.5" fill="#C9A84C" opacity="0.4"/>
-    <circle cx="245" cy="65" r="3" fill="#C9A84C" opacity="0.4"/>
-  </svg>
-  <svg class="hero-floral-br" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M10 290 Q50 200 150 150 Q200 50 290 10" stroke="#C9A84C" stroke-width="0.8" fill="none"/>
-    <path d="M10 250 Q60 180 130 140 Q180 60 250 10" stroke="#C9A84C" stroke-width="0.5" fill="none"/>
-    <circle cx="60" cy="240" r="12" stroke="#C9A84C" stroke-width="0.6" fill="none"/>
-    <circle cx="60" cy="240" r="6" stroke="#C9A84C" stroke-width="0.4" fill="none"/>
-    <circle cx="100" cy="200" r="8" stroke="#C9A84C" stroke-width="0.6" fill="none"/>
-    <circle cx="150" cy="150" r="10" stroke="#C9A84C" stroke-width="0.6" fill="none"/>
-    <circle cx="200" cy="100" r="7" stroke="#C9A84C" stroke-width="0.5" fill="none"/>
-    <circle cx="240" cy="60" r="9" stroke="#C9A84C" stroke-width="0.6" fill="none"/>
-    <path d="M55 240 Q58 230 65 235" stroke="#C9A84C" stroke-width="0.5" fill="none"/>
-    <path d="M55 240 Q50 232 58 228" stroke="#C9A84C" stroke-width="0.5" fill="none"/>
-    <path d="M95 200 Q98 190 105 195" stroke="#C9A84C" stroke-width="0.5" fill="none"/>
-    <path d="M145 150 Q148 140 155 145" stroke="#C9A84C" stroke-width="0.5" fill="none"/>
-    <circle cx="30" cy="275" r="3" fill="#C9A84C" opacity="0.4"/>
-    <circle cx="90" cy="215" r="2.5" fill="#C9A84C" opacity="0.4"/>
-    <circle cx="140" cy="163" r="3" fill="#C9A84C" opacity="0.4"/>
-    <circle cx="190" cy="113" r="2.5" fill="#C9A84C" opacity="0.4"/>
-    <circle cx="245" cy="65" r="3" fill="#C9A84C" opacity="0.4"/>
-  </svg>
-
+  <div class="hero-ring"></div><div class="hero-ring"></div><div class="hero-ring"></div>
+  <svg class="hero-floral-tl" viewBox="0 0 300 300" fill="none"><path d="M10 290 Q50 200 150 150 Q200 50 290 10" stroke="#C9A84C" stroke-width="0.8" fill="none"/><path d="M10 250 Q60 180 130 140 Q180 60 250 10" stroke="#C9A84C" stroke-width="0.5" fill="none"/><circle cx="60" cy="240" r="12" stroke="#C9A84C" stroke-width="0.6" fill="none"/><circle cx="150" cy="150" r="10" stroke="#C9A84C" stroke-width="0.6" fill="none"/><circle cx="240" cy="60" r="9" stroke="#C9A84C" stroke-width="0.6" fill="none"/><path d="M55 240 Q58 230 65 235" stroke="#C9A84C" stroke-width="0.5" fill="none"/><path d="M55 240 Q50 232 58 228" stroke="#C9A84C" stroke-width="0.5" fill="none"/><path d="M145 150 Q148 140 155 145" stroke="#C9A84C" stroke-width="0.5" fill="none"/><circle cx="30" cy="275" r="3" fill="#C9A84C" opacity="0.4"/><circle cx="90" cy="215" r="2.5" fill="#C9A84C" opacity="0.4"/><circle cx="140" cy="163" r="3" fill="#C9A84C" opacity="0.4"/></svg>
+  <svg class="hero-floral-br" viewBox="0 0 300 300" fill="none"><path d="M10 290 Q50 200 150 150 Q200 50 290 10" stroke="#C9A84C" stroke-width="0.8" fill="none"/><path d="M10 250 Q60 180 130 140 Q180 60 250 10" stroke="#C9A84C" stroke-width="0.5" fill="none"/><circle cx="60" cy="240" r="12" stroke="#C9A84C" stroke-width="0.6" fill="none"/><circle cx="150" cy="150" r="10" stroke="#C9A84C" stroke-width="0.6" fill="none"/><circle cx="240" cy="60" r="9" stroke="#C9A84C" stroke-width="0.6" fill="none"/><path d="M55 240 Q58 230 65 235" stroke="#C9A84C" stroke-width="0.5" fill="none"/><path d="M145 150 Q148 140 155 145" stroke="#C9A84C" stroke-width="0.5" fill="none"/><circle cx="30" cy="275" r="3" fill="#C9A84C" opacity="0.4"/></svg>
   <div class="hero-content">
     <p class="hero-eyebrow">Together with their families</p>
-    <h1 class="hero-initial">
-      Aldrich
-      <span class="amp">&amp;</span>
-      Mirzi
-    </h1>
+    <h1 class="hero-initial">Aldrich<span class="amp">&amp;</span>Mirzi</h1>
     <p class="hero-fullnames">Aldrich A. Batas &nbsp;·&nbsp; Mirzi Nathalie M. Cucharo</p>
     <div class="hero-rule"></div>
     <div class="hero-date-block">
       <p class="hero-date-text">September 8, 2026</p>
-      <p class="hero-venue-text">Sacred Heart of Jesus Quasi-Parish &nbsp;·&nbsp; Palmeras Private Resort</p>
+      <p class="hero-venue-text">Sacred Heart of Jesus Quasi-Parish · Palmeras Private Resort</p>
     </div>
-    <div class="hero-cta">
-      <a href="#rsvp">Kindly RSVP</a>
-    </div>
+    <div class="hero-cta"><a href="#rsvp">Kindly RSVP</a></div>
   </div>
   <div class="hero-scroll" onclick="document.getElementById('countdown').scrollIntoView({behavior:'smooth'})">
     <div class="scroll-line"></div>
@@ -711,46 +531,28 @@ footer::before{
 <div id="countdown">
   <p class="cd-label">Counting Down to Forever</p>
   <div class="cd-grid">
-    <div class="cd-unit">
-      <span class="cd-num" id="cd-days">—</span>
-      <span class="cd-word">Days</span>
-    </div>
+    <div class="cd-unit"><span class="cd-num" id="cd-days">—</span><span class="cd-word">Days</span></div>
     <div class="cd-sep">:</div>
-    <div class="cd-unit">
-      <span class="cd-num" id="cd-hours">—</span>
-      <span class="cd-word">Hours</span>
-    </div>
+    <div class="cd-unit"><span class="cd-num" id="cd-hours">—</span><span class="cd-word">Hours</span></div>
     <div class="cd-sep">:</div>
-    <div class="cd-unit">
-      <span class="cd-num" id="cd-mins">—</span>
-      <span class="cd-word">Minutes</span>
-    </div>
+    <div class="cd-unit"><span class="cd-num" id="cd-mins">—</span><span class="cd-word">Minutes</span></div>
     <div class="cd-sep">:</div>
-    <div class="cd-unit">
-      <span class="cd-num" id="cd-secs">—</span>
-      <span class="cd-word">Seconds</span>
-    </div>
+    <div class="cd-unit"><span class="cd-num" id="cd-secs">—</span><span class="cd-word">Seconds</span></div>
   </div>
 </div>
 
-<!-- OUR STORY -->
+<!-- OUR STORY TIMELINE -->
 <section id="story">
   <div class="reveal">
     <p class="sec-label">How It All Began</p>
     <h2 class="sec-title" style="color:var(--burg)">Our Story</h2>
-    <div class="sec-rule">
-      <div class="sec-rule-line rev"></div>
-      <span class="sec-rule-gem">◆</span>
-      <div class="sec-rule-line"></div>
-    </div>
-    <div class="story-wrap">
-      <span class="story-icon">💌</span>
-      <p class="story-text">
-        This is where your love story will be written.<br><br>
-        Share with us how you met, your favorite memories together,
-        and the beautiful moment you knew this was forever —
-        and we'll make it as elegant as it deserves to be.
-      </p>
+    <div class="sec-rule"><div class="sec-rule-line rev"></div><span class="sec-rule-gem">◆</span><div class="sec-rule-line"></div></div>
+    <div class="tl-placeholder">
+      <span style="font-size:2.5rem;display:block;margin-bottom:20px;">💌</span>
+      <p>This is where your love story will be written.<br><br>
+      Share with us how you met, your favorite memories together,
+      and the beautiful moment you knew this was forever —
+      and we'll craft it into an elegant timeline just like this.</p>
     </div>
   </div>
 </section>
@@ -760,34 +562,131 @@ footer::before{
   <div class="reveal">
     <p class="sec-label">Join Us in Celebration</p>
     <h2 class="sec-title" style="color:var(--burg)">The Celebration</h2>
-    <div class="sec-rule">
-      <div class="sec-rule-line rev"></div>
-      <span class="sec-rule-gem">◆</span>
-      <div class="sec-rule-line"></div>
-    </div>
+    <div class="sec-rule"><div class="sec-rule-line rev"></div><span class="sec-rule-gem">◆</span><div class="sec-rule-line"></div></div>
     <div class="details-grid">
       <div class="detail-card">
         <svg class="detail-card-corner tl" viewBox="0 0 80 80" fill="none"><path d="M5 75 Q5 5 75 5" stroke="#6B1B2A" stroke-width="0.8" fill="none"/><circle cx="20" cy="60" r="5" stroke="#6B1B2A" stroke-width="0.6" fill="none"/><circle cx="40" cy="40" r="4" stroke="#6B1B2A" stroke-width="0.6" fill="none"/><circle cx="60" cy="20" r="5" stroke="#6B1B2A" stroke-width="0.6" fill="none"/></svg>
-        <svg class="detail-card-corner br" viewBox="0 0 80 80" fill="none"><path d="M5 75 Q5 5 75 5" stroke="#6B1B2A" stroke-width="0.8" fill="none"/><circle cx="20" cy="60" r="5" stroke="#6B1B2A" stroke-width="0.6" fill="none"/><circle cx="40" cy="40" r="4" stroke="#6B1B2A" stroke-width="0.6" fill="none"/><circle cx="60" cy="20" r="5" stroke="#6B1B2A" stroke-width="0.6" fill="none"/></svg>
+        <svg class="detail-card-corner br" viewBox="0 0 80 80" fill="none"><path d="M5 75 Q5 5 75 5" stroke="#6B1B2A" stroke-width="0.8" fill="none"/><circle cx="20" cy="60" r="5" stroke="#6B1B2A" stroke-width="0.6" fill="none"/><circle cx="40" cy="40" r="4" stroke="#6B1B2A" stroke-width="0.6" fill="none"/></svg>
         <span class="d-icon">⛪</span>
         <p class="d-tag">Holy Matrimony</p>
         <h3 class="d-name">Sacred Heart of Jesus<br>Quasi-Parish</h3>
-        <p class="d-info">September 8, 2026 · Tuesday<br>Davao City</p>
+        <p class="d-info">September 8, 2026 · Tuesday<br>Tagum City, Davao del Norte</p>
         <p class="d-time">1:30 PM</p>
       </div>
       <div class="detail-card em">
         <svg class="detail-card-corner tl" viewBox="0 0 80 80" fill="none"><path d="M5 75 Q5 5 75 5" stroke="#1B5E3B" stroke-width="0.8" fill="none"/><circle cx="20" cy="60" r="5" stroke="#1B5E3B" stroke-width="0.6" fill="none"/><circle cx="40" cy="40" r="4" stroke="#1B5E3B" stroke-width="0.6" fill="none"/><circle cx="60" cy="20" r="5" stroke="#1B5E3B" stroke-width="0.6" fill="none"/></svg>
-        <svg class="detail-card-corner br" viewBox="0 0 80 80" fill="none"><path d="M5 75 Q5 5 75 5" stroke="#1B5E3B" stroke-width="0.8" fill="none"/><circle cx="20" cy="60" r="5" stroke="#1B5E3B" stroke-width="0.6" fill="none"/><circle cx="40" cy="40" r="4" stroke="#1B5E3B" stroke-width="0.6" fill="none"/><circle cx="60" cy="20" r="5" stroke="#1B5E3B" stroke-width="0.6" fill="none"/></svg>
+        <svg class="detail-card-corner br" viewBox="0 0 80 80" fill="none"><path d="M5 75 Q5 5 75 5" stroke="#1B5E3B" stroke-width="0.8" fill="none"/><circle cx="20" cy="60" r="5" stroke="#1B5E3B" stroke-width="0.6" fill="none"/><circle cx="40" cy="40" r="4" stroke="#1B5E3B" stroke-width="0.6" fill="none"/></svg>
         <span class="d-icon">🥂</span>
         <p class="d-tag">Wedding Reception</p>
         <h3 class="d-name">Palmeras<br>Private Resort</h3>
-        <p class="d-info">September 8, 2026 · Tuesday<br>Davao City</p>
+        <p class="d-info">September 8, 2026 · Tuesday<br>Tagum City, Davao del Norte</p>
         <p class="d-time">4:00 PM</p>
       </div>
     </div>
   </div>
 </section>
 
+<!-- VENUE MAP -->
+<section id="venuemap">
+  <div class="reveal map-container">
+    <p class="sec-label">Find Your Way</p>
+    <h2 class="sec-title" style="color:var(--burg)">Venue Locations</h2>
+    <div class="sec-rule"><div class="sec-rule-line rev"></div><span class="sec-rule-gem">◆</span><div class="sec-rule-line"></div></div>
+    <div class="map-venues">
+      <div class="map-venue-card">
+        <p class="mvc-tag">01 — Ceremony</p>
+        <p class="mvc-name">Sacred Heart of Jesus Quasi-Parish</p>
+        <p class="mvc-addr">CRCM+6V9, Tagum City<br>Davao del Norte, Philippines<br>1:30 PM · September 8, 2026</p>
+        <a class="mvc-btn" href="https://maps.google.com/?q=CRCM+6V9,+Tagum,+Davao+del+Norte" target="_blank">Get Directions →</a>
+      </div>
+      <div class="map-venue-card em">
+        <p class="mvc-tag">02 — Reception</p>
+        <p class="mvc-name">Palmeras Private Resort</p>
+        <p class="mvc-addr">CQGP+QJ Tagum City<br>Davao del Norte, Philippines<br>4:00 PM · September 8, 2026</p>
+        <a class="mvc-btn" href="https://maps.google.com/?q=CQGP+QJ+Tagum,+Davao+del+Norte" target="_blank">Get Directions →</a>
+      </div>
+    </div>
+    <div class="map-svg-wrap">
+      <p class="map-svg-title">Route Overview — Church to Reception</p>
+      <svg id="routeMap" viewBox="0 0 800 340" xmlns="http://www.w3.org/2000/svg">
+        <!-- Background -->
+        <rect width="800" height="340" fill="#F7EFE4" rx="4"/>
+        <!-- Road grid (decorative) -->
+        <line x1="0" y1="170" x2="800" y2="170" stroke="#E0D4C4" stroke-width="8"/>
+        <line x1="200" y1="0" x2="200" y2="340" stroke="#E0D4C4" stroke-width="6"/>
+        <line x1="500" y1="0" x2="500" y2="340" stroke="#E0D4C4" stroke-width="6"/>
+        <line x1="0" y1="80" x2="800" y2="80" stroke="#E8DED0" stroke-width="3"/>
+        <line x1="0" y1="260" x2="800" y2="260" stroke="#E8DED0" stroke-width="3"/>
+        <line x1="100" y1="0" x2="100" y2="340" stroke="#E8DED0" stroke-width="3"/>
+        <line x1="350" y1="0" x2="350" y2="340" stroke="#E8DED0" stroke-width="3"/>
+        <line x1="650" y1="0" x2="650" y2="340" stroke="#E8DED0" stroke-width="3"/>
+        <!-- Main road highlight -->
+        <line x1="0" y1="170" x2="800" y2="170" stroke="#D4C4B0" stroke-width="12"/>
+        <line x1="0" y1="170" x2="800" y2="170" stroke="#EDE0CC" stroke-width="8"/>
+        <!-- Road dashes -->
+        <line x1="0" y1="170" x2="100" y2="170" stroke="white" stroke-width="2" stroke-dasharray="20,15"/>
+        <line x1="120" y1="170" x2="380" y2="170" stroke="white" stroke-width="2" stroke-dasharray="20,15"/>
+        <line x1="420" y1="170" x2="800" y2="170" stroke="white" stroke-width="2" stroke-dasharray="20,15"/>
+
+        <!-- Animated route path -->
+        <path id="routePath" d="M 160 170 Q 250 170 300 170 Q 380 170 420 170 Q 480 170 540 170 Q 600 170 640 170" stroke="#6B1B2A" stroke-width="4" fill="none" stroke-dasharray="10,6" opacity="0.8">
+          <animate attributeName="stroke-dashoffset" from="480" to="0" dur="3s" repeatCount="indefinite"/>
+        </path>
+
+        <!-- Church pin -->
+        <g id="churchPin" transform="translate(160,130)">
+          <circle cx="0" cy="0" r="28" fill="#6B1B2A" opacity="0.15"/>
+          <circle cx="0" cy="0" r="20" fill="#6B1B2A"/>
+          <text x="0" y="7" text-anchor="middle" font-size="16">⛪</text>
+          <!-- Pulse ring -->
+          <circle cx="0" cy="0" r="20" fill="none" stroke="#6B1B2A" stroke-width="2" opacity="0.6">
+            <animate attributeName="r" from="20" to="38" dur="2s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" from="0.6" to="0" dur="2s" repeatCount="indefinite"/>
+          </circle>
+        </g>
+        <text x="160" y="100" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="11" fill="#6B1B2A" font-weight="500">Sacred Heart</text>
+        <text x="160" y="113" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="10" fill="#8A7060">Quasi-Parish</text>
+        <text x="160" y="207" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#C9A84C" letter-spacing="2">1:30 PM</text>
+
+        <!-- Animated car -->
+        <g id="carGroup">
+          <animateMotion dur="3s" repeatCount="indefinite" rotate="auto">
+            <mpath href="#routePath"/>
+          </animateMotion>
+          <rect x="-12" y="-8" width="24" height="14" rx="3" fill="#C9A84C"/>
+          <rect x="-8" y="-14" width="16" height="10" rx="2" fill="#E2C97A"/>
+          <circle cx="-7" cy="7" r="4" fill="#3D0D18"/>
+          <circle cx="7" cy="7" r="4" fill="#3D0D18"/>
+        </g>
+
+        <!-- Reception pin -->
+        <g id="resortPin" transform="translate(640,130)">
+          <circle cx="0" cy="0" r="28" fill="#1B5E3B" opacity="0.15"/>
+          <circle cx="0" cy="0" r="20" fill="#1B5E3B"/>
+          <text x="0" y="7" text-anchor="middle" font-size="16">🥂</text>
+          <circle cx="0" cy="0" r="20" fill="none" stroke="#1B5E3B" stroke-width="2" opacity="0.6">
+            <animate attributeName="r" from="20" to="38" dur="2s" begin="1s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" from="0.6" to="0" dur="2s" begin="1s" repeatCount="indefinite"/>
+          </circle>
+        </g>
+        <text x="640" y="100" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="11" fill="#1B5E3B" font-weight="500">Palmeras</text>
+        <text x="640" y="113" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="10" fill="#8A7060">Private Resort</text>
+        <text x="640" y="207" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#C9A84C" letter-spacing="2">4:00 PM</text>
+
+        <!-- Distance label -->
+        <rect x="330" y="148" width="140" height="22" rx="11" fill="white" opacity="0.8"/>
+        <text x="400" y="163" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#4A3828" letter-spacing="1">Tagum City, Davao del Norte</text>
+
+        <!-- Tagum City label -->
+        <text x="400" y="300" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="13" fill="#8A7060" opacity="0.5">Tagum City</text>
+      </svg>
+      <div class="map-legend">
+        <div class="ml-item"><div class="ml-dot" style="background:#6B1B2A;"></div>Sacred Heart of Jesus Quasi-Parish — 1:30 PM</div>
+        <div class="ml-item"><div class="ml-dot" style="background:#1B5E3B;"></div>Palmeras Private Resort — 4:00 PM</div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- DRESS CODE -->
 <section id="dresscode">
@@ -799,83 +698,27 @@ footer::before{
       <span class="sec-rule-gem">◆</span>
       <div class="sec-rule-line" style="background:linear-gradient(to left,transparent,rgba(201,168,76,0.5));"></div>
     </div>
-
-    <!-- Color Palette -->
-    <p class="sec-sub" style="color:rgba(255,255,255,0.5);margin-bottom:36px;">Our Wedding Color Palette</p>
+    <p class="sec-sub" style="color:rgba(255,255,255,0.45);margin-bottom:36px;">Our Wedding Color Palette</p>
     <div class="dc-palette">
       <div class="dc-swatch-wrap">
-        <div class="dc-swatch" style="background:#6B1B2A;"></div>
+        <div class="dc-swatch" style="background:#6B1B2A;width:90px;height:90px;"></div>
         <p class="dc-swatch-name">Burgundy</p>
         <p class="dc-swatch-hex">#6B1B2A</p>
       </div>
-      <div class="dc-swatch-wrap">
-        <div class="dc-swatch" style="background:#8B2A3C;"></div>
-        <p class="dc-swatch-name">Deep Rose</p>
-        <p class="dc-swatch-hex">#8B2A3C</p>
+      <div class="dc-swatch-wrap" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 32px;">
+        <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:2rem;color:var(--gold);line-height:1;">&amp;</p>
       </div>
       <div class="dc-swatch-wrap">
-        <div class="dc-swatch" style="background:#1B5E3B;"></div>
-        <p class="dc-swatch-name">Emerald</p>
+        <div class="dc-swatch" style="background:#1B5E3B;width:90px;height:90px;"></div>
+        <p class="dc-swatch-name">Emerald Green</p>
         <p class="dc-swatch-hex">#1B5E3B</p>
       </div>
-      <div class="dc-swatch-wrap">
-        <div class="dc-swatch" style="background:#2D7A52;"></div>
-        <p class="dc-swatch-name">Forest Green</p>
-        <p class="dc-swatch-hex">#2D7A52</p>
-      </div>
-      <div class="dc-swatch-wrap">
-        <div class="dc-swatch" style="background:#C9A84C;"></div>
-        <p class="dc-swatch-name">Gold</p>
-        <p class="dc-swatch-hex">#C9A84C</p>
-      </div>
-      <div class="dc-swatch-wrap">
-        <div class="dc-swatch" style="background:#F7EFE4;border-color:rgba(201,168,76,0.4);"></div>
-        <p class="dc-swatch-name">Cream</p>
-        <p class="dc-swatch-hex">#F7EFE4</p>
-      </div>
     </div>
-
-    <!-- Attire Cards -->
     <div class="dc-grid">
-      <div class="dc-card">
-        <span class="dc-card-icon">🤵</span>
-        <p class="dc-card-title">For the Gentlemen</p>
-        <p class="dc-card-body">
-          Formal Barong Tagalog<br>
-          or Long-sleeved Polo<br>
-          with dress pants<br><br>
-          Suit & tie also welcome<br><br>
-          Colors: Burgundy, Emerald,<br>
-          Navy, Black, or Cream
-        </p>
-      </div>
-      <div class="dc-card">
-        <span class="dc-card-icon">👗</span>
-        <p class="dc-card-title">For the Ladies</p>
-        <p class="dc-card-body">
-          Formal gown or<br>
-          cocktail dress<br><br>
-          Elegant midi or<br>
-          maxi dress also lovely<br><br>
-          Colors: Burgundy, Emerald,<br>
-          Gold, Blush, or Nude
-        </p>
-      </div>
-      <div class="dc-card">
-        <span class="dc-card-icon">👶</span>
-        <p class="dc-card-title">For the Little Ones</p>
-        <p class="dc-card-body">
-          Smart casual to<br>
-          semi-formal attire<br><br>
-          Comfort is key<br>
-          for the little ones!<br><br>
-          Matching our colors<br>
-          is a sweet touch 💚
-        </p>
-      </div>
+      <div class="dc-card"><span class="dc-card-icon">🤵</span><p class="dc-card-title">Gentlemen</p><p class="dc-card-body">Formal Barong Tagalog<br>or Long-sleeved Polo<br>with dress pants<br><br>Suit & tie also welcome<br><br>Colors: Burgundy, Emerald,<br>Navy, Black, or Cream</p></div>
+      <div class="dc-card"><span class="dc-card-icon">👗</span><p class="dc-card-title">Ladies</p><p class="dc-card-body">Formal gown or<br>cocktail dress<br><br>Elegant midi or<br>maxi dress also lovely<br><br>Colors: Burgundy, Emerald,<br>Gold, Blush, or Nude</p></div>
+      <div class="dc-card"><span class="dc-card-icon">👶</span><p class="dc-card-title">Little Ones</p><p class="dc-card-body">Smart casual to<br>semi-formal attire<br><br>Comfort is key<br>for the little ones!<br><br>Matching our colors<br>is a sweet touch 💚</p></div>
     </div>
-
-    <!-- Do Not Wear -->
     <div class="dc-donot">
       <p class="dc-donot-title">Please Kindly Avoid</p>
       <div class="dc-donot-list">
@@ -909,84 +752,75 @@ footer::before{
       <div class="gallery-item"><span class="g-ph-icon">🌸</span><p class="g-ph">Prenup Photo</p></div>
     </div>
     <input type="file" id="photo-input" accept="image/*" multiple>
-    <button class="gallery-upload-btn" onclick="document.getElementById('photo-input').click()">
-      + Upload Prenup Photos
-    </button>
+    <button class="gallery-upload-btn" onclick="document.getElementById('photo-input').click()">+ Upload Prenup Photos</button>
   </div>
 </section>
+
+<!-- Lightbox -->
+<div id="lightbox"><span id="lightbox-close" onclick="closeLightbox()">✕</span><img id="lightbox-img" src="" alt=""></div>
 
 <!-- ENTOURAGE -->
 <section id="entourage">
   <div class="reveal">
     <p class="sec-label">Those Who Stand With Us</p>
     <h2 class="sec-title" style="color:var(--burg)">Our Entourage</h2>
-    <div class="sec-rule">
-      <div class="sec-rule-line rev"></div>
-      <span class="sec-rule-gem">◆</span>
-      <div class="sec-rule-line"></div>
-    </div>
-
+    <div class="sec-rule"><div class="sec-rule-line rev"></div><span class="sec-rule-gem">◆</span><div class="sec-rule-line"></div></div>
     <div class="ent-section">
       <p class="ent-role">Principal Sponsors — Ninong</p>
       <div class="ent-divider"><div class="ent-divider-line"></div><span class="ent-divider-gem">◆</span><div class="ent-divider-line"></div></div>
       <div class="ent-grid">
-        <span class="ent-name">Ninong 1</span>
-        <span class="ent-name">Ninong 2</span>
-        <span class="ent-name">Ninong 3</span>
-        <span class="ent-name">Ninong 4</span>
+        <div class="ent-card"><span class="ent-card-icon">👔</span><p class="ent-card-name">Ninong 1</p><p class="ent-card-role">Principal Sponsor</p></div>
+        <div class="ent-card"><span class="ent-card-icon">👔</span><p class="ent-card-name">Ninong 2</p><p class="ent-card-role">Principal Sponsor</p></div>
+        <div class="ent-card"><span class="ent-card-icon">👔</span><p class="ent-card-name">Ninong 3</p><p class="ent-card-role">Principal Sponsor</p></div>
+        <div class="ent-card"><span class="ent-card-icon">👔</span><p class="ent-card-name">Ninong 4</p><p class="ent-card-role">Principal Sponsor</p></div>
       </div>
     </div>
-
     <div class="ent-section">
       <p class="ent-role">Principal Sponsors — Ninang</p>
       <div class="ent-divider"><div class="ent-divider-line"></div><span class="ent-divider-gem">◆</span><div class="ent-divider-line"></div></div>
       <div class="ent-grid">
-        <span class="ent-name">Ninang 1</span>
-        <span class="ent-name">Ninang 2</span>
-        <span class="ent-name">Ninang 3</span>
-        <span class="ent-name">Ninang 4</span>
+        <div class="ent-card"><span class="ent-card-icon">👘</span><p class="ent-card-name">Ninang 1</p><p class="ent-card-role">Principal Sponsor</p></div>
+        <div class="ent-card"><span class="ent-card-icon">👘</span><p class="ent-card-name">Ninang 2</p><p class="ent-card-role">Principal Sponsor</p></div>
+        <div class="ent-card"><span class="ent-card-icon">👘</span><p class="ent-card-name">Ninang 3</p><p class="ent-card-role">Principal Sponsor</p></div>
+        <div class="ent-card"><span class="ent-card-icon">👘</span><p class="ent-card-name">Ninang 4</p><p class="ent-card-role">Principal Sponsor</p></div>
       </div>
     </div>
-
     <div class="ent-section">
       <p class="ent-role">Best Man &amp; Groomsmen</p>
       <div class="ent-divider"><div class="ent-divider-line"></div><span class="ent-divider-gem">◆</span><div class="ent-divider-line"></div></div>
       <div class="ent-grid">
-        <span class="ent-name">Best Man</span>
-        <span class="ent-name">Groomsman 1</span>
-        <span class="ent-name">Groomsman 2</span>
-        <span class="ent-name">Groomsman 3</span>
+        <div class="ent-card"><span class="ent-card-icon">🤵</span><p class="ent-card-name">Best Man</p><p class="ent-card-role">Best Man</p></div>
+        <div class="ent-card"><span class="ent-card-icon">🤵</span><p class="ent-card-name">Groomsman 1</p><p class="ent-card-role">Groomsman</p></div>
+        <div class="ent-card"><span class="ent-card-icon">🤵</span><p class="ent-card-name">Groomsman 2</p><p class="ent-card-role">Groomsman</p></div>
+        <div class="ent-card"><span class="ent-card-icon">🤵</span><p class="ent-card-name">Groomsman 3</p><p class="ent-card-role">Groomsman</p></div>
       </div>
     </div>
-
     <div class="ent-section">
       <p class="ent-role">Maid of Honor &amp; Bridesmaids</p>
       <div class="ent-divider"><div class="ent-divider-line"></div><span class="ent-divider-gem">◆</span><div class="ent-divider-line"></div></div>
       <div class="ent-grid">
-        <span class="ent-name">Maid of Honor</span>
-        <span class="ent-name">Bridesmaid 1</span>
-        <span class="ent-name">Bridesmaid 2</span>
-        <span class="ent-name">Bridesmaid 3</span>
+        <div class="ent-card"><span class="ent-card-icon">💐</span><p class="ent-card-name">Maid of Honor</p><p class="ent-card-role">Maid of Honor</p></div>
+        <div class="ent-card"><span class="ent-card-icon">💐</span><p class="ent-card-name">Bridesmaid 1</p><p class="ent-card-role">Bridesmaid</p></div>
+        <div class="ent-card"><span class="ent-card-icon">💐</span><p class="ent-card-name">Bridesmaid 2</p><p class="ent-card-role">Bridesmaid</p></div>
+        <div class="ent-card"><span class="ent-card-icon">💐</span><p class="ent-card-name">Bridesmaid 3</p><p class="ent-card-role">Bridesmaid</p></div>
       </div>
     </div>
-
     <div class="ent-section">
       <p class="ent-role">Secondary Sponsors</p>
       <div class="ent-divider"><div class="ent-divider-line"></div><span class="ent-divider-gem">◆</span><div class="ent-divider-line"></div></div>
       <div class="ent-grid">
-        <span class="ent-name">Veil — Pair 1</span>
-        <span class="ent-name">Cord — Pair 2</span>
-        <span class="ent-name">Candle — Pair 3</span>
+        <div class="ent-card"><span class="ent-card-icon">🕯️</span><p class="ent-card-name">Veil Pair</p><p class="ent-card-role">Veil Sponsor</p></div>
+        <div class="ent-card"><span class="ent-card-icon">🪢</span><p class="ent-card-name">Cord Pair</p><p class="ent-card-role">Cord Sponsor</p></div>
+        <div class="ent-card"><span class="ent-card-icon">🕯️</span><p class="ent-card-name">Candle Pair</p><p class="ent-card-role">Candle Sponsor</p></div>
       </div>
     </div>
-
     <div class="ent-section" style="margin-bottom:0;">
       <p class="ent-role">Flower Girls &amp; Ring Bearer</p>
       <div class="ent-divider"><div class="ent-divider-line"></div><span class="ent-divider-gem">◆</span><div class="ent-divider-line"></div></div>
       <div class="ent-grid">
-        <span class="ent-name">Flower Girl 1</span>
-        <span class="ent-name">Flower Girl 2</span>
-        <span class="ent-name">Ring Bearer</span>
+        <div class="ent-card"><span class="ent-card-icon">🌸</span><p class="ent-card-name">Flower Girl 1</p><p class="ent-card-role">Flower Girl</p></div>
+        <div class="ent-card"><span class="ent-card-icon">🌸</span><p class="ent-card-name">Flower Girl 2</p><p class="ent-card-role">Flower Girl</p></div>
+        <div class="ent-card"><span class="ent-card-icon">💍</span><p class="ent-card-name">Ring Bearer</p><p class="ent-card-role">Ring Bearer</p></div>
       </div>
     </div>
   </div>
@@ -1002,15 +836,42 @@ footer::before{
       <span class="sec-rule-gem">◆</span>
       <div class="sec-rule-line" style="background:linear-gradient(to left,transparent,rgba(201,168,76,0.5));"></div>
     </div>
-    <p class="rsvp-desc">
-      Your presence is the greatest gift you could give us.
-      Kindly let us know if you will be joining us as we begin
-      this beautiful journey together.
-    </p>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSc4phMm0tsrtgOYh7C-0CgsGJ4GBN0Sxv83ax7EyAyXlT37Ug/viewform?usp=publish-editor" target="_blank" class="rsvp-btn">
-      Confirm Attendance
-    </a>
+    <p class="rsvp-desc">Your presence is the greatest gift you could give us. Kindly let us know if you will be joining us as we begin this beautiful journey together.</p>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSc4phMm0tsrtgOYh7C-0CgsGJ4GBN0Sxv83ax7EyAyXlT37Ug/viewform?usp=publish-editor" target="_blank" class="rsvp-btn">Confirm Attendance</a>
     <p class="rsvp-note">Kindly RSVP on or before August 25, 2026</p>
+  </div>
+</section>
+
+<!-- GIFTS -->
+<section id="gifts">
+  <div class="reveal gifts-wrap">
+    <p class="sec-label">Wedding Gifts</p>
+    <h2 class="sec-title" style="color:var(--burg)">Gift Registry</h2>
+    <div class="sec-rule"><div class="sec-rule-line rev"></div><span class="sec-rule-gem">◆</span><div class="sec-rule-line"></div></div>
+    <p class="gifts-intro">Your love and presence is truly the greatest gift. But if you wish to bless us as we begin our new life together, we would be deeply grateful for any of the following.</p>
+    <div class="gifts-grid" style="grid-template-columns:1fr 1fr;">
+      <div class="gift-card">
+        <span class="gift-icon">💵</span>
+        <h3 class="gift-title">Cash Gift</h3>
+        <p class="gift-text">A monetary gift towards our new life together would be deeply cherished and appreciated.</p>
+      </div>
+      <div class="gift-card">
+        <span class="gift-icon">✉️</span>
+        <h3 class="gift-title">Heartfelt Message</h3>
+        <p class="gift-text">A sincere note or letter in our guestbook on the day of the wedding is a treasure we will keep forever.</p>
+      </div>
+      <div class="gift-card">
+        <span class="gift-icon">🚗</span>
+        <h3 class="gift-title">Car</h3>
+        <p class="gift-text">A brand new car would be a wonderful blessing for our family's journey ahead. Any brand welcome! 😄</p>
+      </div>
+      <div class="gift-card">
+        <span class="gift-icon">🏡</span>
+        <h3 class="gift-title">House &amp; Lot</h3>
+        <p class="gift-text">A cozy home to build our life and family in — the ultimate gift of love and security. Davao area preferred! 😄</p>
+      </div>
+    </div>
+    <p class="gift-note">Your presence is truly our greatest gift. Everything else is just a sweet bonus! 🙏💚</p>
   </div>
 </section>
 
@@ -1019,116 +880,96 @@ footer::before{
   <div class="reveal">
     <p class="sec-label">Good to Know</p>
     <h2 class="sec-title" style="color:var(--burg);">Frequently Asked Questions</h2>
-    <div class="sec-rule">
-      <div class="sec-rule-line rev"></div>
-      <span class="sec-rule-gem">◆</span>
-      <div class="sec-rule-line"></div>
-    </div>
+    <div class="sec-rule"><div class="sec-rule-line rev"></div><span class="sec-rule-gem">◆</span><div class="sec-rule-line"></div></div>
     <div class="faq-list">
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">What is the dress code?<span class="faq-arrow">▾</span></button>
-        <div class="faq-a">The dress code is <strong>Formal Attire</strong>. We warmly encourage our guests to wear our wedding colors — Burgundy and Emerald Green — but any elegant formal wear is most welcome. Out of respect for the bride, kindly avoid wearing white or ivory.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Is parking available at the venues?<span class="faq-arrow">▾</span></button>
-        <div class="faq-a">Yes! Parking is available at Palmeras Private Resort for the reception. We recommend arriving a little early to secure a spot. Carpooling with fellow guests is also a wonderful idea.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Can I bring a plus one?<span class="faq-arrow">▾</span></button>
-        <div class="faq-a">Our invitations are extended to those named on the invitation card. If your invitation includes a plus one, their name will be indicated. Please note their name in your RSVP form.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Are children welcome?<span class="faq-arrow">▾</span></button>
-        <div class="faq-a">We adore your little ones! Children are welcome at both the ceremony and reception. Kindly indicate in your RSVP if you will be bringing children so we can prepare accordingly.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">What about gifts?<span class="faq-arrow">▾</span></button>
-        <div class="faq-a">Your presence truly is our greatest gift. Should you wish to give something, a monetary gift or a heartfelt note in our guestbook would be deeply cherished as we begin our new chapter together.</div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q" onclick="toggleFaq(this)">Can I take photos during the ceremony?<span class="faq-arrow">▾</span></button>
-        <div class="faq-a">We kindly ask that you be fully present with us during the ceremony and follow the guidelines of Sacred Heart of Jesus Quasi-Parish regarding photography. Please feel free to capture all the joy at the reception — our photographer will take care of the sacred moments.</div>
-      </div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What is the dress code?<span class="faq-arrow">▾</span></button><div class="faq-a">The dress code is <strong>Formal Attire</strong>. We warmly encourage our guests to wear our wedding colors — Burgundy and Emerald Green. Out of respect for the bride, kindly avoid wearing white or ivory. Please also avoid sleeveless attire inside the church.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Is parking available at the venues?<span class="faq-arrow">▾</span></button><div class="faq-a">Yes! Parking is available at Palmeras Private Resort for the reception. We recommend arriving a little early to secure a spot. Carpooling with fellow guests is also a wonderful idea.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Can I bring a plus one?<span class="faq-arrow">▾</span></button><div class="faq-a">Our invitations are extended to those named on the invitation card. If your invitation includes a plus one, their name will be indicated. Please note their name in your RSVP form.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Are children welcome?<span class="faq-arrow">▾</span></button><div class="faq-a">We adore your little ones! Children are welcome at both the ceremony and reception. Kindly indicate in your RSVP if you will be bringing children so we can prepare accordingly.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What about gifts?<span class="faq-arrow">▾</span></button><div class="faq-a">Your presence truly is our greatest gift. Should you wish to give something, a monetary gift or a heartfelt note in our guestbook would be deeply cherished. Kindly no large appliances — we appreciate your thoughtfulness!</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Can I take photos during the ceremony?<span class="faq-arrow">▾</span></button><div class="faq-a">We kindly ask that you be fully present with us during the ceremony and follow the guidelines of Sacred Heart of Jesus Quasi-Parish. Please feel free to capture all the joy at the reception — our photographer will take care of the sacred moments.</div></div>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <svg class="footer-floral l" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M10 290 Q50 200 150 150 Q200 50 290 10" stroke="#C9A84C" stroke-width="1" fill="none"/>
-    <circle cx="60" cy="240" r="14" stroke="#C9A84C" stroke-width="0.8" fill="none"/>
-    <circle cx="150" cy="150" r="12" stroke="#C9A84C" stroke-width="0.8" fill="none"/>
-    <circle cx="240" cy="60" r="11" stroke="#C9A84C" stroke-width="0.8" fill="none"/>
-    <path d="M55 240 Q58 226 67 233" stroke="#C9A84C" stroke-width="0.7" fill="none"/>
-    <path d="M55 240 Q48 230 57 224" stroke="#C9A84C" stroke-width="0.7" fill="none"/>
-    <path d="M145 150 Q148 136 157 143" stroke="#C9A84C" stroke-width="0.7" fill="none"/>
-    <path d="M145 150 Q138 140 147 134" stroke="#C9A84C" stroke-width="0.7" fill="none"/>
-  </svg>
-  <svg class="footer-floral r" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M10 290 Q50 200 150 150 Q200 50 290 10" stroke="#C9A84C" stroke-width="1" fill="none"/>
-    <circle cx="60" cy="240" r="14" stroke="#C9A84C" stroke-width="0.8" fill="none"/>
-    <circle cx="150" cy="150" r="12" stroke="#C9A84C" stroke-width="0.8" fill="none"/>
-    <circle cx="240" cy="60" r="11" stroke="#C9A84C" stroke-width="0.8" fill="none"/>
-    <path d="M55 240 Q58 226 67 233" stroke="#C9A84C" stroke-width="0.7" fill="none"/>
-    <path d="M55 240 Q48 230 57 224" stroke="#C9A84C" stroke-width="0.7" fill="none"/>
-    <path d="M145 150 Q148 136 157 143" stroke="#C9A84C" stroke-width="0.7" fill="none"/>
-  </svg>
+  <svg class="footer-floral l" viewBox="0 0 300 300" fill="none"><path d="M10 290 Q50 200 150 150 Q200 50 290 10" stroke="#C9A84C" stroke-width="1" fill="none"/><circle cx="60" cy="240" r="14" stroke="#C9A84C" stroke-width="0.8" fill="none"/><circle cx="150" cy="150" r="12" stroke="#C9A84C" stroke-width="0.8" fill="none"/><circle cx="240" cy="60" r="11" stroke="#C9A84C" stroke-width="0.8" fill="none"/></svg>
+  <svg class="footer-floral r" viewBox="0 0 300 300" fill="none"><path d="M10 290 Q50 200 150 150 Q200 50 290 10" stroke="#C9A84C" stroke-width="1" fill="none"/><circle cx="60" cy="240" r="14" stroke="#C9A84C" stroke-width="0.8" fill="none"/><circle cx="150" cy="150" r="12" stroke="#C9A84C" stroke-width="0.8" fill="none"/><circle cx="240" cy="60" r="11" stroke="#C9A84C" stroke-width="0.8" fill="none"/></svg>
   <div class="footer-inner">
-    <div class="footer-names">
-      Aldrich
-      <span class="footer-amp">&amp;</span>
-      Mirzi
-    </div>
+    <div class="footer-names">Aldrich<span class="footer-amp">&amp;</span>Mirzi</div>
     <p class="footer-date">September 8 · 2026</p>
     <div class="footer-rule"></div>
-    <p class="footer-verse">
-      "Two are better than one, because they have a good return for their labor."<br>
-      <em style="font-size:0.85em;opacity:0.6;">— Ecclesiastes 4:9</em>
-    </p>
+    <p class="footer-verse">"Two are better than one, because they have a good return for their labor."<br><em style="font-size:0.85em;opacity:0.6;">— Ecclesiastes 4:9</em></p>
     <p class="footer-copy">Made with love · Aldrich A. Batas &amp; Mirzi Nathalie M. Cucharo</p>
   </div>
 </footer>
 
+<!-- MUSIC PLAYER -->
+<div id="music-player">
+  <div class="mp-vinyl" id="mpVinyl"></div>
+  <div class="mp-info">
+    <p class="mp-song" id="mpSong">Your Wedding Song</p>
+    <p class="mp-artist" id="mpArtist">Add your song later</p>
+  </div>
+  <div class="mp-controls">
+    <button class="mp-btn" onclick="toggleMusic()" id="mpPlayBtn">▶</button>
+  </div>
+  <span class="mp-toggle" onclick="toggleMinimize()" title="Minimize">—</span>
+  <audio id="weddingAudio" loop></audio>
+</div>
+
 <script>
+// ── LOADER ──
+window.addEventListener('load',()=>{
+  setTimeout(()=>{
+    document.getElementById('loader').classList.add('hide');
+    // Check URL for guest name
+    const params=new URLSearchParams(window.location.search);
+    const urlName=params.get('name');
+    if(urlName){
+      showGuestWelcome(decodeURIComponent(urlName));
+    } else {
+      setTimeout(()=>document.getElementById('welcome-screen').style.display='flex',800);
+    }
+  },3000);
+});
+
+// ── WELCOME SCREEN ──
+function enterSite(){
+  const name=document.getElementById('guestNameInput').value.trim();
+  document.getElementById('welcome-screen').classList.add('hide');
+  if(name) showGuestWelcome(name);
+}
+function showGuestWelcome(name){
+  document.getElementById('guestNameDisplay').textContent=name;
+  const banner=document.getElementById('guest-banner');
+  banner.classList.add('show');
+  setTimeout(()=>{banner.style.opacity='0';banner.style.transition='opacity 1s';},6000);
+  setTimeout(()=>{banner.classList.remove('show');},7000);
+}
+document.getElementById('guestNameInput').addEventListener('keydown',e=>{if(e.key==='Enter')enterSite();});
+
 // ── COUNTDOWN ──
 function updateCountdown(){
   const wedding=new Date('2026-09-08T13:30:00');
-  const now=new Date();
-  const diff=wedding-now;
-  if(diff<=0){
-    ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id=>document.getElementById(id).textContent='00');
-    return;
-  }
-  const d=Math.floor(diff/86400000);
-  const h=Math.floor((diff%86400000)/3600000);
-  const m=Math.floor((diff%3600000)/60000);
-  const s=Math.floor((diff%60000)/1000);
-  document.getElementById('cd-days').textContent=String(d).padStart(3,'0');
-  document.getElementById('cd-hours').textContent=String(h).padStart(2,'0');
-  document.getElementById('cd-mins').textContent=String(m).padStart(2,'0');
-  document.getElementById('cd-secs').textContent=String(s).padStart(2,'0');
+  const now=new Date();const diff=wedding-now;
+  if(diff<=0){['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id=>document.getElementById(id).textContent='00');return;}
+  document.getElementById('cd-days').textContent=String(Math.floor(diff/86400000)).padStart(3,'0');
+  document.getElementById('cd-hours').textContent=String(Math.floor((diff%86400000)/3600000)).padStart(2,'0');
+  document.getElementById('cd-mins').textContent=String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
+  document.getElementById('cd-secs').textContent=String(Math.floor((diff%60000)/1000)).padStart(2,'0');
 }
-updateCountdown();
-setInterval(updateCountdown,1000);
+updateCountdown();setInterval(updateCountdown,1000);
 
 // ── SCROLL REVEAL ──
-const observer=new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);}
-  });
-},{threshold:0.12});
+const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);}});},{threshold:0.1});
 document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 
 // ── FAQ ──
-function toggleFaq(btn){
-  const item=btn.parentElement;
-  const isOpen=item.classList.contains('open');
-  document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
-  if(!isOpen)item.classList.add('open');
-}
+function toggleFaq(btn){const item=btn.parentElement;const isOpen=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!isOpen)item.classList.add('open');}
 
-// ── GALLERY ──
+// ── GALLERY + LIGHTBOX ──
 document.getElementById('photo-input').addEventListener('change',function(e){
   const files=Array.from(e.target.files);
   const grid=document.getElementById('galleryGrid');
@@ -1136,21 +977,40 @@ document.getElementById('photo-input').addEventListener('change',function(e){
   files.forEach(file=>{
     const reader=new FileReader();
     reader.onload=(ev)=>{
-      const div=document.createElement('div');
-      div.className='gallery-item';
-      const img=document.createElement('img');
-      img.src=ev.target.result;img.alt='Wedding photo';
-      div.appendChild(img);grid.appendChild(div);
+      const div=document.createElement('div');div.className='gallery-item';
+      const img=document.createElement('img');img.src=ev.target.result;img.alt='Wedding photo';
+      const overlay=document.createElement('div');overlay.className='overlay';overlay.innerHTML='<span style="color:white;font-size:1.5rem;">🔍</span>';
+      div.appendChild(img);div.appendChild(overlay);
+      div.onclick=()=>openLightbox(ev.target.result);
+      grid.appendChild(div);
     };
     reader.readAsDataURL(file);
   });
 });
+function openLightbox(src){document.getElementById('lightbox-img').src=src;document.getElementById('lightbox').classList.add('active');}
+function closeLightbox(){document.getElementById('lightbox').classList.remove('active');}
+document.getElementById('lightbox').addEventListener('click',e=>{if(e.target===e.currentTarget)closeLightbox();});
+
+// ── MUSIC PLAYER ──
+let isPlaying=false;let isMinimized=false;
+function toggleMusic(){
+  const audio=document.getElementById('weddingAudio');
+  const btn=document.getElementById('mpPlayBtn');
+  const vinyl=document.getElementById('mpVinyl');
+  if(!audio.src||audio.src===window.location.href){
+    alert('Boss, i-add pa ang song! Ingna lang ko kung naa na imong song file.');return;
+  }
+  if(isPlaying){audio.pause();btn.textContent='▶';vinyl.classList.remove('spinning');isPlaying=false;}
+  else{audio.play();btn.textContent='⏸';vinyl.classList.add('spinning');isPlaying=true;}
+}
+function toggleMinimize(){
+  const player=document.getElementById('music-player');
+  isMinimized=!isMinimized;
+  player.classList.toggle('minimized',isMinimized);
+}
 
 // ── NAV SHADOW ──
-window.addEventListener('scroll',()=>{
-  document.querySelector('nav').style.boxShadow=
-    window.scrollY>60?'0 4px 24px rgba(0,0,0,0.07)':'none';
-});
+window.addEventListener('scroll',()=>{document.querySelector('nav').style.boxShadow=window.scrollY>60?'0 4px 24px rgba(0,0,0,0.07)':'none';});
 </script>
 </body>
 </html>
