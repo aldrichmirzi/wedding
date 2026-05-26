@@ -496,11 +496,201 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
 .masonry-ph:nth-child(5){min-height:200px;}
 @media(max-width:768px){.masonry-grid{columns:2;}.ribbon::before,.ribbon::after{display:none;}}
 
+
+/* ══ CUSTOM RING CURSOR ══ */
+*, *::before, *::after { cursor: none !important; }
+#custom-cursor {
+  position: fixed; pointer-events: none; z-index: 99999;
+  width: 32px; height: 32px;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease;
+}
+#cursor-trail {
+  position: fixed; pointer-events: none; z-index: 99998;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: rgba(201,168,76,0.4);
+  transform: translate(-50%, -50%);
+  transition: left 0.15s ease, top 0.15s ease;
+}
+#custom-cursor.clicking { transform: translate(-50%, -50%) scale(0.8); }
+
+/* ══ GUESTBOOK ══ */
+#guestbook { background: var(--cream2); padding: 100px 24px; }
+.gb-wrap { max-width: 760px; margin: 0 auto; }
+.gb-form {
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(201,168,76,0.2);
+  padding: 40px; margin-bottom: 40px;
+  position: relative;
+}
+.gb-form::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(to right,transparent,var(--gold),transparent); }
+.gb-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.gb-input, .gb-textarea {
+  width: 100%; padding: 12px 16px;
+  font-family: 'EB Garamond', serif; font-style: italic; font-size: 1rem;
+  border: 1px solid rgba(201,168,76,0.25); background: rgba(253,248,242,0.8);
+  color: var(--ink); outline: none; transition: border-color 0.3s;
+  resize: none;
+}
+.gb-input:focus, .gb-textarea:focus { border-color: var(--burg); }
+.gb-input::placeholder, .gb-textarea::placeholder { color: var(--ink-light); }
+.gb-submit {
+  background: var(--burg); color: var(--white); border: none;
+  padding: 14px 40px; cursor: pointer;
+  font-family: 'Cinzel Decorative', serif; font-size: 0.62rem; letter-spacing: 2px;
+  transition: all 0.3s; width: 100%; margin-top: 8px;
+}
+.gb-submit:hover { background: var(--burg-mid); transform: translateY(-2px); }
+.gb-messages { display: flex; flex-direction: column; gap: 16px; }
+.gb-msg {
+  background: rgba(255,255,255,0.85); backdrop-filter: blur(8px);
+  border: 1px solid rgba(201,168,76,0.15);
+  padding: 24px 28px; position: relative;
+  animation: gbFadeIn 0.5s ease;
+}
+@keyframes gbFadeIn { from{opacity:0;transform:translateY(16px);} to{opacity:1;transform:none;} }
+.gb-msg::before { content:'"'; position:absolute; top:8px; left:16px; font-family:'Playfair Display',serif; font-size:3rem; color:rgba(201,168,76,0.2); line-height:1; }
+.gb-msg-name { font-family:'Cinzel Decorative',serif; font-size:0.62rem; letter-spacing:2px; color:var(--burg); margin-bottom:8px; }
+.gb-msg-text { font-family:'EB Garamond',serif; font-style:italic; font-size:1.05rem; color:var(--ink-mid); line-height:1.7; }
+.gb-msg-date { font-family:'Jost',sans-serif; font-weight:200; font-size:0.65rem; color:var(--ink-light); margin-top:8px; letter-spacing:1px; }
+.gb-empty { text-align:center; font-family:'EB Garamond',serif; font-style:italic; font-size:1.1rem; color:var(--ink-light); padding:40px; }
+
+/* ══ WEDDING PROGRAM ══ */
+#program { background: var(--burg-dark); padding: 100px 24px; position:relative; overflow:hidden; }
+#program::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(107,27,42,0.5) 0%,transparent 70%); }
+.prog-inner { max-width: 680px; margin: 0 auto; position:relative; }
+.prog-timeline { position: relative; padding-left: 40px; }
+.prog-timeline::before { content:''; position:absolute; left:12px; top:0; bottom:0; width:1px; background:linear-gradient(to bottom,transparent,var(--gold),transparent); }
+.prog-item { position:relative; margin-bottom:36px; }
+.prog-item:last-child { margin-bottom:0; }
+.prog-dot { position:absolute; left:-34px; top:4px; width:14px; height:14px; border-radius:50%; background:var(--gold); border:3px solid var(--burg-dark); box-shadow:0 0 0 1px var(--gold); }
+.prog-time { font-family:'Cinzel Decorative',serif; font-size:0.58rem; letter-spacing:3px; color:var(--gold); margin-bottom:4px; }
+.prog-event { font-family:'Playfair Display',serif; font-style:italic; font-size:1.2rem; color:var(--white); margin-bottom:4px; }
+.prog-desc { font-family:'Jost',sans-serif; font-weight:200; font-size:0.85rem; color:rgba(255,255,255,0.45); line-height:1.7; }
+
+/* ══ SHARE BUTTON ══ */
+#share-fab {
+  position: fixed; bottom: 24px; right: 24px; z-index: 300;
+  background: var(--burg); color: var(--white);
+  width: 52px; height: 52px; border-radius: 50%;
+  display: flex; align-items:center; justify-content:center;
+  font-size: 1.2rem; cursor: pointer;
+  box-shadow: 0 4px 20px rgba(107,27,42,0.4);
+  transition: all 0.3s; border: none;
+}
+#share-fab:hover { background: var(--burg-mid); transform: scale(1.1); }
+.share-menu {
+  position: fixed; bottom: 88px; right: 24px; z-index: 300;
+  display: none; flex-direction: column; gap: 8px; align-items: flex-end;
+}
+.share-menu.open { display: flex; }
+.share-opt {
+  background: rgba(61,13,24,0.95); backdrop-filter:blur(10px);
+  border: 1px solid rgba(201,168,76,0.2);
+  color: var(--white); padding: 10px 18px;
+  font-family: 'Jost',sans-serif; font-weight:300;
+  font-size: 0.75rem; letter-spacing:2px;
+  cursor: pointer; white-space:nowrap;
+  transition: all 0.3s; border:none; text-align:right;
+}
+.share-opt:hover { background: var(--burg); }
+
+/* ══ SAVE DATE BUTTON ══ */
+.save-date-btn {
+  display: inline-block; margin-top: 24px;
+  background: transparent; border: 1px solid rgba(201,168,76,0.4);
+  color: var(--gold); padding: 12px 32px;
+  font-family: 'Jost',sans-serif; font-weight:300;
+  font-size: 0.65rem; letter-spacing:3px; text-transform:uppercase;
+  cursor: pointer; transition: all 0.3s; text-decoration:none;
+}
+.save-date-btn:hover { background:rgba(201,168,76,0.1); border-color:var(--gold); }
+
+@media(max-width:768px){
+  .gb-row { grid-template-columns:1fr; }
+  #share-fab { bottom:80px; }
+  .share-menu { bottom:144px; }
+}
+
+
+/* ══ PRENUP TEASER VIDEO ══ */
+#teaser { background: var(--ink); padding: 100px 24px; position:relative; overflow:hidden; }
+#teaser::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 70% 60% at 50% 50%, rgba(107,27,42,0.3) 0%, transparent 70%); }
+.teaser-inner { max-width: 860px; margin: 0 auto; position:relative; }
+.teaser-frame {
+  position:relative; width:100%;
+  aspect-ratio: 16/9;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(201,168,76,0.2);
+  overflow:hidden;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.6);
+}
+.teaser-frame iframe {
+  width:100%; height:100%; border:none; display:block;
+}
+.teaser-placeholder {
+  width:100%; height:100%;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  gap:16px; padding:40px; text-align:center;
+  background: linear-gradient(135deg, var(--burg-dark), var(--ink));
+}
+.teaser-play-icon {
+  width:72px; height:72px; border-radius:50%;
+  background: rgba(201,168,76,0.15);
+  border: 2px solid rgba(201,168,76,0.4);
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.8rem;
+  animation: pulsePl 2s ease-in-out infinite;
+}
+@keyframes pulsePl {
+  0%,100%{box-shadow:0 0 0 0 rgba(201,168,76,0.3);}
+  50%{box-shadow:0 0 0 16px rgba(201,168,76,0);}
+}
+.teaser-ph-title {
+  font-family:'Playfair Display',serif; font-style:italic;
+  font-size:1.4rem; color:var(--white);
+}
+.teaser-ph-sub {
+  font-family:'Jost',sans-serif; font-weight:200;
+  font-size:0.75rem; letter-spacing:3px; text-transform:uppercase;
+  color:rgba(255,255,255,0.35);
+}
+.teaser-caption {
+  text-align:center; margin-top:24px;
+  font-family:'EB Garamond',serif; font-style:italic;
+  font-size:1.05rem; color:rgba(255,255,255,0.4);
+}
+
 </style>
 </head>
 <body>
 
 <!-- LOADING SCREEN -->
+
+<!-- CUSTOM CURSOR -->
+<div id="custom-cursor">
+  <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="16" cy="16" r="12" stroke="#C9A84C" stroke-width="1.5" fill="none" opacity="0.9"/>
+    <circle cx="16" cy="16" r="6" stroke="#C9A84C" stroke-width="1" fill="none" opacity="0.6"/>
+    <circle cx="16" cy="16" r="2" fill="#C9A84C" opacity="0.8"/>
+    <line x1="16" y1="2" x2="16" y2="8" stroke="#C9A84C" stroke-width="1" opacity="0.5"/>
+    <line x1="16" y1="24" x2="16" y2="30" stroke="#C9A84C" stroke-width="1" opacity="0.5"/>
+    <line x1="2" y1="16" x2="8" y2="16" stroke="#C9A84C" stroke-width="1" opacity="0.5"/>
+    <line x1="24" y1="16" x2="30" y2="16" stroke="#C9A84C" stroke-width="1" opacity="0.5"/>
+  </svg>
+</div>
+<div id="cursor-trail"></div>
+
+<!-- SHARE FAB -->
+<button id="share-fab" onclick="toggleShare()" title="Share">📤</button>
+<div class="share-menu" id="shareMenu">
+  <button class="share-opt" onclick="shareViber()">📱 Share via Viber</button>
+  <button class="share-opt" onclick="shareFacebook()">💙 Share on Facebook</button>
+  <button class="share-opt" onclick="copyLink()">🔗 Copy Link</button>
+</div>
+
 <div id="loader">
   <svg class="loader-floral tl" viewBox="0 0 300 300" fill="none"><path d="M10 290 Q50 200 150 150 Q200 50 290 10" stroke="#C9A84C" stroke-width="1" fill="none"/><circle cx="60" cy="240" r="14" stroke="#C9A84C" stroke-width="0.8" fill="none"/><circle cx="150" cy="150" r="12" stroke="#C9A84C" stroke-width="0.8" fill="none"/><circle cx="240" cy="60" r="11" stroke="#C9A84C" stroke-width="0.8" fill="none"/></svg>
   <svg class="loader-floral br" viewBox="0 0 300 300" fill="none"><path d="M10 290 Q50 200 150 150 Q200 50 290 10" stroke="#C9A84C" stroke-width="1" fill="none"/><circle cx="60" cy="240" r="14" stroke="#C9A84C" stroke-width="0.8" fill="none"/><circle cx="150" cy="150" r="12" stroke="#C9A84C" stroke-width="0.8" fill="none"/><circle cx="240" cy="60" r="11" stroke="#C9A84C" stroke-width="0.8" fill="none"/></svg>
@@ -541,9 +731,12 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
     <li><a href="#venuemap">Venue</a></li>
     <li><a href="#dresscode">Attire</a></li>
     <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#teaser">Video</a></li>
     <li><a href="#entourage">Entourage</a></li>
     <li><a href="#rsvp">RSVP</a></li>
+    <li><a href="#program">Program</a></li>
     <li><a href="#gifts">Gifts</a></li>
+    <li><a href="#guestbook">Guestbook</a></li>
     <li><a href="#faq">FAQ</a></li>
   </ul>
 </nav>
@@ -809,6 +1002,32 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
 <div id="lightbox"><span id="lightbox-close" onclick="closeLightbox()">✕</span><img id="lightbox-img" src="" alt=""></div>
 
 <div class="wave-divider" style="background:var(--burg-dark);"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,30 C200,60 400,0 600,30 C800,60 1000,0 1200,30 L1200,60 L0,60 Z" fill="#FDF8F2"/></svg></div>
+
+<div class="wave-divider" style="background:var(--burg-dark);"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,20 C400,60 800,0 1200,50 L1200,60 L0,60 Z" fill="#1C1008"/></svg></div>
+<!-- PRENUP TEASER VIDEO -->
+<section id="teaser">
+  <div class="reveal teaser-inner">
+    <p class="sec-label" style="color:var(--gold-light);">Before The Big Day</p>
+    <h2 class="sec-title" style="color:var(--white);">Prenup Teaser</h2>
+    <div class="sec-rule">
+      <div class="sec-rule-line rev" style="background:linear-gradient(to right,transparent,rgba(201,168,76,0.5));"></div>
+      <span class="sec-rule-gem">◆</span>
+      <div class="sec-rule-line" style="background:linear-gradient(to left,transparent,rgba(201,168,76,0.5));"></div>
+    </div>
+    <div class="teaser-frame">
+      <div class="teaser-placeholder" id="teaserPlaceholder">
+        <div class="teaser-play-icon">▶</div>
+        <p class="teaser-ph-title">Prenup Teaser Coming Soon</p>
+        <p class="teaser-ph-sub">Aldrich &amp; Mirzi · 2026</p>
+      </div>
+      <!-- When ready, replace the div above with: -->
+      <!-- <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" allowfullscreen allow="autoplay"></iframe> -->
+    </div>
+    <p class="teaser-caption">A glimpse of our love story — before forever begins. 💍</p>
+  </div>
+</section>
+<div class="wave-divider" style="background:var(--ink);"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,50 C300,0 900,60 1200,20 L1200,60 L0,60 Z" fill="#FDF8F2"/></svg></div>
+
 <!-- ENTOURAGE -->
 <section id="entourage">
   <div class="reveal">
@@ -894,6 +1113,101 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
 </section>
 
 <div class="wave-divider" style="background:var(--em-dark);"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,40 C200,0 500,60 800,20 C1000,0 1100,40 1200,30 L1200,60 L0,60 Z" fill="#F7EFE4"/></svg></div>
+<div class="wave-divider" style="background:var(--cream);"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,20 C400,60 800,0 1200,50 L1200,60 L0,60 Z" fill="#3D0D18"/></svg></div>
+
+<!-- WEDDING PROGRAM -->
+<section id="program">
+  <div class="reveal prog-inner">
+    <p class="sec-label" style="color:var(--gold-light);">September 8, 2026</p>
+    <h2 class="sec-title" style="color:var(--white)">Wedding Program</h2>
+    <div class="sec-rule">
+      <div class="sec-rule-line rev" style="background:linear-gradient(to right,transparent,rgba(201,168,76,0.5));"></div>
+      <span class="sec-rule-gem">◆</span>
+      <div class="sec-rule-line" style="background:linear-gradient(to left,transparent,rgba(201,168,76,0.5));"></div>
+    </div>
+    <div class="prog-timeline">
+      <div class="prog-item">
+        <div class="prog-dot"></div>
+        <p class="prog-time">1:00 PM</p>
+        <p class="prog-event">Guest Arrival</p>
+        <p class="prog-desc">Guests arrive and are seated at Sacred Heart of Jesus Quasi-Parish</p>
+      </div>
+      <div class="prog-item">
+        <div class="prog-dot"></div>
+        <p class="prog-time">1:30 PM</p>
+        <p class="prog-event">Wedding Ceremony</p>
+        <p class="prog-desc">The Holy Matrimony of Aldrich &amp; Mirzi begins</p>
+      </div>
+      <div class="prog-item">
+        <div class="prog-dot"></div>
+        <p class="prog-time">2:30 PM</p>
+        <p class="prog-event">Newlywed Photo Session</p>
+        <p class="prog-desc">Photo opportunity with the couple, family &amp; entourage</p>
+      </div>
+      <div class="prog-item">
+        <div class="prog-dot"></div>
+        <p class="prog-time">3:30 PM</p>
+        <p class="prog-event">Transfer to Reception</p>
+        <p class="prog-desc">Guests proceed to Palmeras Private Resort</p>
+      </div>
+      <div class="prog-item">
+        <div class="prog-dot"></div>
+        <p class="prog-time">4:00 PM</p>
+        <p class="prog-event">Reception Begins</p>
+        <p class="prog-desc">Cocktail hour, dinner, and celebrations begin</p>
+      </div>
+      <div class="prog-item">
+        <div class="prog-dot"></div>
+        <p class="prog-time">5:00 PM</p>
+        <p class="prog-event">Grand Entrance &amp; First Dance</p>
+        <p class="prog-desc">The newlyweds make their grand entrance</p>
+      </div>
+      <div class="prog-item">
+        <div class="prog-dot"></div>
+        <p class="prog-time">5:30 PM</p>
+        <p class="prog-event">Dinner &amp; Program</p>
+        <p class="prog-desc">Toasts, messages, and dinner with family &amp; friends</p>
+      </div>
+      <div class="prog-item">
+        <div class="prog-dot"></div>
+        <p class="prog-time">7:00 PM</p>
+        <p class="prog-event">Dancing &amp; Celebration</p>
+        <p class="prog-desc">Dance floor opens — let the celebration continue!</p>
+      </div>
+    </div>
+    <!-- Save the Date -->
+    <div style="text-align:center;margin-top:48px;">
+      <a class="save-date-btn" href="data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0ABEGIN:VEVENT%0ASUMMARY:Aldrich%20%26%20Mirzi%20Wedding%0ADTSTART:20260908T053000Z%0ADTEND:20260908T110000Z%0ALOCATION:Sacred%20Heart%20of%20Jesus%20Quasi-Parish%2C%20Tagum%20City%0ADESCRIPTION:Wedding%20of%20Aldrich%20A.%20Batas%20%26%20Mirzi%20Nathalie%20M.%20Cucharo%0AEND:VEVENT%0AEND:VCALENDAR" download="aldrich-mirzi-wedding.ics">
+        📅 Save the Date to Calendar
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="wave-divider" style="background:var(--burg-dark);"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,50 C300,0 900,60 1200,20 L1200,60 L0,60 Z" fill="#F7EFE4"/></svg></div>
+<!-- GUESTBOOK -->
+
+<!-- GUESTBOOK -->
+<section id="guestbook">
+  <div class="reveal gb-wrap">
+    <div class="ribbon-wrap"><span class="ribbon">Leave a Message</span></div>
+    <h2 class="sec-title" style="color:var(--burg)">Guestbook</h2>
+    <div class="sec-rule"><div class="sec-rule-line rev"></div><span class="sec-rule-gem">◆</span><div class="sec-rule-line"></div></div>
+    <p class="sec-sub" style="margin-bottom:36px;">Leave a note for Aldrich &amp; Mirzi — your words will be treasured forever.</p>
+    <div class="gb-form">
+      <div class="gb-row">
+        <input class="gb-input" id="gb-name" type="text" placeholder="Your name..." maxlength="50">
+        <input class="gb-input" id="gb-relation" type="text" placeholder="Relation (e.g. Friend of Groom)..." maxlength="50">
+      </div>
+      <textarea class="gb-textarea" id="gb-message" rows="4" placeholder="Write your heartfelt message here..."></textarea>
+      <button class="gb-submit" onclick="submitMessage()">Leave a Message ◆</button>
+    </div>
+    <div class="gb-messages" id="gbMessages">
+      <div class="gb-empty">Be the first to leave a message! 💌</div>
+    </div>
+  </div>
+</section>
+
 <!-- GIFTS -->
 <section id="gifts">
   <div class="reveal gifts-wrap">
@@ -908,9 +1222,9 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
         <p class="gift-text">A monetary gift towards our new life together would be deeply cherished and appreciated.</p>
       </div>
       <div class="gift-card">
-        <span class="gift-icon">✉️</span>
-        <h3 class="gift-title">Heartfelt Message</h3>
-        <p class="gift-text">A sincere note or letter in our guestbook on the day of the wedding is a treasure we will keep forever.</p>
+        <span class="gift-icon">✈️</span>
+        <h3 class="gift-title">Travel for Two</h3>
+        <p class="gift-text">A trip abroad with accommodation for our honeymoon would be the most unforgettable gift — any destination welcome! 😄🌍</p>
       </div>
       <div class="gift-card">
         <span class="gift-icon">🚗</span>
@@ -923,7 +1237,7 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
         <p class="gift-text">A cozy home to build our life and family in — the ultimate gift of love and security. Davao area preferred! 😄</p>
       </div>
     </div>
-    <p class="gift-note">Your presence is truly our greatest gift. Everything else is just a sweet bonus! 🙏💚</p>
+    <p class="gift-note">We are grateful for any gift — big or small, cash or kind! Your generosity means the world to us. 🙏💚😄</p>
   </div>
 </section>
 
@@ -939,7 +1253,7 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Is parking available at the venues?<span class="faq-arrow">▾</span></button><div class="faq-a">Yes! Parking is available at Palmeras Private Resort for the reception. We recommend arriving a little early to secure a spot. Carpooling with fellow guests is also a wonderful idea.</div></div>
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Can I bring a plus one?<span class="faq-arrow">▾</span></button><div class="faq-a">Our invitations are extended to those named on the invitation card. If your invitation includes a plus one, their name will be indicated. Please note their name in your RSVP form.</div></div>
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Are children welcome?<span class="faq-arrow">▾</span></button><div class="faq-a">We adore your little ones! Children are welcome at both the ceremony and reception. Kindly indicate in your RSVP if you will be bringing children so we can prepare accordingly.</div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What about gifts?<span class="faq-arrow">▾</span></button><div class="faq-a">Your presence truly is our greatest gift. Should you wish to give something, a monetary gift or a heartfelt note in our guestbook would be deeply cherished. Kindly no large appliances — we appreciate your thoughtfulness!</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What about gifts?<span class="faq-arrow">▾</span></button><div class="faq-a">Your presence truly is our greatest gift. Should you wish to give something, we humbly and gladly accept anything — big or small, near or far! Every gift is a blessing and we are grateful for all of it. 😄🙏</div></div>
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Can I take photos during the ceremony?<span class="faq-arrow">▾</span></button><div class="faq-a">We kindly ask that you be fully present with us during the ceremony and follow the guidelines of Sacred Heart of Jesus Quasi-Parish. Please feel free to capture all the joy at the reception — our photographer will take care of the sacred moments.</div></div>
     </div>
   </div>
@@ -1136,6 +1450,63 @@ document.getElementById('photo-input').addEventListener('change',function(e){
     reader.readAsDataURL(file);
   });
 });
+
+
+// ── CUSTOM RING CURSOR ──
+(function(){
+  const cursor=document.getElementById('custom-cursor');
+  const trail=document.getElementById('cursor-trail');
+  if(!cursor||!trail)return;
+  document.addEventListener('mousemove',e=>{
+    cursor.style.left=e.clientX+'px';cursor.style.top=e.clientY+'px';
+    setTimeout(()=>{ trail.style.left=e.clientX+'px'; trail.style.top=e.clientY+'px'; },80);
+  });
+  document.addEventListener('mousedown',()=>cursor.classList.add('clicking'));
+  document.addEventListener('mouseup',()=>cursor.classList.remove('clicking'));
+})();
+
+// ── SHARE FUNCTIONS ──
+function toggleShare(){document.getElementById('shareMenu').classList.toggle('open');}
+function shareFacebook(){window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(window.location.href),'_blank');}
+function shareViber(){window.open('viber://forward?text='+encodeURIComponent('You are invited to the wedding of Aldrich & Mirzi! '+window.location.href));}
+function copyLink(){
+  navigator.clipboard.writeText(window.location.href).then(()=>{
+    const btn=document.querySelector('.share-opt:last-child');
+    const orig=btn.textContent; btn.textContent='✅ Copied!';
+    setTimeout(()=>btn.textContent=orig,2000);
+  });
+}
+document.addEventListener('click',e=>{
+  const fab=document.getElementById('share-fab');
+  const menu=document.getElementById('shareMenu');
+  if(fab&&menu&&!fab.contains(e.target)&&!menu.contains(e.target)) menu.classList.remove('open');
+});
+
+// ── GUESTBOOK ──
+let messages=[];
+function submitMessage(){
+  const name=document.getElementById('gb-name').value.trim();
+  const relation=document.getElementById('gb-relation').value.trim();
+  const text=document.getElementById('gb-message').value.trim();
+  if(!name||!text){alert('Palihug butangi ang imong ngalan ug mensahe. 😊');return;}
+  const msg={name,relation,text,date:new Date().toLocaleDateString('en-PH',{year:'numeric',month:'long',day:'numeric'})};
+  messages.unshift(msg);
+  renderMessages();
+  document.getElementById('gb-name').value='';
+  document.getElementById('gb-relation').value='';
+  document.getElementById('gb-message').value='';
+}
+function renderMessages(){
+  const container=document.getElementById('gbMessages');
+  if(!messages.length){container.innerHTML='<div class="gb-empty">Be the first to leave a message! 💌</div>';return;}
+  container.innerHTML=messages.map(m=>`
+    <div class="gb-msg">
+      <p class="gb-msg-name">${m.name}${m.relation?' · '+m.relation:''}</p>
+      <p class="gb-msg-text">${m.text}</p>
+      <p class="gb-msg-date">${m.date}</p>
+    </div>
+  `).join('');
+}
 
 </script>
 </body>
