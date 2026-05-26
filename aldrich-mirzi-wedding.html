@@ -774,6 +774,227 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
   .mobile-nav, .mobile-nav-overlay { display: none !important; }
 }
 
+
+/* ══ SCROLL PROGRESS BAR ══ */
+#progress-bar {
+  position: fixed; top: 0; left: 0; z-index: 9999;
+  height: 2px; width: 0%;
+  background: linear-gradient(to right, var(--burg), var(--gold), var(--em));
+  transition: width 0.1s linear;
+  box-shadow: 0 0 8px rgba(201,168,76,0.6);
+}
+
+/* ══ GOLD SHIMMER ON HERO NAMES ══ */
+.hero-initial {
+  background: linear-gradient(
+    90deg,
+    #ffffff 0%,
+    #ffffff 35%,
+    #E2C97A 45%,
+    #FBF5E6 50%,
+    #E2C97A 55%,
+    #ffffff 65%,
+    #ffffff 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmerText 4s linear infinite;
+}
+.hero-initial .amp {
+  background: linear-gradient(90deg, #C9A84C 0%, #FBF5E6 50%, #C9A84C 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmerText 3s linear infinite;
+}
+@keyframes shimmerText {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+/* ══ 3D TILT CARDS ══ */
+.tilt-card {
+  transform-style: preserve-3d;
+  transition: transform 0.1s ease;
+  will-change: transform;
+}
+.tilt-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.15) 0%,
+    transparent 50%,
+    rgba(0,0,0,0.05) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.tilt-card:hover::after { opacity: 1; }
+
+/* ══ CINEMATIC HERO VIDEO BG ══ */
+.hero-video-bg {
+  position: absolute; inset: 0; z-index: 0;
+  overflow: hidden;
+}
+.hero-video-bg video {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0.12;
+  filter: blur(2px) saturate(0.8);
+}
+.hero-bokeh {
+  position: absolute; inset: 0; z-index: 1;
+  pointer-events: none;
+}
+.bokeh-circle {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  animation: bokehFloat ease-in-out infinite;
+}
+@keyframes bokehFloat {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.4; }
+  50% { transform: translateY(-40px) scale(1.1); opacity: 0.7; }
+}
+
+/* ══ AMBIENT GLOW ══ */
+.ambient-glow {
+  position: relative;
+}
+.ambient-glow::before {
+  content: '';
+  position: absolute;
+  inset: -20px;
+  background: radial-gradient(ellipse at center,
+    rgba(201,168,76,0.06) 0%,
+    transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+.detail-card.ambient-glow::before,
+.gift-card.ambient-glow::before {
+  inset: 0;
+  border-radius: inherit;
+}
+
+/* ══ SECTION BACKGROUND PATTERNS ══ */
+#story { position: relative; }
+#story::after {
+  content: '';
+  position: absolute; inset: 0; z-index: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(107,27,42,0.03) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(27,94,59,0.03) 0%, transparent 40%);
+}
+#story > * { position: relative; z-index: 1; }
+
+#entourage { position: relative; }
+#entourage::after {
+  content: '';
+  position: absolute; inset: 0; z-index: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Ccircle cx='40' cy='40' r='20' stroke='%236B1B2A' stroke-width='0.3' opacity='0.08'/%3E%3Ccircle cx='40' cy='40' r='12' stroke='%23C9A84C' stroke-width='0.3' opacity='0.06'/%3E%3C/g%3E%3C/svg%3E");
+}
+#entourage > * { position: relative; z-index: 1; }
+
+#faq { position: relative; }
+#faq::after {
+  content: '';
+  position: absolute; inset: 0; z-index: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cpath d='M10 30 Q30 10 50 30 Q30 50 10 30' stroke='%23C9A84C' stroke-width='0.4' opacity='0.06'/%3E%3C/g%3E%3C/svg%3E");
+}
+#faq > * { position: relative; z-index: 1; }
+
+#gifts { position: relative; }
+#gifts::after {
+  content: '';
+  position: absolute; inset: 0; z-index: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 80% 20%, rgba(201,168,76,0.04) 0%, transparent 40%),
+    radial-gradient(circle at 20% 80%, rgba(107,27,42,0.04) 0%, transparent 40%);
+}
+#gifts > * { position: relative; z-index: 1; }
+
+/* ══ STAGGERED ANIMATIONS ══ */
+.stagger-item {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(.16,1,.3,1);
+}
+.stagger-item.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ══ PRELOADER UPGRADE ══ */
+#loader {
+  background: radial-gradient(ellipse at center, #5A1220 0%, var(--burg-dark) 60%, #1a0608 100%);
+}
+.loader-ring-anim {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(201,168,76,0.15);
+  animation: loaderRing 3s ease-in-out infinite;
+}
+@keyframes loaderRing {
+  0%, 100% { transform: translate(-50%,-50%) scale(1); opacity: 0.3; }
+  50% { transform: translate(-50%,-50%) scale(1.2); opacity: 0.7; }
+}
+
+/* ══ NAV SMOOTH TRANSITION ══ */
+.nav-scrolled {
+  background: rgba(253,248,242,0.98) !important;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07) !important;
+}
+
+/* ══ TYPOGRAPHY REFINEMENT ══ */
+.sec-title {
+  line-height: 1.05 !important;
+  letter-spacing: -0.5px;
+}
+.hero-initial {
+  line-height: 0.88 !important;
+  letter-spacing: -3px;
+}
+p.sec-sub {
+  font-size: 1.2rem !important;
+  line-height: 1.8 !important;
+  max-width: 540px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.detail-card .d-name {
+  font-size: 1.7rem !important;
+  line-height: 1.2 !important;
+}
+.rsvp-desc {
+  font-size: 1.3rem !important;
+  line-height: 1.9 !important;
+}
+.footer-names {
+  letter-spacing: 2px;
+  line-height: 1.1 !important;
+}
+
+/* ══ PAGE TRANSITION ══ */
+.page-transition {
+  position: fixed; inset: 0; z-index: 9990;
+  background: var(--burg-dark);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.page-transition.flash { opacity: 0.3; }
+
 </style>
 </head>
 <body>
@@ -781,6 +1002,8 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
 <!-- LOADING SCREEN -->
 
 <!-- CUSTOM CURSOR -->
+<div id="progress-bar"></div>
+<div class="page-transition" id="pageTransition"></div>
 <div id="custom-cursor">
   <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
     <circle cx="16" cy="16" r="12" stroke="#C9A84C" stroke-width="1.5" fill="none" opacity="0.9"/>
@@ -803,6 +1026,9 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
 </div>
 
 <div id="loader">
+  <div class="loader-ring-anim" style="width:300px;height:300px;top:50%;left:50%;animation-delay:0s;"></div>
+  <div class="loader-ring-anim" style="width:240px;height:240px;top:50%;left:50%;animation-delay:0.5s;border-color:rgba(201,168,76,0.1);"></div>
+  <div class="loader-ring-anim" style="width:180px;height:180px;top:50%;left:50%;animation-delay:1s;border-color:rgba(201,168,76,0.08);"></div>
   <svg class="loader-floral tl" viewBox="0 0 300 300" fill="none"><path d="M10 290 Q50 200 150 150 Q200 50 290 10" stroke="#C9A84C" stroke-width="1" fill="none"/><circle cx="60" cy="240" r="14" stroke="#C9A84C" stroke-width="0.8" fill="none"/><circle cx="150" cy="150" r="12" stroke="#C9A84C" stroke-width="0.8" fill="none"/><circle cx="240" cy="60" r="11" stroke="#C9A84C" stroke-width="0.8" fill="none"/></svg>
   <svg class="loader-floral br" viewBox="0 0 300 300" fill="none"><path d="M10 290 Q50 200 150 150 Q200 50 290 10" stroke="#C9A84C" stroke-width="1" fill="none"/><circle cx="60" cy="240" r="14" stroke="#C9A84C" stroke-width="0.8" fill="none"/><circle cx="150" cy="150" r="12" stroke="#C9A84C" stroke-width="0.8" fill="none"/><circle cx="240" cy="60" r="11" stroke="#C9A84C" stroke-width="0.8" fill="none"/></svg>
   <div style="margin-bottom:16px;"><svg class="monogram-svg" width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -896,6 +1122,13 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
 <!-- HERO -->
 <section id="hero">
   <div class="hero-gradient"></div>
+  <div class="hero-bokeh">
+    <div class="bokeh-circle" style="width:300px;height:300px;background:rgba(107,27,42,0.3);top:10%;left:5%;animation-duration:7s;animation-delay:0s;"></div>
+    <div class="bokeh-circle" style="width:200px;height:200px;background:rgba(27,94,59,0.25);top:60%;right:8%;animation-duration:9s;animation-delay:2s;"></div>
+    <div class="bokeh-circle" style="width:150px;height:150px;background:rgba(201,168,76,0.1);top:30%;right:20%;animation-duration:6s;animation-delay:1s;"></div>
+    <div class="bokeh-circle" style="width:250px;height:250px;background:rgba(27,94,59,0.2);bottom:10%;left:30%;animation-duration:11s;animation-delay:3s;"></div>
+    <div class="bokeh-circle" style="width:100px;height:100px;background:rgba(201,168,76,0.15);top:5%;right:40%;animation-duration:8s;animation-delay:0.5s;"></div>
+  </div>
   <div class="hero-ring"></div><div class="hero-ring"></div><div class="hero-ring"></div>
   <svg class="hero-floral-tl" viewBox="0 0 300 300" fill="none"><path d="M10 290 Q50 200 150 150 Q200 50 290 10" stroke="#C9A84C" stroke-width="0.8" fill="none"/><path d="M10 250 Q60 180 130 140 Q180 60 250 10" stroke="#C9A84C" stroke-width="0.5" fill="none"/><circle cx="60" cy="240" r="12" stroke="#C9A84C" stroke-width="0.6" fill="none"/><circle cx="150" cy="150" r="10" stroke="#C9A84C" stroke-width="0.6" fill="none"/><circle cx="240" cy="60" r="9" stroke="#C9A84C" stroke-width="0.6" fill="none"/><path d="M55 240 Q58 230 65 235" stroke="#C9A84C" stroke-width="0.5" fill="none"/><path d="M55 240 Q50 232 58 228" stroke="#C9A84C" stroke-width="0.5" fill="none"/><path d="M145 150 Q148 140 155 145" stroke="#C9A84C" stroke-width="0.5" fill="none"/><circle cx="30" cy="275" r="3" fill="#C9A84C" opacity="0.4"/><circle cx="90" cy="215" r="2.5" fill="#C9A84C" opacity="0.4"/><circle cx="140" cy="163" r="3" fill="#C9A84C" opacity="0.4"/></svg>
   <svg class="hero-floral-br" viewBox="0 0 300 300" fill="none"><path d="M10 290 Q50 200 150 150 Q200 50 290 10" stroke="#C9A84C" stroke-width="0.8" fill="none"/><path d="M10 250 Q60 180 130 140 Q180 60 250 10" stroke="#C9A84C" stroke-width="0.5" fill="none"/><circle cx="60" cy="240" r="12" stroke="#C9A84C" stroke-width="0.6" fill="none"/><circle cx="150" cy="150" r="10" stroke="#C9A84C" stroke-width="0.6" fill="none"/><circle cx="240" cy="60" r="9" stroke="#C9A84C" stroke-width="0.6" fill="none"/><path d="M55 240 Q58 230 65 235" stroke="#C9A84C" stroke-width="0.5" fill="none"/><path d="M145 150 Q148 140 155 145" stroke="#C9A84C" stroke-width="0.5" fill="none"/><circle cx="30" cy="275" r="3" fill="#C9A84C" opacity="0.4"/></svg>
@@ -955,7 +1188,7 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
     <h2 class="sec-title" style="color:var(--burg)">The Celebration</h2>
     <div class="sec-rule"><div class="sec-rule-line rev"></div><span class="sec-rule-gem">◆</span><div class="sec-rule-line"></div></div>
     <div class="details-grid">
-      <div class="detail-card">
+      <div class="detail-card tilt-card">
         <svg class="detail-card-corner tl" viewBox="0 0 80 80" fill="none"><path d="M5 75 Q5 5 75 5" stroke="#6B1B2A" stroke-width="0.8" fill="none"/><circle cx="20" cy="60" r="5" stroke="#6B1B2A" stroke-width="0.6" fill="none"/><circle cx="40" cy="40" r="4" stroke="#6B1B2A" stroke-width="0.6" fill="none"/><circle cx="60" cy="20" r="5" stroke="#6B1B2A" stroke-width="0.6" fill="none"/></svg>
         <svg class="detail-card-corner br" viewBox="0 0 80 80" fill="none"><path d="M5 75 Q5 5 75 5" stroke="#6B1B2A" stroke-width="0.8" fill="none"/><circle cx="20" cy="60" r="5" stroke="#6B1B2A" stroke-width="0.6" fill="none"/><circle cx="40" cy="40" r="4" stroke="#6B1B2A" stroke-width="0.6" fill="none"/></svg>
         <span class="d-icon">⛪</span>
@@ -964,7 +1197,7 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
         <p class="d-info">September 8, 2026 · Tuesday<br>Tagum City, Davao del Norte</p>
         <p class="d-time">1:30 PM</p>
       </div>
-      <div class="detail-card em">
+      <div class="detail-card em tilt-card">
         <svg class="detail-card-corner tl" viewBox="0 0 80 80" fill="none"><path d="M5 75 Q5 5 75 5" stroke="#1B5E3B" stroke-width="0.8" fill="none"/><circle cx="20" cy="60" r="5" stroke="#1B5E3B" stroke-width="0.6" fill="none"/><circle cx="40" cy="40" r="4" stroke="#1B5E3B" stroke-width="0.6" fill="none"/><circle cx="60" cy="20" r="5" stroke="#1B5E3B" stroke-width="0.6" fill="none"/></svg>
         <svg class="detail-card-corner br" viewBox="0 0 80 80" fill="none"><path d="M5 75 Q5 5 75 5" stroke="#1B5E3B" stroke-width="0.8" fill="none"/><circle cx="20" cy="60" r="5" stroke="#1B5E3B" stroke-width="0.6" fill="none"/><circle cx="40" cy="40" r="4" stroke="#1B5E3B" stroke-width="0.6" fill="none"/></svg>
         <span class="d-icon">🥂</span>
@@ -1108,9 +1341,9 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
       </div>
     </div>
     <div class="dc-grid">
-      <div class="dc-card"><span class="dc-card-icon">🤵</span><p class="dc-card-title">Gentlemen</p><p class="dc-card-body">Formal Barong Tagalog<br>or Long-sleeved Polo<br>with dress pants<br><br>Suit & tie also welcome<br><br>Colors: Burgundy, Emerald,<br>Navy, Black, or Cream</p></div>
-      <div class="dc-card"><span class="dc-card-icon">👗</span><p class="dc-card-title">Ladies</p><p class="dc-card-body">Formal gown or<br>cocktail dress<br><br>Elegant midi or<br>maxi dress also lovely<br><br>Colors: Burgundy, Emerald,<br>Gold, Blush, or Nude</p></div>
-      <div class="dc-card"><span class="dc-card-icon">👶</span><p class="dc-card-title">Little Ones</p><p class="dc-card-body">Smart casual to<br>semi-formal attire<br><br>Comfort is key<br>for the little ones!<br><br>Matching our colors<br>is a sweet touch 💚</p></div>
+      <div class="dc-card tilt-card"><span class="dc-card-icon">🤵</span><p class="dc-card-title">Gentlemen</p><p class="dc-card-body">Formal Barong Tagalog<br>or Long-sleeved Polo<br>with dress pants<br><br>Suit & tie also welcome<br><br>Colors: Burgundy, Emerald,<br>Navy, Black, or Cream</p></div>
+      <div class="dc-card tilt-card"><span class="dc-card-icon">👗</span><p class="dc-card-title">Ladies</p><p class="dc-card-body">Formal gown or<br>cocktail dress<br><br>Elegant midi or<br>maxi dress also lovely<br><br>Colors: Burgundy, Emerald,<br>Gold, Blush, or Nude</p></div>
+      <div class="dc-card tilt-card"><span class="dc-card-icon">👶</span><p class="dc-card-title">Little Ones</p><p class="dc-card-body">Smart casual to<br>semi-formal attire<br><br>Comfort is key<br>for the little ones!<br><br>Matching our colors<br>is a sweet touch 💚</p></div>
     </div>
     <div class="dc-donot">
       <p class="dc-donot-title">Please Kindly Avoid</p>
@@ -1190,58 +1423,58 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
       <p class="ent-role">Principal Sponsors — Ninong</p>
       <div class="ent-divider"><div class="ent-divider-line"></div><span class="ent-divider-gem">◆</span><div class="ent-divider-line"></div></div>
       <div class="ent-grid">
-        <div class="ent-card"><span class="ent-card-icon">👔</span><p class="ent-card-name">Ninong 1</p><p class="ent-card-role">Principal Sponsor</p></div>
-        <div class="ent-card"><span class="ent-card-icon">👔</span><p class="ent-card-name">Ninong 2</p><p class="ent-card-role">Principal Sponsor</p></div>
-        <div class="ent-card"><span class="ent-card-icon">👔</span><p class="ent-card-name">Ninong 3</p><p class="ent-card-role">Principal Sponsor</p></div>
-        <div class="ent-card"><span class="ent-card-icon">👔</span><p class="ent-card-name">Ninong 4</p><p class="ent-card-role">Principal Sponsor</p></div>
+        <div class="ent-card tilt-card"><span class="ent-card-icon">👔</span><p class="ent-card-name">Ninong 1</p><p class="ent-card-role">Principal Sponsor</p></div>
+        <div class="ent-card tilt-card"><span class="ent-card-icon">👔</span><p class="ent-card-name">Ninong 2</p><p class="ent-card-role">Principal Sponsor</p></div>
+        <div class="ent-card tilt-card"><span class="ent-card-icon">👔</span><p class="ent-card-name">Ninong 3</p><p class="ent-card-role">Principal Sponsor</p></div>
+        <div class="ent-card tilt-card"><span class="ent-card-icon">👔</span><p class="ent-card-name">Ninong 4</p><p class="ent-card-role">Principal Sponsor</p></div>
       </div>
     </div>
     <div class="ent-section">
       <p class="ent-role">Principal Sponsors — Ninang</p>
       <div class="ent-divider"><div class="ent-divider-line"></div><span class="ent-divider-gem">◆</span><div class="ent-divider-line"></div></div>
       <div class="ent-grid">
-        <div class="ent-card"><span class="ent-card-icon">👘</span><p class="ent-card-name">Ninang 1</p><p class="ent-card-role">Principal Sponsor</p></div>
-        <div class="ent-card"><span class="ent-card-icon">👘</span><p class="ent-card-name">Ninang 2</p><p class="ent-card-role">Principal Sponsor</p></div>
-        <div class="ent-card"><span class="ent-card-icon">👘</span><p class="ent-card-name">Ninang 3</p><p class="ent-card-role">Principal Sponsor</p></div>
-        <div class="ent-card"><span class="ent-card-icon">👘</span><p class="ent-card-name">Ninang 4</p><p class="ent-card-role">Principal Sponsor</p></div>
+        <div class="ent-card tilt-card"><span class="ent-card-icon">👘</span><p class="ent-card-name">Ninang 1</p><p class="ent-card-role">Principal Sponsor</p></div>
+        <div class="ent-card tilt-card"><span class="ent-card-icon">👘</span><p class="ent-card-name">Ninang 2</p><p class="ent-card-role">Principal Sponsor</p></div>
+        <div class="ent-card tilt-card"><span class="ent-card-icon">👘</span><p class="ent-card-name">Ninang 3</p><p class="ent-card-role">Principal Sponsor</p></div>
+        <div class="ent-card tilt-card"><span class="ent-card-icon">👘</span><p class="ent-card-name">Ninang 4</p><p class="ent-card-role">Principal Sponsor</p></div>
       </div>
     </div>
     <div class="ent-section">
       <p class="ent-role">Best Man &amp; Groomsmen</p>
       <div class="ent-divider"><div class="ent-divider-line"></div><span class="ent-divider-gem">◆</span><div class="ent-divider-line"></div></div>
       <div class="ent-grid">
-        <div class="ent-card"><span class="ent-card-icon">🤵</span><p class="ent-card-name">Best Man</p><p class="ent-card-role">Best Man</p></div>
-        <div class="ent-card"><span class="ent-card-icon">🤵</span><p class="ent-card-name">Groomsman 1</p><p class="ent-card-role">Groomsman</p></div>
-        <div class="ent-card"><span class="ent-card-icon">🤵</span><p class="ent-card-name">Groomsman 2</p><p class="ent-card-role">Groomsman</p></div>
-        <div class="ent-card"><span class="ent-card-icon">🤵</span><p class="ent-card-name">Groomsman 3</p><p class="ent-card-role">Groomsman</p></div>
+        <div class="ent-card tilt-card"><span class="ent-card-icon">🤵</span><p class="ent-card-name">Best Man</p><p class="ent-card-role">Best Man</p></div>
+        <div class="ent-card tilt-card"><span class="ent-card-icon">🤵</span><p class="ent-card-name">Groomsman 1</p><p class="ent-card-role">Groomsman</p></div>
+        <div class="ent-card tilt-card"><span class="ent-card-icon">🤵</span><p class="ent-card-name">Groomsman 2</p><p class="ent-card-role">Groomsman</p></div>
+        <div class="ent-card tilt-card"><span class="ent-card-icon">🤵</span><p class="ent-card-name">Groomsman 3</p><p class="ent-card-role">Groomsman</p></div>
       </div>
     </div>
     <div class="ent-section">
       <p class="ent-role">Maid of Honor &amp; Bridesmaids</p>
       <div class="ent-divider"><div class="ent-divider-line"></div><span class="ent-divider-gem">◆</span><div class="ent-divider-line"></div></div>
       <div class="ent-grid">
-        <div class="ent-card"><span class="ent-card-icon">💐</span><p class="ent-card-name">Maid of Honor</p><p class="ent-card-role">Maid of Honor</p></div>
-        <div class="ent-card"><span class="ent-card-icon">💐</span><p class="ent-card-name">Bridesmaid 1</p><p class="ent-card-role">Bridesmaid</p></div>
-        <div class="ent-card"><span class="ent-card-icon">💐</span><p class="ent-card-name">Bridesmaid 2</p><p class="ent-card-role">Bridesmaid</p></div>
-        <div class="ent-card"><span class="ent-card-icon">💐</span><p class="ent-card-name">Bridesmaid 3</p><p class="ent-card-role">Bridesmaid</p></div>
+        <div class="ent-card tilt-card"><span class="ent-card-icon">💐</span><p class="ent-card-name">Maid of Honor</p><p class="ent-card-role">Maid of Honor</p></div>
+        <div class="ent-card tilt-card"><span class="ent-card-icon">💐</span><p class="ent-card-name">Bridesmaid 1</p><p class="ent-card-role">Bridesmaid</p></div>
+        <div class="ent-card tilt-card"><span class="ent-card-icon">💐</span><p class="ent-card-name">Bridesmaid 2</p><p class="ent-card-role">Bridesmaid</p></div>
+        <div class="ent-card tilt-card"><span class="ent-card-icon">💐</span><p class="ent-card-name">Bridesmaid 3</p><p class="ent-card-role">Bridesmaid</p></div>
       </div>
     </div>
     <div class="ent-section">
       <p class="ent-role">Secondary Sponsors</p>
       <div class="ent-divider"><div class="ent-divider-line"></div><span class="ent-divider-gem">◆</span><div class="ent-divider-line"></div></div>
       <div class="ent-grid">
-        <div class="ent-card"><span class="ent-card-icon">🕯️</span><p class="ent-card-name">Veil Pair</p><p class="ent-card-role">Veil Sponsor</p></div>
-        <div class="ent-card"><span class="ent-card-icon">🪢</span><p class="ent-card-name">Cord Pair</p><p class="ent-card-role">Cord Sponsor</p></div>
-        <div class="ent-card"><span class="ent-card-icon">🕯️</span><p class="ent-card-name">Candle Pair</p><p class="ent-card-role">Candle Sponsor</p></div>
+        <div class="ent-card tilt-card"><span class="ent-card-icon">🕯️</span><p class="ent-card-name">Veil Pair</p><p class="ent-card-role">Veil Sponsor</p></div>
+        <div class="ent-card tilt-card"><span class="ent-card-icon">🪢</span><p class="ent-card-name">Cord Pair</p><p class="ent-card-role">Cord Sponsor</p></div>
+        <div class="ent-card tilt-card"><span class="ent-card-icon">🕯️</span><p class="ent-card-name">Candle Pair</p><p class="ent-card-role">Candle Sponsor</p></div>
       </div>
     </div>
     <div class="ent-section" style="margin-bottom:0;">
       <p class="ent-role">Flower Girls &amp; Ring Bearer</p>
       <div class="ent-divider"><div class="ent-divider-line"></div><span class="ent-divider-gem">◆</span><div class="ent-divider-line"></div></div>
       <div class="ent-grid">
-        <div class="ent-card"><span class="ent-card-icon">🌸</span><p class="ent-card-name">Flower Girl 1</p><p class="ent-card-role">Flower Girl</p></div>
-        <div class="ent-card"><span class="ent-card-icon">🌸</span><p class="ent-card-name">Flower Girl 2</p><p class="ent-card-role">Flower Girl</p></div>
-        <div class="ent-card"><span class="ent-card-icon">💍</span><p class="ent-card-name">Ring Bearer</p><p class="ent-card-role">Ring Bearer</p></div>
+        <div class="ent-card tilt-card"><span class="ent-card-icon">🌸</span><p class="ent-card-name">Flower Girl 1</p><p class="ent-card-role">Flower Girl</p></div>
+        <div class="ent-card tilt-card"><span class="ent-card-icon">🌸</span><p class="ent-card-name">Flower Girl 2</p><p class="ent-card-role">Flower Girl</p></div>
+        <div class="ent-card tilt-card"><span class="ent-card-icon">💍</span><p class="ent-card-name">Ring Bearer</p><p class="ent-card-role">Ring Bearer</p></div>
       </div>
     </div>
   </div>
@@ -1368,22 +1601,22 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
     <div class="sec-rule"><div class="sec-rule-line rev"></div><span class="sec-rule-gem">◆</span><div class="sec-rule-line"></div></div>
     <p class="gifts-intro">Your love and presence is truly the greatest gift. But if you wish to bless us as we begin our new life together, we would be deeply grateful for any of the following.</p>
     <div class="gifts-grid" style="grid-template-columns:1fr 1fr;">
-      <div class="gift-card">
+      <div class="gift-card tilt-card">
         <span class="gift-icon">💵</span>
         <h3 class="gift-title">Cash Gift</h3>
         <p class="gift-text">A monetary gift towards our new life together would be deeply cherished and appreciated.</p>
       </div>
-      <div class="gift-card">
+      <div class="gift-card tilt-card">
         <span class="gift-icon">✈️</span>
         <h3 class="gift-title">Travel for Two</h3>
         <p class="gift-text">A trip abroad with accommodation for our honeymoon would be the most unforgettable gift — any destination welcome! 😄🌍</p>
       </div>
-      <div class="gift-card">
+      <div class="gift-card tilt-card">
         <span class="gift-icon">🚗</span>
         <h3 class="gift-title">Car</h3>
         <p class="gift-text">A brand new car would be a wonderful blessing for our family's journey ahead. Any brand welcome! 😄</p>
       </div>
-      <div class="gift-card">
+      <div class="gift-card tilt-card">
         <span class="gift-icon">🏡</span>
         <h3 class="gift-title">House &amp; Lot</h3>
         <p class="gift-text">A cozy home to build our life and family in — the ultimate gift of love and security. Davao area preferred! 😄</p>
@@ -1684,6 +1917,74 @@ function closeMobileNav(){
   document.getElementById('mobileOverlay').classList.remove('open');
   document.body.style.overflow='';
 }
+
+
+// ── SCROLL PROGRESS BAR ──
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+  const bar = document.getElementById('progress-bar');
+  if (bar) bar.style.width = pct + '%';
+  // Nav class
+  const nav = document.querySelector('nav');
+  if (nav) nav.classList.toggle('nav-scrolled', scrollTop > 60);
+}, { passive: true });
+
+// ── GOLD SHIMMER — already CSS ──
+
+// ── 3D TILT CARDS ──
+document.querySelectorAll('.tilt-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const cx = rect.width / 2;
+    const cy = rect.height / 2;
+    const rotX = ((y - cy) / cy) * -8;
+    const rotY = ((x - cx) / cx) * 8;
+    card.style.transform = `perspective(800px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale(1.02)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = 'perspective(800px) rotateX(0) rotateY(0) scale(1)';
+  });
+});
+
+// ── STAGGERED ENTRANCE ──
+const staggerObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const items = entry.target.querySelectorAll('.tilt-card, .prog-item, .faq-item, .masonry-item');
+      items.forEach((item, i) => {
+        item.classList.add('stagger-item');
+        setTimeout(() => item.classList.add('visible'), i * 80);
+      });
+      staggerObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('#details, #entourage, #program, #gallery, #faq, #gifts').forEach(sec => {
+  staggerObserver.observe(sec);
+});
+
+// ── SMOOTH NAV TRANSITIONS ──
+document.querySelectorAll('a[href^="#"], .mobile-nav a').forEach(link => {
+  link.addEventListener('click', e => {
+    const target = document.querySelector(link.getAttribute('href'));
+    if (!target) return;
+    e.preventDefault();
+    const pt = document.getElementById('pageTransition');
+    if (pt) {
+      pt.classList.add('flash');
+      setTimeout(() => {
+        target.scrollIntoView({ behavior: 'smooth' });
+        setTimeout(() => pt.classList.remove('flash'), 400);
+      }, 200);
+    } else {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
 
 </script>
 </body>
