@@ -452,6 +452,50 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
   #music-player{bottom:16px;left:16px;}
   .map-venues{grid-template-columns:1fr;}
 }
+
+/* ══ FALLING PETALS ══ */
+.petal{position:fixed;top:-20px;pointer-events:none;z-index:50;animation:petalFall linear infinite;opacity:0;}
+@keyframes petalFall{0%{opacity:0;transform:translateY(-20px) rotate(0deg) scale(0.8);}10%{opacity:0.7;}90%{opacity:0.4;}100%{opacity:0;transform:translateY(110vh) rotate(720deg) scale(1.2);}}
+
+/* ══ GOLD PARTICLES ══ */
+.particle{position:absolute;pointer-events:none;z-index:3;border-radius:50%;animation:particleFloat ease-in-out infinite;}
+@keyframes particleFloat{0%,100%{transform:translateY(0) scale(1);opacity:0.6;}50%{transform:translateY(-30px) scale(1.3);opacity:1;}}
+
+/* ══ WAVE DIVIDERS ══ */
+.wave-divider{width:100%;overflow:hidden;line-height:0;margin-bottom:-2px;}
+.wave-divider svg{display:block;width:100%;}
+
+/* ══ GLASSMORPHISM CARDS ══ */
+.detail-card{background:rgba(255,255,255,0.78)!important;backdrop-filter:blur(16px)!important;-webkit-backdrop-filter:blur(16px)!important;box-shadow:0 8px 32px rgba(107,27,42,0.08),inset 0 1px 0 rgba(255,255,255,0.6)!important;}
+.faq-item{background:rgba(255,255,255,0.82)!important;backdrop-filter:blur(8px)!important;-webkit-backdrop-filter:blur(8px)!important;}
+.ent-card{background:rgba(255,255,255,0.85)!important;backdrop-filter:blur(10px)!important;box-shadow:0 4px 16px rgba(107,27,42,0.06),inset 0 1px 0 rgba(255,255,255,0.8)!important;}
+.gift-card{background:rgba(255,255,255,0.82)!important;backdrop-filter:blur(12px)!important;box-shadow:0 8px 24px rgba(107,27,42,0.07),inset 0 1px 0 rgba(255,255,255,0.7)!important;}
+.dc-card{background:rgba(255,255,255,0.06)!important;backdrop-filter:blur(8px)!important;}
+
+/* ══ TEXT REVEAL ══ */
+.sec-title span{display:inline-block;opacity:0;transform:translateY(100%);transition:opacity 0.6s ease,transform 0.6s cubic-bezier(.16,1,.3,1);margin-right:0.25em;}
+
+/* ══ RIBBON ACCENTS ══ */
+.ribbon-wrap{position:relative;text-align:center;margin-bottom:20px;}
+.ribbon{display:inline-block;position:relative;padding:8px 48px;background:linear-gradient(135deg,var(--burg-dark),var(--burg));color:var(--gold-light);font-family:'Cinzel Decorative',serif;font-size:0.58rem;letter-spacing:4px;text-transform:uppercase;clip-path:polygon(12px 0%,calc(100% - 12px) 0%,100% 50%,calc(100% - 12px) 100%,12px 100%,0% 50%);}
+.ribbon.em{background:linear-gradient(135deg,var(--em-dark),var(--em));}
+.ribbon::before,.ribbon::after{content:'';position:absolute;top:50%;transform:translateY(-50%);width:60px;height:1px;background:linear-gradient(to right,transparent,var(--gold));}
+.ribbon::before{right:calc(100% + 8px);}
+.ribbon::after{left:calc(100% + 8px);background:linear-gradient(to left,transparent,var(--gold));}
+
+/* ══ MASONRY GALLERY ══ */
+.masonry-grid{columns:3;column-gap:8px;max-width:920px;margin:0 auto;}
+.masonry-item{break-inside:avoid;margin-bottom:8px;position:relative;overflow:hidden;cursor:pointer;border:1px dashed rgba(201,168,76,0.15);transition:all 0.4s;background:rgba(255,255,255,0.03);display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.masonry-item:hover{border-color:rgba(201,168,76,0.35);}
+.masonry-item img{width:100%;display:block;transition:transform 0.5s;}
+.masonry-item:hover img{transform:scale(1.05);}
+.masonry-item .overlay{position:absolute;inset:0;background:rgba(61,13,24,0.4);opacity:0;transition:opacity 0.3s;display:flex;align-items:center;justify-content:center;}
+.masonry-item:hover .overlay{opacity:1;}
+.masonry-ph{min-height:180px;padding:24px;}
+.masonry-ph:nth-child(2){min-height:140px;}
+.masonry-ph:nth-child(5){min-height:200px;}
+@media(max-width:768px){.masonry-grid{columns:2;}.ribbon::before,.ribbon::after{display:none;}}
+
 </style>
 </head>
 <body>
@@ -541,10 +585,11 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
   </div>
 </div>
 
+<div class="wave-divider" style="background:var(--em-dark);"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,30 C200,60 400,0 600,30 C800,60 1000,0 1200,30 L1200,60 L0,60 Z" fill="#FDF8F2"/></svg></div>
 <!-- OUR STORY TIMELINE -->
 <section id="story">
   <div class="reveal">
-    <p class="sec-label">How It All Began</p>
+    <div class="ribbon-wrap"><span class="ribbon">How It All Began</span></div>
     <h2 class="sec-title" style="color:var(--burg)">Our Story</h2>
     <div class="sec-rule"><div class="sec-rule-line rev"></div><span class="sec-rule-gem">◆</span><div class="sec-rule-line"></div></div>
     <div class="tl-placeholder">
@@ -557,6 +602,7 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
   </div>
 </section>
 
+<div class="wave-divider" style="background:var(--cream);"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,0 C300,60 900,0 1200,40 L1200,60 L0,60 Z" fill="#F7EFE4"/></svg></div>
 <!-- EVENT DETAILS -->
 <section id="details">
   <div class="reveal">
@@ -586,6 +632,7 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
   </div>
 </section>
 
+<div class="wave-divider" style="background:var(--cream2);"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,40 C300,0 900,60 1200,20 L1200,60 L0,60 Z" fill="#FDF8F2"/></svg></div>
 <!-- VENUE MAP -->
 <section id="venuemap">
   <div class="reveal map-container">
@@ -688,6 +735,7 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
   </div>
 </section>
 
+<div class="wave-divider" style="background:var(--cream);"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,20 C400,60 800,0 1200,50 L1200,60 L0,60 Z" fill="#3D0D18"/></svg></div>
 <!-- DRESS CODE -->
 <section id="dresscode">
   <div class="dc-inner reveal">
@@ -733,6 +781,7 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
   </div>
 </section>
 
+<div class="wave-divider" style="background:var(--burg-dark);"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,50 C300,0 900,60 1200,20 L1200,60 L0,60 Z" fill="#3D0D18"/></svg></div>
 <!-- GALLERY -->
 <section id="gallery">
   <div class="reveal" style="position:relative;">
@@ -743,13 +792,13 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
       <span class="sec-rule-gem">◆</span>
       <div class="sec-rule-line" style="background:linear-gradient(to left,transparent,rgba(201,168,76,0.5));"></div>
     </div>
-    <div class="gallery-grid" id="galleryGrid">
-      <div class="gallery-item"><span class="g-ph-icon">🌸</span><p class="g-ph">Prenup Photo</p></div>
-      <div class="gallery-item"><span class="g-ph-icon">🌸</span><p class="g-ph">Prenup Photo</p></div>
-      <div class="gallery-item"><span class="g-ph-icon">🌸</span><p class="g-ph">Prenup Photo</p></div>
-      <div class="gallery-item"><span class="g-ph-icon">🌸</span><p class="g-ph">Prenup Photo</p></div>
-      <div class="gallery-item"><span class="g-ph-icon">🌸</span><p class="g-ph">Prenup Photo</p></div>
-      <div class="gallery-item"><span class="g-ph-icon">🌸</span><p class="g-ph">Prenup Photo</p></div>
+    <div class="masonry-grid" id="galleryGrid">
+      <div class="masonry-item masonry-ph"><span class="g-ph-icon">🌸</span><p class="g-ph">Prenup Photo</p></div>
+      <div class="masonry-item masonry-ph"><span class="g-ph-icon">🌸</span><p class="g-ph">Prenup Photo</p></div>
+      <div class="masonry-item masonry-ph"><span class="g-ph-icon">🌸</span><p class="g-ph">Prenup Photo</p></div>
+      <div class="masonry-item masonry-ph"><span class="g-ph-icon">🌸</span><p class="g-ph">Prenup Photo</p></div>
+      <div class="masonry-item masonry-ph"><span class="g-ph-icon">🌸</span><p class="g-ph">Prenup Photo</p></div>
+      <div class="masonry-item masonry-ph"><span class="g-ph-icon">🌸</span><p class="g-ph">Prenup Photo</p></div>
     </div>
     <input type="file" id="photo-input" accept="image/*" multiple>
     <button class="gallery-upload-btn" onclick="document.getElementById('photo-input').click()">+ Upload Prenup Photos</button>
@@ -759,10 +808,11 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
 <!-- Lightbox -->
 <div id="lightbox"><span id="lightbox-close" onclick="closeLightbox()">✕</span><img id="lightbox-img" src="" alt=""></div>
 
+<div class="wave-divider" style="background:var(--burg-dark);"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,30 C200,60 400,0 600,30 C800,60 1000,0 1200,30 L1200,60 L0,60 Z" fill="#FDF8F2"/></svg></div>
 <!-- ENTOURAGE -->
 <section id="entourage">
   <div class="reveal">
-    <p class="sec-label">Those Who Stand With Us</p>
+    <div class="ribbon-wrap"><span class="ribbon">Those Who Stand With Us</span></div>
     <h2 class="sec-title" style="color:var(--burg)">Our Entourage</h2>
     <div class="sec-rule"><div class="sec-rule-line rev"></div><span class="sec-rule-gem">◆</span><div class="sec-rule-line"></div></div>
     <div class="ent-section">
@@ -826,6 +876,7 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
   </div>
 </section>
 
+<div class="wave-divider" style="background:var(--cream);"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,0 C300,60 900,0 1200,40 L1200,60 L0,60 Z" fill="#0A3322"/></svg></div>
 <!-- RSVP -->
 <section id="rsvp">
   <div class="reveal rsvp-inner">
@@ -842,10 +893,11 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
   </div>
 </section>
 
+<div class="wave-divider" style="background:var(--em-dark);"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,40 C200,0 500,60 800,20 C1000,0 1100,40 1200,30 L1200,60 L0,60 Z" fill="#F7EFE4"/></svg></div>
 <!-- GIFTS -->
 <section id="gifts">
   <div class="reveal gifts-wrap">
-    <p class="sec-label">Wedding Gifts</p>
+    <div class="ribbon-wrap"><span class="ribbon">Wedding Gifts</span></div>
     <h2 class="sec-title" style="color:var(--burg)">Gift Registry</h2>
     <div class="sec-rule"><div class="sec-rule-line rev"></div><span class="sec-rule-gem">◆</span><div class="sec-rule-line"></div></div>
     <p class="gifts-intro">Your love and presence is truly the greatest gift. But if you wish to bless us as we begin our new life together, we would be deeply grateful for any of the following.</p>
@@ -875,10 +927,11 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
   </div>
 </section>
 
+<div class="wave-divider" style="background:var(--cream2);"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,20 C400,60 800,0 1200,50 L1200,60 L0,60 Z" fill="#3D0D18"/></svg></div>
 <!-- FAQ -->
 <section id="faq">
   <div class="reveal">
-    <p class="sec-label">Good to Know</p>
+    <div class="ribbon-wrap"><span class="ribbon">Good to Know</span></div>
     <h2 class="sec-title" style="color:var(--burg);">Frequently Asked Questions</h2>
     <div class="sec-rule"><div class="sec-rule-line rev"></div><span class="sec-rule-gem">◆</span><div class="sec-rule-line"></div></div>
     <div class="faq-list">
@@ -893,6 +946,7 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
 </section>
 
 <!-- FOOTER -->
+<div class="wave-divider" style="background:var(--burg-dark);"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,50 C300,0 900,60 1200,20 L1200,60 L0,60 Z" fill="#3D0D18"/></svg></div>
 <footer>
   <svg class="footer-floral l" viewBox="0 0 300 300" fill="none"><path d="M10 290 Q50 200 150 150 Q200 50 290 10" stroke="#C9A84C" stroke-width="1" fill="none"/><circle cx="60" cy="240" r="14" stroke="#C9A84C" stroke-width="0.8" fill="none"/><circle cx="150" cy="150" r="12" stroke="#C9A84C" stroke-width="0.8" fill="none"/><circle cx="240" cy="60" r="11" stroke="#C9A84C" stroke-width="0.8" fill="none"/></svg>
   <svg class="footer-floral r" viewBox="0 0 300 300" fill="none"><path d="M10 290 Q50 200 150 150 Q200 50 290 10" stroke="#C9A84C" stroke-width="1" fill="none"/><circle cx="60" cy="240" r="14" stroke="#C9A84C" stroke-width="0.8" fill="none"/><circle cx="150" cy="150" r="12" stroke="#C9A84C" stroke-width="0.8" fill="none"/><circle cx="240" cy="60" r="11" stroke="#C9A84C" stroke-width="0.8" fill="none"/></svg>
@@ -1009,8 +1063,80 @@ function toggleMinimize(){
   player.classList.toggle('minimized',isMinimized);
 }
 
-// ── NAV SHADOW ──
-window.addEventListener('scroll',()=>{document.querySelector('nav').style.boxShadow=window.scrollY>60?'0 4px 24px rgba(0,0,0,0.07)':'none';});
+
+// ── FALLING PETALS ──
+(function(){
+  const colors=['#6B1B2A','#1B5E3B','#C9A84C','#8B2A3C','#2D7A52'];
+  function createPetal(){
+    const p=document.createElement('div');p.className='petal';
+    const size=6+Math.random()*8;
+    p.style.cssText=`width:${size}px;height:${size}px;border-radius:50% 0 50% 0;background:${colors[Math.floor(Math.random()*colors.length)]};opacity:0.45;left:${Math.random()*100}vw;animation-duration:${7+Math.random()*10}s;animation-delay:${Math.random()*5}s;`;
+    document.body.appendChild(p);
+    setTimeout(()=>p.remove(),20000);
+  }
+  for(let i=0;i<10;i++) setTimeout(createPetal,i*400);
+  setInterval(createPetal,500);
+})();
+
+// ── GOLD PARTICLES in HERO ──
+(function(){
+  const hero=document.getElementById('hero');
+  if(!hero)return;
+  for(let i=0;i<20;i++){
+    const p=document.createElement('div');p.className='particle';
+    const size=2+Math.random()*5;
+    p.style.cssText=`width:${size}px;height:${size}px;background:${Math.random()>0.5?'#C9A84C':'#E2C97A'};left:${Math.random()*100}%;top:${Math.random()*100}%;animation-duration:${3+Math.random()*5}s;animation-delay:${Math.random()*4}s;opacity:${0.3+Math.random()*0.5};`;
+    hero.appendChild(p);
+  }
+})();
+
+// ── PARALLAX ──
+window.addEventListener('scroll',()=>{
+  const scrolled=window.pageYOffset;
+  const hero=document.getElementById('hero');
+  if(hero&&scrolled<window.innerHeight*1.5){
+    const rings=hero.querySelectorAll('.hero-ring');
+    rings.forEach((r,i)=>{r.style.transform=`translate(-50%,calc(-50% + ${scrolled*(0.08*(i+1))}px))`;});
+  }
+  document.querySelector('nav').style.boxShadow=scrolled>60?'0 4px 24px rgba(0,0,0,0.07)':'none';
+},{ passive:true });
+
+// ── TEXT REVEAL ──
+const titleObserver=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('span').forEach((s,i)=>{
+        setTimeout(()=>{s.style.opacity='1';s.style.transform='translateY(0)';},i*80);
+      });
+      titleObserver.unobserve(e.target);
+    }
+  });
+},{threshold:0.3});
+document.querySelectorAll('.sec-title').forEach(title=>{
+  const html=title.innerHTML;
+  title.innerHTML=html.split(' ').map(w=>`<span style="display:inline-block;opacity:0;transform:translateY(100%);transition:opacity 0.6s ease,transform 0.6s cubic-bezier(.16,1,.3,1);margin-right:0.25em;">${w}</span>`).join('');
+  titleObserver.observe(title);
+});
+
+// ── MASONRY GALLERY UPLOAD ──
+document.getElementById('photo-input').addEventListener('change',function(e){
+  const files=Array.from(e.target.files);
+  const grid=document.getElementById('galleryGrid');
+  grid.innerHTML='';grid.className='masonry-grid';
+  files.forEach(file=>{
+    const reader=new FileReader();
+    reader.onload=(ev)=>{
+      const div=document.createElement('div');div.className='masonry-item';
+      const img=document.createElement('img');img.src=ev.target.result;img.alt='Wedding photo';
+      const overlay=document.createElement('div');overlay.className='overlay';overlay.innerHTML='<span style="color:white;font-size:1.5rem;">🔍</span>';
+      div.appendChild(img);div.appendChild(overlay);
+      div.onclick=()=>openLightbox(ev.target.result);
+      grid.appendChild(div);
+    };
+    reader.readAsDataURL(file);
+  });
+});
+
 </script>
 </body>
 </html>
