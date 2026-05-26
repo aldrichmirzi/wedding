@@ -786,29 +786,39 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
 
 /* ══ GOLD SHIMMER ON HERO NAMES ══ */
 .hero-initial {
+  color: var(--white);
+  position: relative;
+}
+.hero-initial::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
   background: linear-gradient(
     90deg,
-    #ffffff 0%,
-    #ffffff 35%,
-    #E2C97A 45%,
-    #FBF5E6 50%,
-    #E2C97A 55%,
-    #ffffff 65%,
-    #ffffff 100%
+    transparent 0%,
+    transparent 30%,
+    rgba(226,201,122,0.6) 45%,
+    rgba(251,245,230,0.8) 50%,
+    rgba(226,201,122,0.6) 55%,
+    transparent 65%,
+    transparent 100%
   );
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   animation: shimmerText 4s linear infinite;
+  pointer-events: none;
 }
 .hero-initial .amp {
-  background: linear-gradient(90deg, #C9A84C 0%, #FBF5E6 50%, #C9A84C 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: shimmerText 3s linear infinite;
+  color: var(--gold);
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.45em;
+  letter-spacing: 6px;
+  margin: 8px 0;
 }
 @keyframes shimmerText {
   0% { background-position: 200% center; }
@@ -961,10 +971,7 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
   line-height: 1.05 !important;
   letter-spacing: -0.5px;
 }
-.hero-initial {
-  line-height: 0.88 !important;
-  letter-spacing: -3px;
-}
+.hero-initial { line-height: 0.9 !important; letter-spacing: -2px; }
 p.sec-sub {
   font-size: 1.2rem !important;
   line-height: 1.8 !important;
