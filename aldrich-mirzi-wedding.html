@@ -789,36 +789,26 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
   color: var(--white);
   position: relative;
 }
-.hero-initial::after {
-  content: attr(data-text);
+.hero-shimmer-overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    90deg,
-    transparent 0%,
-    transparent 30%,
-    rgba(226,201,122,0.6) 45%,
-    rgba(251,245,230,0.8) 50%,
-    rgba(226,201,122,0.6) 55%,
-    transparent 65%,
-    transparent 100%
+    105deg,
+    transparent 20%,
+    rgba(226,201,122,0.45) 40%,
+    rgba(251,245,230,0.65) 50%,
+    rgba(226,201,122,0.45) 60%,
+    transparent 80%
   );
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: shimmerText 4s linear infinite;
+  background-size: 250% 100%;
+  animation: shimmerSweep 3.5s ease-in-out infinite;
   pointer-events: none;
+  mix-blend-mode: overlay;
+  border-radius: inherit;
 }
-.hero-initial .amp {
-  color: var(--gold);
-  display: block;
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  font-weight: 400;
-  font-size: 0.45em;
-  letter-spacing: 6px;
-  margin: 8px 0;
+@keyframes shimmerSweep {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
 }
 @keyframes shimmerText {
   0% { background-position: 200% center; }
@@ -971,7 +961,7 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
   line-height: 1.05 !important;
   letter-spacing: -0.5px;
 }
-.hero-initial { line-height: 0.9 !important; letter-spacing: -2px; }
+
 p.sec-sub {
   font-size: 1.2rem !important;
   line-height: 1.8 !important;
@@ -1141,7 +1131,7 @@ p.sec-sub {
   <svg class="hero-floral-br" viewBox="0 0 300 300" fill="none"><path d="M10 290 Q50 200 150 150 Q200 50 290 10" stroke="#C9A84C" stroke-width="0.8" fill="none"/><path d="M10 250 Q60 180 130 140 Q180 60 250 10" stroke="#C9A84C" stroke-width="0.5" fill="none"/><circle cx="60" cy="240" r="12" stroke="#C9A84C" stroke-width="0.6" fill="none"/><circle cx="150" cy="150" r="10" stroke="#C9A84C" stroke-width="0.6" fill="none"/><circle cx="240" cy="60" r="9" stroke="#C9A84C" stroke-width="0.6" fill="none"/><path d="M55 240 Q58 230 65 235" stroke="#C9A84C" stroke-width="0.5" fill="none"/><path d="M145 150 Q148 140 155 145" stroke="#C9A84C" stroke-width="0.5" fill="none"/><circle cx="30" cy="275" r="3" fill="#C9A84C" opacity="0.4"/></svg>
   <div class="hero-content">
     <p class="hero-eyebrow">Together with their families</p>
-    <h1 class="hero-initial">Aldrich<span class="amp">&amp;</span>Mirzi</h1>
+    <h1 class="hero-initial">Aldrich<span class="amp">&amp;</span>Mirzi<div class="hero-shimmer-overlay"></div></h1>
     <p class="hero-fullnames">Aldrich A. Batas &nbsp;·&nbsp; Mirzi Nathalie M. Cucharo</p>
     <div class="hero-rule"></div>
     <div class="hero-date-block">
