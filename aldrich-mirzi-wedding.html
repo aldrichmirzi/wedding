@@ -1051,6 +1051,32 @@ p.sec-sub {
   100% { transform: translateY(110vh) rotate(720deg) scale(0.5); opacity: 0; }
 }
 
+
+/* ══ WELCOME SCREEN FIXES ══ */
+#welcome-screen .ws-ring { z-index: 1; }
+#welcome-screen .ws-floral { z-index: 1; }
+#welcome-screen .ws-particle { z-index: 1; }
+#welcome-screen .ws-monogram { z-index: 3; }
+#welcome-screen .ws-pre { position:relative; z-index: 3; }
+#welcome-screen .ws-title { position:relative; z-index: 3; }
+#welcome-screen .ws-sub { position:relative; z-index: 3; }
+#welcome-screen .ws-rule { position:relative; z-index: 3; }
+#welcome-screen .ws-input-wrap { position:relative; z-index: 3; }
+#welcome-screen .ws-btn { position:relative; z-index: 3; }
+#welcome-screen .ws-skip { position:relative; z-index: 3; }
+#welcome-screen p { position:relative; z-index: 3; }
+/* Make sure ::before ::after don't cover content */
+#welcome-screen::before { z-index: 1; }
+#welcome-screen::after { z-index: 1; }
+/* ws-floral positioning fix */
+.ws-floral.tl { position:absolute; top:-40px; left:-40px; z-index:1; }
+.ws-floral.tr { position:absolute; top:-40px; right:-40px; z-index:1; }
+.ws-floral.bl { position:absolute; bottom:-40px; left:-40px; z-index:1; }
+.ws-floral.br { position:absolute; bottom:-40px; right:-40px; z-index:1; }
+/* ws-ring positioning */
+.ws-ring { position:absolute; z-index:1; }
+.ws-particle { position:absolute; z-index:1; }
+
 </style>
 </head>
 <body>
