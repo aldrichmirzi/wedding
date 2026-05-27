@@ -1300,6 +1300,181 @@ p.sec-sub {
     radial-gradient(1px 1px at 10% 70%, rgba(201,168,76,0.3) 0%, transparent 100%);
 }
 
+
+/* ══ LIGHT SECTIONS — ENHANCED BACKGROUNDS ══ */
+
+/* ── OUR STORY — Rich watercolor diagonal waves ── */
+#story {
+  background:
+    linear-gradient(135deg,
+      #F5E8EB 0%,
+      #FDF8F2 20%,
+      #E8F5EE 40%,
+      #FDF8F2 60%,
+      #FBF5E6 80%,
+      #FDF8F2 100%
+    ) !important;
+  position: relative;
+  overflow: hidden;
+}
+#story::before {
+  content:''; position:absolute; inset:0; pointer-events:none; z-index:0;
+  background:
+    radial-gradient(ellipse 80% 50% at 0% 30%, rgba(107,27,42,0.08) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 40% at 100% 70%, rgba(27,94,59,0.07) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 50% 100%, rgba(201,168,76,0.06) 0%, transparent 55%);
+}
+#story::after {
+  content:''; position:absolute; inset:0; pointer-events:none; z-index:0;
+  background-image: url("data:image/svg+xml,%3Csvg width='200' height='200' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cpath d='M0 100 Q50 60 100 100 Q150 140 200 100' stroke='%236B1B2A' stroke-width='0.5' opacity='0.07'/%3E%3Cpath d='M0 140 Q50 100 100 140 Q150 180 200 140' stroke='%231B5E3B' stroke-width='0.5' opacity='0.05'/%3E%3Cpath d='M0 60 Q50 20 100 60 Q150 100 200 60' stroke='%23C9A84C' stroke-width='0.5' opacity='0.06'/%3E%3C/g%3E%3C/svg%3E");
+}
+#story > * { position:relative; z-index:1; }
+
+/* ── THE CELEBRATION (details) — Rich linen + deep shadows ── */
+#details {
+  background:
+    linear-gradient(160deg,
+      #EDE0CC 0%,
+      #F7EFE4 25%,
+      #E8DDD0 50%,
+      #F2E8D8 75%,
+      #EDE0CC 100%
+    ) !important;
+  position: relative;
+  overflow: hidden;
+}
+#details::before {
+  content:''; position:absolute; inset:0; pointer-events:none; z-index:0;
+  background:
+    radial-gradient(ellipse 70% 60% at 0% 0%, rgba(107,27,42,0.10) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 50% at 100% 100%, rgba(27,94,59,0.08) 0%, transparent 55%),
+    radial-gradient(ellipse 80% 40% at 50% 50%, rgba(201,168,76,0.05) 0%, transparent 70%);
+}
+#details::after {
+  content:''; position:absolute; inset:0; pointer-events:none; z-index:0;
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cpath d='M0 20 Q10 10 20 20 Q30 30 40 20' stroke='%23C9A84C' stroke-width='0.5' opacity='0.09'/%3E%3Cpath d='M0 30 Q10 20 20 30 Q30 40 40 30' stroke='%236B1B2A' stroke-width='0.4' opacity='0.06'/%3E%3C/g%3E%3C/svg%3E");
+}
+#details > * { position:relative; z-index:1; }
+
+/* ── VENUE LOCATIONS — Rich aged map ── */
+#venuemap {
+  background:
+    linear-gradient(145deg,
+      #EFE3D2 0%,
+      #FDF8F2 30%,
+      #E8D8C0 55%,
+      #F5ECD8 80%,
+      #EDE0CC 100%
+    ) !important;
+  position: relative;
+  overflow: hidden;
+}
+#venuemap::before {
+  content:''; position:absolute; inset:0; pointer-events:none; z-index:0;
+  background:
+    radial-gradient(ellipse 60% 50% at 15% 50%, rgba(107,27,42,0.09) 0%, transparent 55%),
+    radial-gradient(ellipse 55% 45% at 85% 50%, rgba(27,94,59,0.08) 0%, transparent 55%),
+    radial-gradient(ellipse 80% 30% at 50% 0%, rgba(201,168,76,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 30% at 50% 100%, rgba(201,168,76,0.06) 0%, transparent 60%);
+}
+#venuemap::after {
+  content:''; position:absolute; inset:0; pointer-events:none; z-index:0;
+  background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Ccircle cx='40' cy='40' r='35' stroke='%23C9A84C' stroke-width='0.5' opacity='0.07'/%3E%3Ccircle cx='40' cy='40' r='25' stroke='%236B1B2A' stroke-width='0.4' opacity='0.05'/%3E%3Ccircle cx='40' cy='40' r='15' stroke='%231B5E3B' stroke-width='0.4' opacity='0.05'/%3E%3Cline x1='5' y1='40' x2='75' y2='40' stroke='%23C9A84C' stroke-width='0.4' opacity='0.06'/%3E%3Cline x1='40' y1='5' x2='40' y2='75' stroke='%23C9A84C' stroke-width='0.4' opacity='0.06'/%3E%3C/g%3E%3C/svg%3E");
+}
+#venuemap > * { position:relative; z-index:1; }
+
+/* ── OUR ENTOURAGE — Rich damask ── */
+#entourage {
+  background:
+    linear-gradient(160deg,
+      #F5E8EB 0%,
+      #FDF8F2 20%,
+      #E8F0EB 45%,
+      #FDF8F2 70%,
+      #F5E8EB 100%
+    ) !important;
+  position: relative;
+  overflow: hidden;
+}
+#entourage::before {
+  content:''; position:absolute; inset:0; pointer-events:none; z-index:0;
+  background:
+    radial-gradient(ellipse 70% 50% at 0% 50%, rgba(107,27,42,0.09) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 50% at 100% 50%, rgba(27,94,59,0.08) 0%, transparent 55%),
+    radial-gradient(ellipse 100% 30% at 50% 0%, rgba(107,27,42,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 100% 30% at 50% 100%, rgba(27,94,59,0.06) 0%, transparent 60%);
+}
+#entourage::after {
+  content:''; position:absolute; inset:0; pointer-events:none; z-index:0;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cpath d='M50 10 Q65 35 50 50 Q35 35 50 10Z' stroke='%236B1B2A' stroke-width='0.5' opacity='0.07'/%3E%3Cpath d='M50 90 Q65 65 50 50 Q35 65 50 90Z' stroke='%231B5E3B' stroke-width='0.5' opacity='0.06'/%3E%3Cpath d='M10 50 Q35 65 50 50 Q35 35 10 50Z' stroke='%236B1B2A' stroke-width='0.5' opacity='0.06'/%3E%3Cpath d='M90 50 Q65 65 50 50 Q65 35 90 50Z' stroke='%231B5E3B' stroke-width='0.5' opacity='0.06'/%3E%3Ccircle cx='50' cy='50' r='8' stroke='%23C9A84C' stroke-width='0.5' opacity='0.09'/%3E%3Ccircle cx='50' cy='50' r='4' fill='%23C9A84C' opacity='0.05'/%3E%3C/g%3E%3C/svg%3E");
+}
+#entourage > * { position:relative; z-index:1; }
+
+/* ── GIFT REGISTRY — Floral watercolor ── */
+#gifts {
+  background:
+    linear-gradient(150deg,
+      #EDE0CC 0%,
+      #F7EFE4 20%,
+      #E8F0EB 45%,
+      #F7EFE4 70%,
+      #F5E8EB 100%
+    ) !important;
+  position: relative;
+  overflow: hidden;
+}
+#gifts::before {
+  content:''; position:absolute; inset:0; pointer-events:none; z-index:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 10% 20%, rgba(107,27,42,0.09) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 55% at 90% 80%, rgba(27,94,59,0.08) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 40% at 50% 50%, rgba(201,168,76,0.06) 0%, transparent 65%);
+}
+#gifts::after {
+  content:''; position:absolute; inset:0; pointer-events:none; z-index:0;
+  background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cellipse cx='60' cy='60' rx='30' ry='18' stroke='%236B1B2A' stroke-width='0.5' opacity='0.07' transform='rotate(30 60 60)'/%3E%3Cellipse cx='60' cy='60' rx='22' ry='13' stroke='%231B5E3B' stroke-width='0.5' opacity='0.06' transform='rotate(-25 60 60)'/%3E%3Ccircle cx='60' cy='60' r='6' stroke='%23C9A84C' stroke-width='0.5' opacity='0.09'/%3E%3Ccircle cx='20' cy='20' r='4' fill='%23C9A84C' opacity='0.06'/%3E%3Ccircle cx='100' cy='100' r='4' fill='%236B1B2A' opacity='0.05'/%3E%3Ccircle cx='100' cy='20' r='3' fill='%231B5E3B' opacity='0.05'/%3E%3Ccircle cx='20' cy='100' r='3' fill='%23C9A84C' opacity='0.06'/%3E%3C/g%3E%3C/svg%3E");
+}
+#gifts > * { position:relative; z-index:1; }
+
+/* ── GUESTBOOK — Elegant notebook ── */
+#guestbook {
+  background:
+    linear-gradient(170deg,
+      #F5ECD8 0%,
+      #FDF8F2 25%,
+      #EDE8DC 50%,
+      #FDF8F2 75%,
+      #F0E8D8 100%
+    ) !important;
+  position: relative;
+  overflow: hidden;
+}
+#guestbook::before {
+  content:''; position:absolute; inset:0; pointer-events:none; z-index:0;
+  background:
+    radial-gradient(ellipse 70% 50% at 0% 30%, rgba(107,27,42,0.08) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 50% at 100% 70%, rgba(201,168,76,0.07) 0%, transparent 55%),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 31px,
+      rgba(107,27,42,0.05) 31px,
+      rgba(107,27,42,0.05) 32px
+    );
+}
+#guestbook::after {
+  content:''; position:absolute;
+  top:0; left:72px; bottom:0; width:1px;
+  pointer-events:none; z-index:0;
+  background: linear-gradient(to bottom,
+    transparent 0%,
+    rgba(107,27,42,0.12) 10%,
+    rgba(107,27,42,0.12) 90%,
+    transparent 100%
+  );
+}
+#guestbook > * { position:relative; z-index:1; }
+
 </style>
 </head>
 <body>
