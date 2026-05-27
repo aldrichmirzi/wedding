@@ -1077,6 +1077,229 @@ p.sec-sub {
 .ws-ring { position:absolute; z-index:1; }
 .ws-particle { position:absolute; z-index:1; }
 
+
+/* ══════════════════════════════════
+   SECTION BACKGROUND UPGRADES
+══════════════════════════════════ */
+
+/* ── COUNTDOWN — Starfield + Orbs ── */
+#countdown {
+  background: radial-gradient(ellipse 120% 100% at 50% 0%, #0F4A2E 0%, #0A3322 50%, #061A12 100%) !important;
+  position: relative;
+}
+#countdown::before {
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:
+    radial-gradient(1px 1px at 10% 20%, rgba(201,168,76,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 25% 60%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 40% 15%, rgba(201,168,76,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 55% 75%, rgba(255,255,255,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 70% 30%, rgba(201,168,76,0.4) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 80% 55%, rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 90% 10%, rgba(201,168,76,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 15% 85%, rgba(255,255,255,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 60% 45%, rgba(201,168,76,0.4) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 35% 90%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 85% 80%, rgba(201,168,76,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 5% 50%, rgba(255,255,255,0.3) 0%, transparent 100%);
+  animation: starTwinkle 4s ease-in-out infinite alternate;
+}
+#countdown::after {
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 30% 40% at 15% 50%, rgba(27,94,59,0.25) 0%, transparent 70%),
+    radial-gradient(ellipse 25% 35% at 85% 50%, rgba(27,94,59,0.2) 0%, transparent 70%),
+    radial-gradient(ellipse 20% 25% at 50% 80%, rgba(201,168,76,0.08) 0%, transparent 70%);
+}
+@keyframes starTwinkle {
+  0%  { opacity:0.6; }
+  100%{ opacity:1; }
+}
+#countdown > * { position:relative; z-index:2; }
+
+/* ── OUR STORY — Watercolor wash ── */
+#story {
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 30%, rgba(107,27,42,0.04) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 70%, rgba(27,94,59,0.04) 0%, transparent 60%),
+    radial-gradient(ellipse 100% 80% at 50% 50%, rgba(201,168,76,0.02) 0%, transparent 80%),
+    linear-gradient(160deg, #FDF8F2 0%, #F7EFE4 40%, #FDF8F2 70%, #F0E8DC 100%) !important;
+  position:relative;
+}
+#story::before {
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cellipse cx='60' cy='60' rx='40' ry='25' stroke='%236B1B2A' stroke-width='0.3' opacity='0.05' transform='rotate(30 60 60)'/%3E%3Cellipse cx='60' cy='60' rx='30' ry='18' stroke='%231B5E3B' stroke-width='0.3' opacity='0.04' transform='rotate(-20 60 60)'/%3E%3Ccircle cx='20' cy='20' r='4' stroke='%23C9A84C' stroke-width='0.4' opacity='0.06'/%3E%3Ccircle cx='100' cy='100' r='3' stroke='%23C9A84C' stroke-width='0.4' opacity='0.06'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* ── EVENT DETAILS — Linen texture + gold veins ── */
+#details {
+  background:
+    repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(201,168,76,0.015) 2px, rgba(201,168,76,0.015) 4px),
+    repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(201,168,76,0.015) 2px, rgba(201,168,76,0.015) 4px),
+    radial-gradient(ellipse 80% 60% at 30% 40%, rgba(107,27,42,0.04) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 70% 60%, rgba(201,168,76,0.03) 0%, transparent 60%),
+    linear-gradient(135deg, #F7EFE4 0%, #EFE3D2 50%, #F7EFE4 100%) !important;
+  position:relative;
+}
+#details::before {
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 40% 60% at 0% 50%, rgba(201,168,76,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 60% at 100% 50%, rgba(201,168,76,0.06) 0%, transparent 50%);
+}
+
+/* ── VENUE MAP — Aged paper ── */
+#venuemap {
+  background:
+    repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(201,168,76,0.012) 20px, rgba(201,168,76,0.012) 40px),
+    radial-gradient(ellipse 70% 50% at 50% 50%, rgba(107,27,42,0.03) 0%, transparent 70%),
+    linear-gradient(170deg, #FDF8F2 0%, #F5ECD8 30%, #FDF8F2 60%, #EDE0CC 100%) !important;
+  position:relative;
+}
+#venuemap::before {
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Ccircle cx='40' cy='40' r='30' stroke='%23C9A84C' stroke-width='0.3' opacity='0.05'/%3E%3Ccircle cx='40' cy='40' r='20' stroke='%23C9A84C' stroke-width='0.3' opacity='0.04'/%3E%3Cline x1='10' y1='40' x2='70' y2='40' stroke='%23C9A84C' stroke-width='0.3' opacity='0.04'/%3E%3Cline x1='40' y1='10' x2='40' y2='70' stroke='%23C9A84C' stroke-width='0.3' opacity='0.04'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* ── DRESS CODE — Brocade pattern ── */
+#dresscode {
+  background:
+    radial-gradient(ellipse 100% 80% at 50% 50%, rgba(107,27,42,0.4) 0%, transparent 70%),
+    linear-gradient(145deg, #3D0D18 0%, #2A0810 30%, #3D0D18 60%, #1a0408 100%) !important;
+  position:relative;
+}
+#dresscode::before {
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cpath d='M30 5 L35 20 L50 20 L38 30 L43 45 L30 37 L17 45 L22 30 L10 20 L25 20 Z' stroke='%23C9A84C' stroke-width='0.4' opacity='0.06'/%3E%3Ccircle cx='30' cy='30' r='8' stroke='%23C9A84C' stroke-width='0.3' opacity='0.05'/%3E%3C/g%3E%3C/svg%3E");
+  animation: brocadeShift 20s linear infinite;
+}
+@keyframes brocadeShift {
+  0%  { background-position: 0 0; }
+  100%{ background-position: 60px 60px; }
+}
+
+/* ── ENTOURAGE — Damask ── */
+#entourage {
+  background:
+    radial-gradient(ellipse 60% 40% at 20% 20%, rgba(107,27,42,0.03) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 40% at 80% 80%, rgba(27,94,59,0.03) 0%, transparent 50%),
+    linear-gradient(180deg, #FDF8F2 0%, #F7EFE4 50%, #FDF8F2 100%) !important;
+  position:relative;
+}
+#entourage::before {
+  content:'';position:absolute;inset:0;pointer-events:none;z-index:0;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cpath d='M50 10 Q60 30 50 50 Q40 30 50 10Z' stroke='%236B1B2A' stroke-width='0.4' opacity='0.05'/%3E%3Cpath d='M50 50 Q70 60 90 50 Q70 40 50 50Z' stroke='%236B1B2A' stroke-width='0.4' opacity='0.05'/%3E%3Cpath d='M50 50 Q30 60 10 50 Q30 40 50 50Z' stroke='%236B1B2A' stroke-width='0.4' opacity='0.05'/%3E%3Cpath d='M50 90 Q60 70 50 50 Q40 70 50 90Z' stroke='%231B5E3B' stroke-width='0.4' opacity='0.04'/%3E%3Ccircle cx='50' cy='50' r='6' stroke='%23C9A84C' stroke-width='0.4' opacity='0.06'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* ── RSVP — Foliage silhouettes ── */
+#rsvp {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 50%, rgba(45,122,82,0.2) 0%, transparent 70%),
+    linear-gradient(160deg, #0A3322 0%, #061A12 40%, #0F4A2E 70%, #061A12 100%) !important;
+  position:relative;
+}
+#rsvp::before {
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%231B5E3B' opacity='0.08'%3E%3Cellipse cx='20' cy='70' rx='8' ry='20' transform='rotate(-20 20 70)'/%3E%3Cellipse cx='60' cy='75' rx='6' ry='16' transform='rotate(15 60 75)'/%3E%3Cellipse cx='40' cy='72' rx='7' ry='18' transform='rotate(-5 40 72)'/%3E%3C/g%3E%3C/svg%3E");
+  background-position: bottom;
+  background-repeat: repeat-x;
+}
+#rsvp::after {
+  content:'';position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 50% 30% at 10% 20%, rgba(27,94,59,0.15) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 25% at 90% 80%, rgba(27,94,59,0.12) 0%, transparent 60%);
+}
+
+/* ── PROGRAM — Constellation ── */
+#program {
+  background:
+    radial-gradient(ellipse 100% 80% at 50% 30%, rgba(107,27,42,0.35) 0%, transparent 60%),
+    linear-gradient(180deg, #3D0D18 0%, #1a0408 50%, #2A0810 100%) !important;
+  position:relative;
+}
+#program::before {
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:
+    radial-gradient(1.5px 1.5px at 8%  15%, rgba(201,168,76,0.7) 0%, transparent 100%),
+    radial-gradient(1px   1px   at 18% 35%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(1px   1px   at 28% 10%, rgba(201,168,76,0.5) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 42% 55%, rgba(255,255,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px   1px   at 55% 25%, rgba(201,168,76,0.4) 0%, transparent 100%),
+    radial-gradient(1px   1px   at 65% 70%, rgba(255,255,255,0.3) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 75% 40%, rgba(201,168,76,0.6) 0%, transparent 100%),
+    radial-gradient(1px   1px   at 88% 20%, rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(1px   1px   at 92% 65%, rgba(201,168,76,0.4) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 48% 85%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(1px   1px   at 33% 75%, rgba(201,168,76,0.5) 0%, transparent 100%),
+    radial-gradient(1px   1px   at 72% 88%, rgba(255,255,255,0.3) 0%, transparent 100%);
+  animation: starTwinkle 5s ease-in-out infinite alternate;
+}
+
+/* ── GIFTS — Floral watercolor ── */
+#gifts {
+  background:
+    radial-gradient(ellipse 70% 50% at 15% 25%, rgba(107,27,42,0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 85% 75%, rgba(27,94,59,0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(201,168,76,0.03) 0%, transparent 70%),
+    linear-gradient(135deg, #F7EFE4 0%, #EFE3D2 30%, #F7EFE4 60%, #F0E8DC 100%) !important;
+  position:relative;
+}
+#gifts::before {
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image: url("data:image/svg+xml,%3Csvg width='140' height='140' viewBox='0 0 140 140' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cellipse cx='70' cy='70' rx='35' ry='20' stroke='%236B1B2A' stroke-width='0.4' opacity='0.04' transform='rotate(45 70 70)'/%3E%3Cellipse cx='70' cy='70' rx='25' ry='14' stroke='%231B5E3B' stroke-width='0.4' opacity='0.04' transform='rotate(-30 70 70)'/%3E%3Ccircle cx='30' cy='30' r='5' stroke='%23C9A84C' stroke-width='0.4' opacity='0.06'/%3E%3Ccircle cx='110' cy='110' r='4' stroke='%23C9A84C' stroke-width='0.4' opacity='0.06'/%3E%3Ccircle cx='110' cy='30' r='3' stroke='%236B1B2A' stroke-width='0.4' opacity='0.05'/%3E%3Ccircle cx='30' cy='110' r='3' stroke='%231B5E3B' stroke-width='0.4' opacity='0.05'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* ── GUESTBOOK — Aged paper ── */
+#guestbook {
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 28px,
+      rgba(201,168,76,0.04) 28px,
+      rgba(201,168,76,0.04) 29px
+    ),
+    radial-gradient(ellipse 80% 60% at 50% 50%, rgba(107,27,42,0.03) 0%, transparent 70%),
+    linear-gradient(170deg, #F7EFE4 0%, #EDE0CC 40%, #F7EFE4 70%, #EFE3D2 100%) !important;
+  position:relative;
+}
+#guestbook::before {
+  content:'';position:absolute;top:0;left:60px;bottom:0;width:1px;pointer-events:none;
+  background: linear-gradient(to bottom, transparent, rgba(107,27,42,0.08), transparent);
+}
+
+/* ── FAQ — Geometric gold ── */
+#faq {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 50%, rgba(61,13,24,0.8) 0%, transparent 80%),
+    linear-gradient(145deg, #2A0810 0%, #1a0408 40%, #3D0D18 70%, #1a0408 100%) !important;
+  position:relative;
+}
+#faq::before {
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Crect x='15' y='15' width='30' height='30' stroke='%23C9A84C' stroke-width='0.4' opacity='0.06' transform='rotate(45 30 30)'/%3E%3Crect x='20' y='20' width='20' height='20' stroke='%23C9A84C' stroke-width='0.3' opacity='0.04' transform='rotate(45 30 30)'/%3E%3Ccircle cx='30' cy='30' r='3' stroke='%23C9A84C' stroke-width='0.4' opacity='0.07'/%3E%3C/g%3E%3C/svg%3E");
+  animation: brocadeShift 25s linear infinite;
+}
+#faq > * { position:relative; z-index:2; }
+
+/* ── TEASER — Cinema dark ── */
+#teaser {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 50%, rgba(107,27,42,0.2) 0%, transparent 70%),
+    linear-gradient(160deg, #100408 0%, #1C1008 40%, #100408 70%, #0A0204 100%) !important;
+  position:relative;
+}
+#teaser::before {
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:
+    radial-gradient(1px 1px at 20% 30%, rgba(201,168,76,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 70% 60%, rgba(255,255,255,0.2) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 45% 80%, rgba(201,168,76,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 85% 20%, rgba(255,255,255,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 10% 70%, rgba(201,168,76,0.3) 0%, transparent 100%);
+}
+
 </style>
 </head>
 <body>
