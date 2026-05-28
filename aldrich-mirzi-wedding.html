@@ -1684,6 +1684,180 @@ nav ul a.active::after {
   transform: translateX(-50%) scaleX(1) !important;
 }
 
+
+/* ══ RSVP COUNTER ══ */
+.rsvp-counter-wrap {
+  margin: 40px auto 0;
+  max-width: 560px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(201,168,76,0.2);
+  padding: 28px 32px;
+  position: relative;
+}
+.rsvp-counter-wrap::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+}
+.rsvp-counter-title {
+  font-family:'Jost',sans-serif; font-weight:200;
+  font-size:0.58rem; letter-spacing:5px; text-transform:uppercase;
+  color:rgba(255,255,255,0.4); margin-bottom:20px; text-align:center;
+}
+.rsvp-counter-grid {
+  display:flex; justify-content:center; gap:4px; flex-wrap:wrap;
+}
+.rsvp-counter-unit {
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(201,168,76,0.15);
+  padding:20px 24px; text-align:center; min-width:110px;
+}
+.rsvp-counter-num {
+  font-family:'Cormorant Upright',serif; font-weight:300;
+  font-size:2.8rem; color:var(--white); line-height:1; display:block;
+  transition: all 0.5s ease;
+}
+.rsvp-counter-label {
+  font-family:'Jost',sans-serif; font-weight:200;
+  font-size:0.5rem; letter-spacing:3px; text-transform:uppercase;
+  color:rgba(255,255,255,0.35); margin-top:8px; display:block;
+}
+.rsvp-counter-note {
+  font-family:'EB Garamond',serif; font-style:italic;
+  font-size:0.85rem; color:rgba(255,255,255,0.3);
+  text-align:center; margin-top:16px;
+}
+
+/* ══ PHOTO BOOTH ══ */
+#photobooth { background:
+  radial-gradient(ellipse 80% 60% at 50% 50%, rgba(107,27,42,0.3) 0%, transparent 70%),
+  linear-gradient(160deg, #2A0810 0%, #3D0D18 40%, #1a0408 70%, #2A0810 100%);
+  padding:100px 24px; position:relative; overflow:hidden;
+}
+#photobooth::before {
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background-image:
+    radial-gradient(1px 1px at 15% 25%, rgba(201,168,76,0.5) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 75% 35%, rgba(255,255,255,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 45% 75%, rgba(201,168,76,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 85% 65%, rgba(255,255,255,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 25% 80%, rgba(201,168,76,0.3) 0%, transparent 100%);
+}
+.pb-inner { max-width:700px; margin:0 auto; position:relative; }
+.pb-desc {
+  font-family:'EB Garamond',serif; font-style:italic;
+  font-size:1.1rem; color:rgba(255,255,255,0.55);
+  text-align:center; margin-bottom:36px; line-height:1.8;
+}
+.pb-canvas-wrap {
+  position:relative; max-width:480px; margin:0 auto;
+  border:1px solid rgba(201,168,76,0.2);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+}
+#pbCanvas { display:block; width:100%; cursor:pointer; }
+.pb-controls {
+  display:flex; gap:12px; justify-content:center;
+  margin-top:24px; flex-wrap:wrap;
+}
+.pb-btn {
+  background:transparent; border:1px solid rgba(201,168,76,0.4);
+  color:var(--gold); padding:12px 28px;
+  font-family:'Jost',sans-serif; font-weight:300;
+  font-size:0.62rem; letter-spacing:3px; text-transform:uppercase;
+  cursor:pointer; transition:all 0.3s;
+}
+.pb-btn:hover { background:rgba(201,168,76,0.1); border-color:var(--gold); transform:translateY(-2px); }
+.pb-btn.primary { background:var(--gold); color:var(--burg-dark); border-color:var(--gold); font-weight:400; }
+.pb-btn.primary:hover { background:var(--gold-light); }
+#pbFileInput { display:none; }
+.pb-hint {
+  font-family:'Jost',sans-serif; font-weight:200;
+  font-size:0.65rem; letter-spacing:2px; text-transform:uppercase;
+  color:rgba(255,255,255,0.25); text-align:center; margin-top:16px;
+}
+
+/* ══ WISH TREE ══ */
+#wishtree {
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 30%, rgba(27,94,59,0.08) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 80% 70%, rgba(107,27,42,0.06) 0%, transparent 55%),
+    linear-gradient(160deg, #F5E8EB 0%, #FDF8F2 25%, #E8F5EE 50%, #FDF8F2 75%, #FBF5E6 100%);
+  padding:100px 24px; position:relative; overflow:hidden;
+}
+#wishtree::before {
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cpath d='M50 10 Q65 35 50 50 Q35 35 50 10Z' stroke='%231B5E3B' stroke-width='0.4' opacity='0.06'/%3E%3Cpath d='M50 90 Q65 65 50 50 Q35 65 50 90Z' stroke='%231B5E3B' stroke-width='0.4' opacity='0.05'/%3E%3C/g%3E%3C/svg%3E");
+}
+.wt-inner { max-width:900px; margin:0 auto; position:relative; }
+.wt-form {
+  background:rgba(255,255,255,0.8); backdrop-filter:blur(12px);
+  border:1px solid rgba(201,168,76,0.2); padding:36px 40px;
+  margin-bottom:48px; position:relative;
+}
+.wt-form::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background:linear-gradient(to right, var(--burg), var(--gold), var(--em));
+}
+.wt-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
+.wt-input, .wt-textarea {
+  width:100%; padding:12px 16px;
+  font-family:'EB Garamond',serif; font-style:italic; font-size:1rem;
+  border:1px solid rgba(201,168,76,0.25); background:rgba(253,248,242,0.9);
+  color:var(--ink); outline:none; transition:border-color 0.3s; resize:none;
+}
+.wt-input:focus, .wt-textarea:focus { border-color:var(--burg); }
+.wt-input::placeholder, .wt-textarea::placeholder { color:var(--ink-light); }
+.wt-submit {
+  background:var(--em); color:var(--white); border:none;
+  padding:14px 40px; cursor:pointer;
+  font-family:'Cinzel Decorative',serif; font-size:0.62rem; letter-spacing:2px;
+  transition:all 0.3s; width:100%; margin-top:8px;
+}
+.wt-submit:hover { background:var(--em-mid); transform:translateY(-2px); }
+
+/* Wish Wall */
+.wt-wall {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:16px; margin-bottom:40px; min-height:200px;
+}
+.wt-card {
+  background:rgba(255,255,255,0.85); backdrop-filter:blur(8px);
+  border:1px solid rgba(201,168,76,0.15); padding:24px 20px;
+  position:relative; animation:wtCardIn 0.5s ease;
+  transition:all 0.3s; cursor:default;
+}
+.wt-card:hover { transform:translateY(-4px) rotate(0.5deg); box-shadow:0 12px 32px rgba(107,27,42,0.1); border-color:rgba(201,168,76,0.35); }
+.wt-card::before { content:'"'; position:absolute; top:6px; left:12px; font-family:'Playfair Display',serif; font-size:2.5rem; color:rgba(201,168,76,0.2); line-height:1; }
+.wt-card-name { font-family:'Cinzel Decorative',serif; font-size:0.55rem; letter-spacing:2px; color:var(--burg); margin-bottom:8px; }
+.wt-card-wish { font-family:'EB Garamond',serif; font-style:italic; font-size:0.95rem; color:var(--ink-mid); line-height:1.7; }
+.wt-card-leaf { position:absolute; bottom:8px; right:12px; font-size:1rem; opacity:0.5; }
+.wt-empty { text-align:center; font-family:'EB Garamond',serif; font-style:italic; font-size:1.1rem; color:var(--ink-light); padding:60px; grid-column:1/-1; }
+@keyframes wtCardIn { from{opacity:0;transform:translateY(20px) scale(0.95);} to{opacity:1;transform:none;} }
+
+/* Floating leaves */
+.wt-leaf {
+  position:absolute; pointer-events:none; z-index:0;
+  animation:leafFloat ease-in-out infinite;
+  font-size:1.2rem; opacity:0.25;
+}
+@keyframes leafFloat {
+  0%,100%{transform:translateY(0) rotate(0deg);}
+  33%{transform:translateY(-20px) rotate(8deg);}
+  66%{transform:translateY(-10px) rotate(-5deg);}
+}
+.wt-counter {
+  text-align:center; margin-bottom:32px;
+  font-family:'Jost',sans-serif; font-weight:200;
+  font-size:0.62rem; letter-spacing:4px; text-transform:uppercase;
+  color:var(--ink-light);
+}
+.wt-counter span { color:var(--burg); font-size:0.9rem; }
+
+@media(max-width:768px){
+  .wt-wall{grid-template-columns:1fr 1fr;}
+  .wt-row{grid-template-columns:1fr;}
+  .pb-controls{flex-direction:column;align-items:center;}
+}
+
 </style>
 </head>
 <body>
@@ -1848,6 +2022,8 @@ nav ul a.active::after {
     <li><a href="#program">Program</a></li>
     <li><a href="#gifts">Gifts</a></li>
     <li><a href="#guestbook">Guestbook</a></li>
+    <li><a href="#wishtree">Wishes</a></li>
+    <li><a href="#photobooth">Photo Booth</a></li>
     <li><a href="#faq">FAQ</a></li>
   </ul>
   <button class="hamburger" id="hamburger" onclick="toggleMobileNav()" aria-label="Open Menu">
@@ -1876,6 +2052,8 @@ nav ul a.active::after {
   <a href="#program" onclick="closeMobileNav()">Program</a>
   <a href="#gifts" onclick="closeMobileNav()">Gifts</a>
   <a href="#guestbook" onclick="closeMobileNav()">Guestbook</a>
+  <a href="#wishtree" onclick="closeMobileNav()">Wish Tree</a>
+  <a href="#photobooth" onclick="closeMobileNav()">Photo Booth</a>
   <a href="#faq" onclick="closeMobileNav()">FAQ</a>
 </div>
 
@@ -2256,6 +2434,24 @@ nav ul a.active::after {
     <p class="rsvp-desc">Your presence is the greatest gift you could give us. Kindly let us know if you will be joining us as we begin this beautiful journey together.</p>
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSc4phMm0tsrtgOYh7C-0CgsGJ4GBN0Sxv83ax7EyAyXlT37Ug/viewform?usp=publish-editor" target="_blank" class="rsvp-btn">Confirm Attendance</a>
     <p class="rsvp-note">Kindly RSVP on or before August 25, 2026</p>
+    <div class="rsvp-counter-wrap">
+      <p class="rsvp-counter-title">Current RSVP Count</p>
+      <div class="rsvp-counter-grid">
+        <div class="rsvp-counter-unit">
+          <span class="rsvp-counter-num" id="rsvpTotal">—</span>
+          <span class="rsvp-counter-label">Total RSVPs</span>
+        </div>
+        <div class="rsvp-counter-unit">
+          <span class="rsvp-counter-num" id="rsvpAttending">—</span>
+          <span class="rsvp-counter-label">Attending</span>
+        </div>
+        <div class="rsvp-counter-unit">
+          <span class="rsvp-counter-num" id="rsvpGuests">—</span>
+          <span class="rsvp-counter-label">Total Guests</span>
+        </div>
+      </div>
+      <p class="rsvp-counter-note" id="rsvpCounterNote">Connecting to RSVP data...</p>
+    </div>
   </div>
 </section>
 
@@ -2389,6 +2585,63 @@ nav ul a.active::after {
 </section>
 
 <div class="wave-divider" style="background:var(--cream2);"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,20 C400,60 800,0 1200,50 L1200,60 L0,60 Z" fill="#3D0D18"/></svg></div>
+<div class="wave-divider" style="background:var(--cream2);"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,20 C400,60 800,0 1200,50 L1200,60 L0,60 Z" fill="#FDF8F2"/></svg></div>
+<!-- WISH TREE -->
+<section id="wishtree">
+  <div class="reveal wt-inner">
+    <!-- Floating leaves background -->
+    <div class="wt-leaf" style="top:10%;left:5%;animation-duration:6s;animation-delay:0s;">🍃</div>
+    <div class="wt-leaf" style="top:20%;right:8%;animation-duration:8s;animation-delay:1s;">🌿</div>
+    <div class="wt-leaf" style="bottom:15%;left:10%;animation-duration:7s;animation-delay:2s;">🍀</div>
+    <div class="wt-leaf" style="bottom:25%;right:6%;animation-duration:9s;animation-delay:0.5s;">🍃</div>
+    <div class="wt-leaf" style="top:50%;left:2%;animation-duration:10s;animation-delay:3s;">🌿</div>
+    <div class="wt-leaf" style="top:40%;right:3%;animation-duration:7s;animation-delay:1.5s;">🍃</div>
+
+    <div class="ribbon-wrap"><span class="ribbon em">Leave a Wish</span></div>
+    <h2 class="sec-title" style="color:var(--em);">Wish Tree</h2>
+    <div class="sec-rule"><div class="sec-rule-line rev"></div><span class="sec-rule-gem">◆</span><div class="sec-rule-line"></div></div>
+    <p class="sec-sub" style="margin-bottom:36px;">Leave your heartfelt wishes for the couple — they will treasure every word. 🌿</p>
+
+    <div class="wt-form">
+      <div class="wt-row">
+        <input class="wt-input" id="wt-name" type="text" placeholder="Your name..." maxlength="40">
+        <input class="wt-input" id="wt-relation" type="text" placeholder="Your relation (e.g. Friend)..." maxlength="40">
+      </div>
+      <textarea class="wt-textarea" id="wt-wish" rows="3" placeholder="Write your wish for Aldrich & Mirzi..."></textarea>
+      <button class="wt-submit" onclick="submitWish()">🌿 Leave Your Wish</button>
+    </div>
+
+    <p class="wt-counter">Wishes so far: <span id="wishCount">0</span></p>
+    <div class="wt-wall" id="wishWall">
+      <div class="wt-empty">Be the first to leave a wish! 🌿</div>
+    </div>
+  </div>
+</section>
+<div class="wave-divider" style="background:var(--cream);"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,40 C300,0 900,60 1200,20 L1200,60 L0,60 Z" fill="#2A0810"/></svg></div>
+<!-- PHOTO BOOTH -->
+<section id="photobooth">
+  <div class="reveal pb-inner">
+    <p class="sec-label" style="color:var(--gold-light);">Strike a Pose!</p>
+    <h2 class="sec-title" style="color:var(--white);">Photo Booth</h2>
+    <div class="sec-rule">
+      <div class="sec-rule-line rev" style="background:linear-gradient(to right,transparent,rgba(201,168,76,0.5));"></div>
+      <span class="sec-rule-gem">◆</span>
+      <div class="sec-rule-line" style="background:linear-gradient(to left,transparent,rgba(201,168,76,0.5));"></div>
+    </div>
+    <p class="pb-desc">Take a photo with our wedding frame — a fun keepsake from our special day! 📸</p>
+    <div class="pb-canvas-wrap">
+      <canvas id="pbCanvas" width="480" height="480"></canvas>
+    </div>
+    <div class="pb-controls">
+      <input type="file" id="pbFileInput" accept="image/*">
+      <button class="pb-btn" onclick="document.getElementById('pbFileInput').click()">📷 Upload Photo</button>
+      <button class="pb-btn" onclick="pbCapture()">🤳 Use Camera</button>
+      <button class="pb-btn primary" onclick="pbDownload()">⬇ Download</button>
+    </div>
+    <p class="pb-hint">Upload your photo, then download with the frame!</p>
+  </div>
+</section>
+<div class="wave-divider" style="background:var(--burg-dark);"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,20 C400,60 800,0 1200,50 L1200,60 L0,60 Z" fill="#2A0810"/></svg></div>
 <!-- FAQ -->
 <section id="faq">
   <div class="reveal">
@@ -2825,6 +3078,218 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { threshold: 0.4 });
   sections.forEach(s => observer.observe(s));
 })();
+
+
+// ══ RSVP COUNTER (Google Sheets) ══
+// INSTRUCTIONS: Replace SHEET_ID with your Google Sheets ID
+// and deploy a Google Apps Script Web App (steps after build)
+const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbwk2fRNbdJ4QUXOACQKXe1gjSmTY65SqEfGwy3hGHdW_UY17UmobAxmpNtu6c0cTOQ1/exec';
+
+async function fetchRSVPCount() {
+  const noteEl = document.getElementById('rsvpCounterNote');
+  try {
+    if(SHEET_API_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+      document.getElementById('rsvpTotal').textContent = '—';
+      document.getElementById('rsvpAttending').textContent = '—';
+      document.getElementById('rsvpGuests').textContent = '—';
+      if(noteEl) noteEl.textContent = 'Fetching RSVP data...';
+      return;
+    }
+    const res = await fetch(SHEET_API_URL);
+    const data = await res.json();
+    document.getElementById('rsvpTotal').textContent = data.total || 0;
+    document.getElementById('rsvpAttending').textContent = data.attending || 0;
+    document.getElementById('rsvpGuests').textContent = data.guests || 0;
+    if(noteEl) noteEl.textContent = 'Last updated: ' + new Date().toLocaleTimeString();
+  } catch(e) {
+    if(noteEl) noteEl.textContent = 'Could not load RSVP data.';
+  }
+}
+fetchRSVPCount();
+setInterval(fetchRSVPCount, 60000); // refresh every minute
+
+// ══ WISH TREE ══
+let wishes = [];
+function submitWish() {
+  const name = document.getElementById('wt-name').value.trim();
+  const relation = document.getElementById('wt-relation').value.trim();
+  const wish = document.getElementById('wt-wish').value.trim();
+  if(!name || !wish){ alert('Palihug butangi ang imong ngalan ug wish. 🌿'); return; }
+  const leaves = ['🍃','🌿','🍀','🌱','🌾'];
+  wishes.unshift({
+    name, relation, wish,
+    leaf: leaves[Math.floor(Math.random() * leaves.length)],
+    color: ['var(--burg)','var(--em)','var(--gold)'][Math.floor(Math.random()*3)]
+  });
+  renderWishes();
+  document.getElementById('wt-name').value = '';
+  document.getElementById('wt-relation').value = '';
+  document.getElementById('wt-wish').value = '';
+  launchConfetti();
+}
+function renderWishes() {
+  const wall = document.getElementById('wishWall');
+  const counter = document.getElementById('wishCount');
+  if(counter) counter.textContent = wishes.length;
+  if(!wishes.length) {
+    wall.innerHTML = '<div class="wt-empty">Be the first to leave a wish! 🌿</div>';
+    return;
+  }
+  wall.innerHTML = wishes.map(w => `
+    <div class="wt-card">
+      <p class="wt-card-name" style="color:${w.color}">${w.name}${w.relation ? ' · ' + w.relation : ''}</p>
+      <p class="wt-card-wish">${w.wish}</p>
+      <span class="wt-card-leaf">${w.leaf}</span>
+    </div>
+  `).join('');
+}
+
+// ══ PHOTO BOOTH ══
+let pbUserImage = null;
+const pbCanvas = document.getElementById('pbCanvas');
+const pbCtx = pbCanvas ? pbCanvas.getContext('2d') : null;
+
+function pbDrawFrame(img) {
+  if(!pbCtx) return;
+  const W = 480, H = 480;
+  pbCtx.clearRect(0, 0, W, H);
+
+  // Background
+  const bg = pbCtx.createLinearGradient(0, 0, W, H);
+  bg.addColorStop(0, '#3D0D18');
+  bg.addColorStop(0.5, '#0A3322');
+  bg.addColorStop(1, '#3D0D18');
+  pbCtx.fillStyle = bg;
+  pbCtx.fillRect(0, 0, W, H);
+
+  // User photo (center)
+  if(img) {
+    const pad = 52;
+    pbCtx.save();
+    pbCtx.beginPath();
+    pbCtx.rect(pad, pad + 30, W - pad*2, H - pad*2 - 80);
+    pbCtx.clip();
+    const ratio = img.width / img.height;
+    let dw = W - pad*2, dh = dw / ratio;
+    if(dh < H - pad*2 - 80) { dh = H - pad*2 - 80; dw = dh * ratio; }
+    const dx = pad + (W - pad*2 - dw) / 2;
+    const dy = pad + 30 + (H - pad*2 - 80 - dh) / 2;
+    pbCtx.drawImage(img, dx, dy, dw, dh);
+    pbCtx.restore();
+  } else {
+    pbCtx.fillStyle = 'rgba(255,255,255,0.05)';
+    pbCtx.fillRect(52, 82, W-104, H-162);
+    pbCtx.fillStyle = 'rgba(255,255,255,0.2)';
+    pbCtx.font = '18px Jost, sans-serif';
+    pbCtx.textAlign = 'center';
+    pbCtx.fillText('📷 Upload your photo here', W/2, H/2 - 10);
+    pbCtx.font = '12px Jost, sans-serif';
+    pbCtx.fillStyle = 'rgba(255,255,255,0.1)';
+    pbCtx.fillText('Click "Upload Photo" above', W/2, H/2 + 20);
+  }
+
+  // Outer border
+  pbCtx.strokeStyle = '#C9A84C';
+  pbCtx.lineWidth = 2;
+  pbCtx.strokeRect(10, 10, W-20, H-20);
+  pbCtx.strokeStyle = 'rgba(201,168,76,0.3)';
+  pbCtx.lineWidth = 1;
+  pbCtx.strokeRect(16, 16, W-32, H-32);
+
+  // Top banner
+  const topGrad = pbCtx.createLinearGradient(0, 0, W, 0);
+  topGrad.addColorStop(0, 'rgba(61,13,24,0.95)');
+  topGrad.addColorStop(0.5, 'rgba(107,27,42,0.95)');
+  topGrad.addColorStop(1, 'rgba(61,13,24,0.95)');
+  pbCtx.fillStyle = topGrad;
+  pbCtx.fillRect(18, 18, W-36, 56);
+
+  // Top gold line
+  const lineGrad = pbCtx.createLinearGradient(20, 0, W-20, 0);
+  lineGrad.addColorStop(0, 'transparent');
+  lineGrad.addColorStop(0.5, '#C9A84C');
+  lineGrad.addColorStop(1, 'transparent');
+  pbCtx.strokeStyle = lineGrad;
+  pbCtx.lineWidth = 1;
+  pbCtx.beginPath(); pbCtx.moveTo(20, 74); pbCtx.lineTo(W-20, 74); pbCtx.stroke();
+
+  // Names
+  pbCtx.fillStyle = '#FFFFFF';
+  pbCtx.font = 'italic 22px "Playfair Display", serif';
+  pbCtx.textAlign = 'center';
+  pbCtx.fillText('Aldrich & Mirzi', W/2, 50);
+
+  // Bottom banner
+  pbCtx.fillStyle = topGrad;
+  pbCtx.fillRect(18, H-74, W-36, 56);
+
+  pbCtx.strokeStyle = lineGrad;
+  pbCtx.lineWidth = 1;
+  pbCtx.beginPath(); pbCtx.moveTo(20, H-74); pbCtx.lineTo(W-20, H-74); pbCtx.stroke();
+
+  // Corner diamonds
+  const corners = [[28,28],[W-28,28],[28,H-28],[W-28,H-28]];
+  corners.forEach(([cx,cy]) => {
+    pbCtx.fillStyle = '#C9A84C';
+    pbCtx.save();
+    pbCtx.translate(cx, cy);
+    pbCtx.rotate(Math.PI/4);
+    pbCtx.fillRect(-5,-5,10,10);
+    pbCtx.restore();
+  });
+
+  // Date
+  pbCtx.fillStyle = 'rgba(201,168,76,0.8)';
+  pbCtx.font = '13px "Cinzel Decorative", serif';
+  pbCtx.textAlign = 'center';
+  pbCtx.fillText('SEPTEMBER 8, 2026', W/2, H-50);
+
+  pbCtx.fillStyle = 'rgba(255,255,255,0.4)';
+  pbCtx.font = '10px Jost, sans-serif';
+  pbCtx.fillText('Sacred Heart · Palmeras Private Resort · Tagum City', W/2, H-32);
+}
+
+// Initial draw
+if(pbCtx) pbDrawFrame(null);
+
+document.getElementById('pbFileInput') && document.getElementById('pbFileInput').addEventListener('change', function(e) {
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    const img = new Image();
+    img.onload = () => { pbUserImage = img; pbDrawFrame(img); };
+    img.src = ev.target.result;
+  };
+  reader.readAsDataURL(file);
+});
+
+function pbCapture() {
+  if(!navigator.mediaDevices) { alert('Camera not supported on this browser/device.'); return; }
+  const video = document.createElement('video');
+  const canvas2 = document.createElement('canvas');
+  navigator.mediaDevices.getUserMedia({video:true}).then(stream => {
+    video.srcObject = stream;
+    video.play();
+    setTimeout(() => {
+      canvas2.width = video.videoWidth;
+      canvas2.height = video.videoHeight;
+      canvas2.getContext('2d').drawImage(video, 0, 0);
+      stream.getTracks().forEach(t => t.stop());
+      const img = new Image();
+      img.onload = () => { pbUserImage = img; pbDrawFrame(img); };
+      img.src = canvas2.toDataURL();
+    }, 800);
+  }).catch(() => alert('Camera access denied.'));
+}
+
+function pbDownload() {
+  if(!pbCanvas) return;
+  const link = document.createElement('a');
+  link.download = 'aldrich-mirzi-wedding-photo.png';
+  link.href = pbCanvas.toDataURL('image/png');
+  link.click();
+}
 
 </script>
 </body>
