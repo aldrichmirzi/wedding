@@ -3151,8 +3151,9 @@ const pbCtx = pbCanvas ? pbCanvas.getContext('2d') : null;
 
 function pbDrawFrame(img) {
   if(!pbCtx) return;
-  const W=520,H=680;
-  pbCanvas.width=W;pbCanvas.height=H;
+  // Use current canvas size (may have been set by autofit)
+  const W = pbCanvas.width || 480;
+  const H = pbCanvas.height || 700;
   pbCtx.clearRect(0,0,W,H);
 
   // ── BACKGROUND ──
@@ -3165,31 +3166,44 @@ function pbDrawFrame(img) {
   // Emerald corner glows
   [[0,0],[W,0],[0,H],[W,H]].forEach(([x,y])=>{
     const eg=pbCtx.createRadialGradient(x,y,0,x,y,200);
-    eg.addColorStop(0,'rgba(27,94,59,0.18)');eg.addColorStop(1,'rgba(27,94,59,0)');
+    eg.addColorStop(0,'rgba(27,94,59,0.2)');eg.addColorStop(1,'rgba(27,94,59,0)');
     pbCtx.fillStyle=eg;pbCtx.fillRect(0,0,W,H);
   });
 
-  // ── Gold border ──
+  // Gold borders
   pbCtx.strokeStyle='rgba(201,168,76,0.75)';pbCtx.lineWidth=2;
   pbCtx.strokeRect(7,7,W-14,H-14);
   pbCtx.strokeStyle='rgba(201,168,76,0.3)';pbCtx.lineWidth=0.8;
   pbCtx.strokeRect(12,12,W-24,H-24);
 
-  // ── PHOTO AREA — maximized, fills most of frame ──
-  const px=38,py=72,pw=W-76,ph=H-185;
+  // ── PHOTO AREA — dynamic based on canvas size ──
+  const px=36,py=68,pw=W-72,ph=H-175;
 
-  // White bg
   pbCtx.fillStyle='#FFFFFF';pbCtx.fillRect(px,py,pw,ph);
 
   if(img){
     pbCtx.save();
     pbCtx.beginPath();pbCtx.rect(px,py,pw,ph);pbCtx.clip();
-    // COVER FIT — always fills entire area, crops excess
+    // Smart fit: try to show full photo first, then cover if too wide
+    const imgRatio=img.naturalWidth/img.naturalHeight;
+    const frameRatio=pw/ph;
+    let dw,dh,dx,dy;
+    if(imgRatio<frameRatio){
+      // Portrait photo — fit width, may have top/bottom space
+      // Use cover to fill: fit by width
+      dw=pw; dh=dw/imgRatio;
+      dx=px; dy=py+(ph-dh)/2;
+    } else {
+      // Landscape photo — fit height
+      dh=ph; dw=dh*imgRatio;
+      dx=px+(pw-dw)/2; dy=py;
+    }
+    // Always use cover (Math.max scale) to fill entire frame
     const scale=Math.max(pw/img.naturalWidth, ph/img.naturalHeight);
-    const dw=img.naturalWidth*scale;
-    const dh=img.naturalHeight*scale;
-    const dx=px+(pw-dw)/2;
-    const dy=py+(ph-dh)/2;
+    dw=img.naturalWidth*scale;
+    dh=img.naturalHeight*scale;
+    dx=px+(pw-dw)/2;
+    dy=py+(ph-dh)/2;
     pbCtx.drawImage(img,dx,dy,dw,dh);
     pbCtx.restore();
   } else {
@@ -3201,25 +3215,23 @@ function pbDrawFrame(img) {
     pbCtx.fillText('Click "Upload Photo" above',W/2,py+ph/2+14);
   }
 
-  // Photo frame border
+  // Photo frame border — gold
   pbCtx.strokeStyle='#C9A84C';pbCtx.lineWidth=3;pbCtx.strokeRect(px,py,pw,ph);
   pbCtx.strokeStyle='rgba(201,168,76,0.35)';pbCtx.lineWidth=1;
-  pbCtx.strokeRect(px+6,py+6,pw-12,ph-12);
+  pbCtx.strokeRect(px+5,py+5,pw-10,ph-10);
 
-  // Gold corner ornaments on photo
+  // Gold corner ornaments
   [[px,py],[px+pw,py],[px,py+ph],[px+pw,py+ph]].forEach(([ox,oy])=>{
     pbCtx.save();pbCtx.translate(ox,oy);pbCtx.rotate(Math.PI/4);
-    pbCtx.fillStyle='#C9A84C';pbCtx.fillRect(-6,-6,12,12);pbCtx.restore();
-    pbCtx.beginPath();pbCtx.arc(ox,oy,3,0,Math.PI*2);
-    pbCtx.fillStyle='rgba(255,220,100,0.5)';pbCtx.fill();
+    pbCtx.fillStyle='#C9A84C';pbCtx.fillRect(-5,-5,10,10);pbCtx.restore();
   });
 
   // ══ HELPERS ══
   function drawRose(cx,cy,size,c1,c2,c3,cc){
     for(let i=0;i<8;i++){
       const a=i*(Math.PI*2/8)+0.15;
-      const dx=cx+Math.cos(a)*size*0.75,dy=cy+Math.sin(a)*size*0.68;
-      pbCtx.save();pbCtx.translate(dx,dy);pbCtx.rotate(a+Math.PI/2);
+      const dx2=cx+Math.cos(a)*size*0.75,dy2=cy+Math.sin(a)*size*0.68;
+      pbCtx.save();pbCtx.translate(dx2,dy2);pbCtx.rotate(a+Math.PI/2);
       const pg=pbCtx.createLinearGradient(0,0,0,-size*0.6);
       pg.addColorStop(0,c1);pg.addColorStop(0.5,c2);pg.addColorStop(1,c3);
       pbCtx.fillStyle=pg;pbCtx.beginPath();pbCtx.moveTo(0,0);
@@ -3229,8 +3241,8 @@ function pbDrawFrame(img) {
     }
     for(let i=0;i<6;i++){
       const a=i*(Math.PI*2/6)+0.5;
-      const dx=cx+Math.cos(a)*size*0.48,dy=cy+Math.sin(a)*size*0.44;
-      pbCtx.save();pbCtx.translate(dx,dy);pbCtx.rotate(a+Math.PI/2);
+      const dx2=cx+Math.cos(a)*size*0.48,dy2=cy+Math.sin(a)*size*0.44;
+      pbCtx.save();pbCtx.translate(dx2,dy2);pbCtx.rotate(a+Math.PI/2);
       const pg=pbCtx.createLinearGradient(0,0,0,-size*0.5);
       pg.addColorStop(0,c1);pg.addColorStop(0.45,c2);pg.addColorStop(1,c3);
       pbCtx.fillStyle=pg;pbCtx.beginPath();pbCtx.moveTo(0,0);
@@ -3240,8 +3252,8 @@ function pbDrawFrame(img) {
     }
     for(let i=0;i<5;i++){
       const a=i*(Math.PI*2/5)+0.8;
-      const dx=cx+Math.cos(a)*size*0.28,dy=cy+Math.sin(a)*size*0.26;
-      pbCtx.save();pbCtx.translate(dx,dy);pbCtx.rotate(a+Math.PI/2);
+      const dx2=cx+Math.cos(a)*size*0.28,dy2=cy+Math.sin(a)*size*0.26;
+      pbCtx.save();pbCtx.translate(dx2,dy2);pbCtx.rotate(a+Math.PI/2);
       const pg=pbCtx.createLinearGradient(0,0,0,-size*0.4);
       pg.addColorStop(0,c2);pg.addColorStop(1,c3);
       pbCtx.fillStyle=pg;pbCtx.beginPath();pbCtx.moveTo(0,0);
@@ -3255,7 +3267,6 @@ function pbDrawFrame(img) {
     pbCtx.beginPath();pbCtx.arc(cx-size*0.05,cy-size*0.05,size*0.055,0,Math.PI*2);
     pbCtx.fillStyle='rgba(255,255,255,0.3)';pbCtx.fill();
   }
-
   function leaf(cx,cy,sz,ang,c1,c2){
     pbCtx.save();pbCtx.translate(cx,cy);pbCtx.rotate(ang);
     const lg=pbCtx.createLinearGradient(-sz*0.3,0,sz*0.3,-sz);
@@ -3265,15 +3276,13 @@ function pbDrawFrame(img) {
     pbCtx.bezierCurveTo(sz*0.42,-sz*0.62,sz*0.38,-sz*0.22,0,0);
     pbCtx.fill();
     pbCtx.beginPath();pbCtx.moveTo(0,0);pbCtx.lineTo(0,-sz);
-    pbCtx.strokeStyle='rgba(10,50,25,0.3)';pbCtx.lineWidth=0.6;pbCtx.stroke();
+    pbCtx.strokeStyle='rgba(10,50,25,0.28)';pbCtx.lineWidth=0.6;pbCtx.stroke();
     pbCtx.restore();
   }
-
   function vine(x1,y1,x2,y2,cx,cy,col,w){
     pbCtx.beginPath();pbCtx.moveTo(x1,y1);pbCtx.quadraticCurveTo(cx,cy,x2,y2);
     pbCtx.strokeStyle=col||'rgba(45,120,65,0.5)';pbCtx.lineWidth=w||1.2;pbCtx.stroke();
   }
-
   function berry(cx,cy,r,col){
     pbCtx.beginPath();pbCtx.arc(cx,cy,r,0,Math.PI*2);
     const bg2=pbCtx.createRadialGradient(cx-r*0.3,cy-r*0.3,0,cx,cy,r);
@@ -3284,43 +3293,40 @@ function pbDrawFrame(img) {
   }
 
   function cluster(ox,oy,flipX,flipY){
-    const fx=flipX?-1:1, fy=flipY?-1:1;
-    pbCtx.save();pbCtx.translate(ox,oy);pbCtx.scale(fx,fy);
-    vine(0,0,75,70,8,40,'rgba(45,120,65,0.55)',1.4);
-    vine(0,12,95,48,40,22,'rgba(45,120,65,0.45)',1);
-    vine(12,0,60,88,5,52,'rgba(201,168,76,0.35)',0.8);
-    vine(0,30,88,62,35,18,'rgba(45,120,65,0.38)',0.9);
-    leaf(42,40,30,0.88,'rgba(18,88,44,0.92)','rgba(42,138,68,0.88)');
-    leaf(68,34,24,1.25,'rgba(15,80,40,0.88)','rgba(36,120,60,0.82)');
-    leaf(25,65,22,0.32,'rgba(35,112,58,0.85)','rgba(55,152,82,0.78)');
-    leaf(92,55,19,1.65,'rgba(22,85,46,0.82)','rgba(40,120,64,0.75)');
-    leaf(18,88,18,0.08,'rgba(30,100,55,0.78)','rgba(50,142,76,0.7)');
+    pbCtx.save();pbCtx.translate(ox,oy);pbCtx.scale(flipX?-1:1,flipY?-1:1);
+    vine(0,0,75,72,8,42,'rgba(45,120,65,0.55)',1.4);
+    vine(0,14,96,50,42,24,'rgba(45,120,65,0.45)',1);
+    vine(14,0,62,90,6,54,'rgba(201,168,76,0.35)',0.8);
+    leaf(44,42,30,0.88,'rgba(18,88,44,0.92)','rgba(42,138,68,0.88)');
+    leaf(70,36,24,1.25,'rgba(15,80,40,0.88)','rgba(36,120,60,0.82)');
+    leaf(26,68,22,0.32,'rgba(35,112,58,0.85)','rgba(55,152,82,0.78)');
+    leaf(94,57,19,1.65,'rgba(22,85,46,0.82)','rgba(40,120,64,0.75)');
     drawRose(18,18,38,'rgba(185,42,62,0.98)','rgba(122,20,40,0.96)','rgba(65,8,20,0.94)','rgba(205,62,82,0.92)');
-    drawRose(80,50,26,'rgba(168,36,55,0.95)','rgba(112,18,36,0.93)','rgba(60,8,18,0.91)','rgba(188,56,75,0.9)');
-    drawRose(48,82,18,'rgba(155,32,52,0.9)','rgba(105,16,32,0.88)','rgba(55,6,16,0.86)','rgba(175,50,68,0.85)');
-    berry(52,70,4.5,'107,27,42');berry(62,78,3.5,'201,168,76');
-    berry(72,65,3,'107,27,42');berry(38,80,3.5,'201,168,76');
-    berry(85,78,3,'107,27,42');
+    drawRose(82,52,26,'rgba(168,36,55,0.95)','rgba(112,18,36,0.93)','rgba(60,8,18,0.91)','rgba(188,56,75,0.9)');
+    drawRose(50,84,18,'rgba(155,32,52,0.9)','rgba(105,16,32,0.88)','rgba(55,6,16,0.86)','rgba(175,50,68,0.85)');
+    berry(54,72,4.5,'107,27,42');berry(64,80,3.5,'201,168,76');
+    berry(74,67,3,'107,27,42');berry(40,82,3.5,'201,168,76');
+    berry(87,80,3,'107,27,42');
     pbCtx.restore();
   }
 
-  // Draw clusters on all 4 corners
-  cluster(0,0,false,false);      // top-left
-  cluster(W,0,true,false);       // top-right
-  cluster(0,H,false,true);       // bottom-left
-  cluster(W,H,true,true);        // bottom-right
+  // 4 corners
+  cluster(0,0,false,false);
+  cluster(W,0,true,false);
+  cluster(0,H,false,true);
+  cluster(W,H,true,true);
 
   // Side mid accents
-  [H*0.38,H*0.62].forEach(y=>{
-    berry(16,y,4,'201,168,76');berry(16,y+18,3,'107,27,42');berry(16,y-18,3,'107,27,42');
-    berry(W-16,y,4,'201,168,76');berry(W-16,y+18,3,'107,27,42');berry(W-16,y-18,3,'107,27,42');
+  [H*0.4,H*0.6].forEach(y=>{
+    berry(14,y,4,'201,168,76');berry(14,y+16,3,'107,27,42');berry(14,y-16,3,'107,27,42');
+    berry(W-14,y,4,'201,168,76');berry(W-14,y+16,3,'107,27,42');berry(W-14,y-16,3,'107,27,42');
   });
 
   // ── TEXT AREA ──
-  const textY=py+ph+38;
+  const textY=py+ph+36;
   pbCtx.shadowColor='rgba(0,0,0,0.9)';pbCtx.shadowBlur=10;
   pbCtx.fillStyle='#FFFFFF';
-  pbCtx.font='italic 30px "Playfair Display",serif';
+  pbCtx.font='italic 28px "Playfair Display",serif';
   pbCtx.textAlign='center';
   pbCtx.fillText('Aldrich & Mirzi',W/2,textY);
   pbCtx.shadowBlur=0;
@@ -3329,22 +3335,20 @@ function pbDrawFrame(img) {
   lg.addColorStop(0,'transparent');lg.addColorStop(0.3,'#C9A84C');
   lg.addColorStop(0.7,'#C9A84C');lg.addColorStop(1,'transparent');
   pbCtx.strokeStyle=lg;pbCtx.lineWidth=1;
-  pbCtx.beginPath();pbCtx.moveTo(W*0.12,textY+13);pbCtx.lineTo(W*0.88,textY+13);pbCtx.stroke();
-  pbCtx.save();pbCtx.translate(W/2,textY+13);pbCtx.rotate(Math.PI/4);
-  pbCtx.fillStyle='#C9A84C';pbCtx.fillRect(-4,-4,8,8);pbCtx.restore();
+  pbCtx.beginPath();pbCtx.moveTo(W*0.12,textY+12);pbCtx.lineTo(W*0.88,textY+12);pbCtx.stroke();
+  pbCtx.save();pbCtx.translate(W/2,textY+12);pbCtx.rotate(Math.PI/4);
+  pbCtx.fillStyle='#C9A84C';pbCtx.fillRect(-3.5,-3.5,7,7);pbCtx.restore();
 
   pbCtx.shadowColor='rgba(0,0,0,0.7)';pbCtx.shadowBlur=6;
   pbCtx.fillStyle='#E2C97A';
   pbCtx.font='bold 12px "Cinzel Decorative",serif';
-  pbCtx.fillText('SEPTEMBER 8, 2026',W/2,textY+32);
-
+  pbCtx.fillText('SEPTEMBER 8, 2026',W/2,textY+30);
   pbCtx.fillStyle='rgba(255,255,255,0.82)';
   pbCtx.font='9.5px Jost,sans-serif';
-  pbCtx.fillText('Sacred Heart of Jesus Quasi-Parish  ·  Palmeras Private Resort',W/2,textY+50);
-
+  pbCtx.fillText('Sacred Heart of Jesus Quasi-Parish  ·  Palmeras Private Resort',W/2,textY+48);
   pbCtx.fillStyle='rgba(100,210,150,0.9)';
   pbCtx.font='9px Jost,sans-serif';
-  pbCtx.fillText('Tagum City, Davao del Norte',W/2,textY+65);
+  pbCtx.fillText('Tagum City, Davao del Norte',W/2,textY+63);
   pbCtx.shadowBlur=0;
 }
 
@@ -3357,7 +3361,38 @@ document.getElementById('pbFileInput') && document.getElementById('pbFileInput')
   const reader = new FileReader();
   reader.onload = ev => {
     const img = new Image();
-    img.onload = () => { pbUserImage = img; pbDrawFrame(img); };
+    img.onload = () => {
+      pbUserImage = img;
+
+      // ── AUTOFIT: resize canvas photo area to match photo ratio ──
+      const W = 480;
+      const borderTop = 68;       // space for top flowers
+      const borderBottom = 107;   // space for bottom text + flowers
+      const borderSide = 36;      // left/right padding
+      const photoW = W - borderSide * 2;
+
+      // Calculate ideal photo height based on image ratio
+      const imgRatio = img.naturalWidth / img.naturalHeight;
+      let photoH;
+
+      if(imgRatio >= 1) {
+        // Landscape or square — shorter photo area
+        photoH = Math.round(photoW / imgRatio);
+        photoH = Math.max(photoH, 200); // min height
+      } else {
+        // Portrait — taller photo area, max 580px
+        photoH = Math.round(photoW / imgRatio);
+        photoH = Math.min(photoH, 580);
+      }
+
+      const totalH = borderTop + photoH + borderBottom;
+
+      // Resize canvas to fit
+      pbCanvas.width = W;
+      pbCanvas.height = totalH;
+
+      pbDrawFrame(img);
+    };
     img.src = ev.target.result;
   };
   reader.readAsDataURL(file);
