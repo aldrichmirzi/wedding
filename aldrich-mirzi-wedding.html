@@ -401,7 +401,18 @@ section{padding:100px 24px;}
 .ent-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--gold),transparent);transform:scaleX(0);transition:transform 0.3s;}
 .ent-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(107,27,42,0.1);}
 .ent-card:hover::before{transform:scaleX(1);}
-.ent-card-icon{font-size:1.4rem;display:block;margin-bottom:8px;}
+.ent-card-icon{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:46px;height:46px;font-size:1.5rem;
+  border-radius:50%;margin-bottom:12px;
+  background:radial-gradient(circle at 32% 28%, rgba(255,255,255,0.95), rgba(250,244,232,0.75));
+  box-shadow:0 0 0 1.5px rgba(201,168,76,0.55), 0 4px 12px rgba(107,27,42,0.1), inset 0 1px 2px rgba(255,255,255,0.6);
+  transition:transform 0.3s, box-shadow 0.3s;
+}
+.ent-card:hover .ent-card-icon{
+  transform:scale(1.08) rotate(-4deg);
+  box-shadow:0 0 0 2px rgba(201,168,76,0.75), 0 6px 16px rgba(107,27,42,0.15), inset 0 1px 2px rgba(255,255,255,0.7);
+}
 .ent-card-name{font-family:'EB Garamond',serif;font-style:italic;font-size:1.05rem;color:var(--ink-mid);}
 .ent-card-role{font-family:'Jost',sans-serif;font-weight:200;font-size:0.55rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-top:4px;}
 
@@ -503,7 +514,7 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
 }
 
 /* ══ FALLING PETALS ══ */
-.petal{position:fixed;top:-20px;pointer-events:none;z-index:50;animation:petalFall linear infinite;opacity:0;}
+.petal{position:fixed;top:-20px;pointer-events:none;z-index:1;animation:petalFall linear infinite;opacity:0;}
 @keyframes petalFall{0%{opacity:0;transform:translateY(-20px) rotate(0deg) scale(0.8);}10%{opacity:0.7;}90%{opacity:0.4;}100%{opacity:0;transform:translateY(110vh) rotate(720deg) scale(1.2);}}
 
 /* ══ GOLD PARTICLES ══ */
@@ -544,6 +555,8 @@ footer::before{content:'';position:absolute;inset:0;background:radial-gradient(e
 .masonry-ph:nth-child(2){min-height:140px;}
 .masonry-ph:nth-child(5){min-height:200px;}
 @media(max-width:768px){.masonry-grid{columns:2;}.ribbon::before,.ribbon::after{display:none;}}
+.ent-grid[style*="repeat(4"]{grid-template-columns:repeat(4,1fr)!important;}
+@media(max-width:640px){.ent-grid[style*="repeat(4"]{grid-template-columns:repeat(2,1fr)!important;}}
 
 
 /* ══ CUSTOM RING CURSOR ══ */
@@ -1865,6 +1878,14 @@ body { font-size: 1.08em; }
 .mvc-addr { font-size: 0.95rem !important; }
 .gb-msg-text, .wt-card-wish { font-size: 1.05rem !important; }
 
+
+/* ══ ENSURE CARDS SIT ABOVE FLOATING PETALS ══ */
+.dc-card, .detail-card, .ent-card, .gift-card, .faq-item, .gb-msg, .wt-card,
+.map-venue-card, .rsvp-btn, .story-wrap, .dc-donot, .dc-palette {
+  position: relative;
+  z-index: 5;
+}
+
 </style>
 </head>
 <body>
@@ -2435,10 +2456,10 @@ body { font-size: 1.08em; }
       <div class="ent-divider"><div class="ent-divider-line"></div><span class="ent-divider-gem">◆</span><div class="ent-divider-line"></div></div>
       <div class="ent-grid">
         <div class="ent-card tilt-card"><span class="ent-card-icon">🤵</span><p class="ent-card-name">Carl Patrick B. Montinola</p><p class="ent-card-role">Best Man</p></div>
-        <div class="ent-card tilt-card"><span class="ent-card-icon">🤵</span><p class="ent-card-name">Ronel Gerard M. Cucharo</p><p class="ent-card-role">Groomsman</p></div>
-        <div class="ent-card tilt-card"><span class="ent-card-icon">🤵</span><p class="ent-card-name">Junsel A. Santos</p><p class="ent-card-role">Groomsman</p></div>
-        <div class="ent-card tilt-card"><span class="ent-card-icon">🤵</span><p class="ent-card-name">Andy Silvar C. Nistal</p><p class="ent-card-role">Groomsman</p></div>
-        <div class="ent-card tilt-card"><span class="ent-card-icon">🤵</span><p class="ent-card-name">Nick Anthony A. Torreon</p><p class="ent-card-role">Groomsman</p></div>
+        <div class="ent-card tilt-card"><span class="ent-card-icon">🕴️</span><p class="ent-card-name">Ronel Gerard M. Cucharo</p><p class="ent-card-role">Groomsman</p></div>
+        <div class="ent-card tilt-card"><span class="ent-card-icon">🕴️</span><p class="ent-card-name">Junsel A. Santos</p><p class="ent-card-role">Groomsman</p></div>
+        <div class="ent-card tilt-card"><span class="ent-card-icon">🕴️</span><p class="ent-card-name">Andy Silvar C. Nistal</p><p class="ent-card-role">Groomsman</p></div>
+        <div class="ent-card tilt-card"><span class="ent-card-icon">🕴️</span><p class="ent-card-name">Nick Anthony A. Torreon</p><p class="ent-card-role">Groomsman</p></div>
       </div>
     </div>
 
@@ -2455,9 +2476,9 @@ body { font-size: 1.08em; }
       <p class="ent-role">Bridesmaids</p>
       <div class="ent-divider"><div class="ent-divider-line"></div><span class="ent-divider-gem">◆</span><div class="ent-divider-line"></div></div>
       <div class="ent-grid">
-        <div class="ent-card tilt-card"><span class="ent-card-icon">💐</span><p class="ent-card-name">Sophia Grace A. Reyes</p><p class="ent-card-role">Bridesmaid</p></div>
-        <div class="ent-card tilt-card"><span class="ent-card-icon">💐</span><p class="ent-card-name">Indhira C. Santos</p><p class="ent-card-role">Bridesmaid</p></div>
-        <div class="ent-card tilt-card"><span class="ent-card-icon">💐</span><p class="ent-card-name">Merasol S. Nistal</p><p class="ent-card-role">Bridesmaid</p></div>
+        <div class="ent-card tilt-card"><span class="ent-card-icon">👗</span><p class="ent-card-name">Sophia Grace A. Reyes</p><p class="ent-card-role">Bridesmaid</p></div>
+        <div class="ent-card tilt-card"><span class="ent-card-icon">👗</span><p class="ent-card-name">Indhira C. Santos</p><p class="ent-card-role">Bridesmaid</p></div>
+        <div class="ent-card tilt-card"><span class="ent-card-icon">👗</span><p class="ent-card-name">Merasol S. Nistal</p><p class="ent-card-role">Bridesmaid</p></div>
       </div>
     </div>
 
@@ -2474,7 +2495,7 @@ body { font-size: 1.08em; }
       <p class="ent-role">Secondary Sponsors</p>
       <div class="ent-divider"><div class="ent-divider-line"></div><span class="ent-divider-gem">◆</span><div class="ent-divider-line"></div></div>
       <div class="ent-grid" style="flex-direction:column;align-items:center;gap:14px;">
-        <div class="ent-card tilt-card" style="width:100%;max-width:520px;"><span class="ent-card-icon">🕯️</span><p class="ent-card-name">Veil Pair</p><p class="ent-card-role">Veil Sponsor</p></div>
+        <div class="ent-card tilt-card" style="width:100%;max-width:520px;"><span class="ent-card-icon">👰</span><p class="ent-card-name">Veil Pair</p><p class="ent-card-role">Veil Sponsor</p></div>
         <div class="ent-card tilt-card" style="width:100%;max-width:520px;"><span class="ent-card-icon">🪢</span><p class="ent-card-name">Mr. Mark Brian A. Tiu &amp; Ms. Jessa Mae P. Lanes</p><p class="ent-card-role">Cord Sponsor</p></div>
         <div class="ent-card tilt-card" style="width:100%;max-width:520px;"><span class="ent-card-icon">🕯️</span><p class="ent-card-name">Engr. Deacon R. Rodriguez &amp; Mrs. Noveh Ann C. Rodriguez</p><p class="ent-card-role">Candle Sponsor</p></div>
       </div>
@@ -2483,11 +2504,11 @@ body { font-size: 1.08em; }
     <div class="ent-section">
       <p class="ent-role">Flower Girls</p>
       <div class="ent-divider"><div class="ent-divider-line"></div><span class="ent-divider-gem">◆</span><div class="ent-divider-line"></div></div>
-      <div class="ent-grid">
-        <div class="ent-card tilt-card"><span class="ent-card-icon">🌸</span><p class="ent-card-name">Alessia Rae A. Lee</p><p class="ent-card-role">Flower Girl</p></div>
-        <div class="ent-card tilt-card"><span class="ent-card-icon">🌸</span><p class="ent-card-name">Auzzyliahux P. Amoyen</p><p class="ent-card-role">Flower Girl</p></div>
-        <div class="ent-card tilt-card"><span class="ent-card-icon">🌸</span><p class="ent-card-name">Delry C. Rodriguez</p><p class="ent-card-role">Flower Girl</p></div>
-        <div class="ent-card tilt-card"><span class="ent-card-icon">🌸</span><p class="ent-card-name">Zaylee Blake C. Arbiol</p><p class="ent-card-role">Flower Girl</p></div>
+      <div class="ent-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:900px;">
+        <div class="ent-card tilt-card" style="min-width:0;padding:18px 10px;"><span class="ent-card-icon">🌸</span><p class="ent-card-name" style="font-size:0.95rem;">Alessia Rae A. Lee</p><p class="ent-card-role">Flower Girl</p></div>
+        <div class="ent-card tilt-card" style="min-width:0;padding:18px 10px;"><span class="ent-card-icon">🌸</span><p class="ent-card-name" style="font-size:0.95rem;">Auzzyliahux P. Amoyen</p><p class="ent-card-role">Flower Girl</p></div>
+        <div class="ent-card tilt-card" style="min-width:0;padding:18px 10px;"><span class="ent-card-icon">🌸</span><p class="ent-card-name" style="font-size:0.95rem;">Delry C. Rodriguez</p><p class="ent-card-role">Flower Girl</p></div>
+        <div class="ent-card tilt-card" style="min-width:0;padding:18px 10px;"><span class="ent-card-icon">🌸</span><p class="ent-card-name" style="font-size:0.95rem;">Zaylee Blake C. Arbiol</p><p class="ent-card-role">Flower Girl</p></div>
       </div>
     </div>
 
@@ -2733,7 +2754,7 @@ body { font-size: 1.08em; }
     <div class="faq-list">
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What is the dress code?<span class="faq-arrow">▾</span></button><div class="faq-a">The dress code is <strong>Formal Attire</strong>. We warmly encourage our guests to wear our wedding colors — Burgundy and Emerald Green. Out of respect for the bride, kindly avoid wearing white or ivory. Please also avoid sleeveless attire inside the church.</div></div>
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Is parking available at the venues?<span class="faq-arrow">▾</span></button><div class="faq-a">Yes! Parking is available at Palmeras Private Resort for the reception. We recommend arriving a little early to secure a spot. Carpooling with fellow guests is also a wonderful idea.</div></div>
-      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Can I bring a plus one?<span class="faq-arrow">▾</span></button><div class="faq-a">Our invitations are extended to those named on the invitation card. If your invitation includes a plus one, their name will be indicated. Please note their name in your RSVP form.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Can I bring a plus one?<span class="faq-arrow">▾</span></button><div class="faq-a">We kindly request <strong>strictly no plus ones</strong>. Due to limited seating and venue capacity, only the guests named on the invitation will be accommodated. We truly appreciate your understanding! 🙏</div></div>
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Are children welcome?<span class="faq-arrow">▾</span></button><div class="faq-a">We adore your little ones! Children are welcome at both the ceremony and reception. Kindly indicate in your RSVP if you will be bringing children so we can prepare accordingly.</div></div>
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What about gifts?<span class="faq-arrow">▾</span></button><div class="faq-a">Your presence truly is our greatest gift. Should you wish to give something, we humbly and gladly accept anything — big or small, near or far! Every gift is a blessing and we are grateful for all of it. 😄🙏</div></div>
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Can I take photos during the ceremony?<span class="faq-arrow">▾</span></button><div class="faq-a">We kindly ask that you be fully present with us during the ceremony and follow the guidelines of Sacred Heart of Jesus Quasi-Parish. Please feel free to capture all the joy at the reception — our photographer will take care of the sacred moments.</div></div>
@@ -2827,7 +2848,7 @@ function updateCountdown(){
   const wedding=new Date('2026-09-08T14:00:00');
   const now=new Date();const diff=wedding-now;
   if(diff<=0){['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id=>document.getElementById(id).textContent='00');return;}
-  document.getElementById('cd-days').textContent=String(Math.floor(diff/86400000)).padStart(3,'0');
+  document.getElementById('cd-days').textContent=String(Math.floor(diff/86400000)).padStart(2,'0');
   document.getElementById('cd-hours').textContent=String(Math.floor((diff%86400000)/3600000)).padStart(2,'0');
   document.getElementById('cd-mins').textContent=String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
   document.getElementById('cd-secs').textContent=String(Math.floor((diff%60000)/1000)).padStart(2,'0');
