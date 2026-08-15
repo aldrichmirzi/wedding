@@ -1034,7 +1034,20 @@ p.sec-sub {
   50%      { text-shadow: 0 0 70px rgba(201,168,76,0.55), 0 0 120px rgba(201,168,76,0.2), 0 2px 8px rgba(0,0,0,0.4); }
 }
 
-80%  { opacity: 1; }
+/* ══ CONFETTI ══ */
+.confetti-piece {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  top: -20px;
+  pointer-events: none;
+  z-index: 9999;
+  animation: confettiFall linear forwards;
+  border-radius: 2px;
+}
+@keyframes confettiFall {
+  0%   { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
+  80%  { opacity: 1; }
   100% { transform: translateY(110vh) rotate(720deg) scale(0.5); opacity: 0; }
 }
 
@@ -2989,7 +3002,51 @@ document.querySelectorAll('a[href^="#"], .mobile-nav a').forEach(link => {
 });
 
 
-);
+// ── CONFETTI BURST ──
+function launchConfetti() {
+  const colors = [
+    '#6B1B2A', '#8B2A3C', '#B04458',
+    '#1B5E3B', '#2D7A52', '#4A9E70',
+    '#C9A84C', '#E2C97A', '#FBF5E6',
+    '#ffffff'
+  ];
+  const shapes = ['square', 'circle', 'ribbon'];
+
+  for (let i = 0; i < 120; i++) {
+    setTimeout(() => {
+      const piece = document.createElement('div');
+      piece.className = 'confetti-piece';
+
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      const shape = shapes[Math.floor(Math.random() * shapes.length)];
+      const size = 6 + Math.random() * 10;
+      const left = Math.random() * 100;
+      const duration = 2.5 + Math.random() * 2;
+      const delay = Math.random() * 0.8;
+
+      piece.style.cssText = `
+        left: ${left}vw;
+        width: ${shape === 'ribbon' ? size * 0.4 : size}px;
+        height: ${shape === 'ribbon' ? size * 2.5 : size}px;
+        background: ${color};
+        border-radius: ${shape === 'circle' ? '50%' : shape === 'ribbon' ? '2px' : '2px'};
+        animation-duration: ${duration}s;
+        animation-delay: ${delay}s;
+        transform-origin: center;
+      `;
+      document.body.appendChild(piece);
+      setTimeout(() => piece.remove(), (duration + delay + 0.5) * 1000);
+    }, i * 15);
+  }
+}
+
+// Attach to RSVP button
+document.addEventListener('DOMContentLoaded', () => {
+  const rsvpBtn = document.querySelector('.rsvp-btn');
+  if (rsvpBtn) {
+    rsvpBtn.addEventListener('click', () => {
+      launchConfetti();
+    });
   }
   // Also fire on guestbook submit
   const gbSubmit = document.querySelector('.gb-submit');
@@ -2997,7 +3054,7 @@ document.querySelectorAll('a[href^="#"], .mobile-nav a').forEach(link => {
     const origSubmit = window.submitMessage;
     window.submitMessage = function() {
       origSubmit && origSubmit();
-      
+      launchConfetti();
     };
   }
 });
@@ -3068,7 +3125,7 @@ function submitWish() {
   document.getElementById('wt-name').value = '';
   document.getElementById('wt-relation').value = '';
   document.getElementById('wt-wish').value = '';
-  
+  launchConfetti();
 }
 function renderWishes() {
   const wall = document.getElementById('wishWall');
