@@ -388,7 +388,7 @@ section{padding:100px 24px;}
 /* ══ ENTOURAGE CARDS ══ */
 #entourage{background:var(--cream);padding:100px 24px;}
 .ent-section{margin-bottom:64px;}
-.ent-role{font-family:'Jost',sans-serif;font-weight:300;font-size:0.72rem;letter-spacing:4px;text-transform:uppercase;color:var(--em);text-align:center;margin-bottom:12px;}
+.ent-role{font-family:'Jost',sans-serif;font-weight:700;font-size:0.86rem;letter-spacing:3px;text-transform:uppercase;color:var(--em-dark);text-align:center;margin-bottom:12px;}
 .ent-divider{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:28px;}
 .ent-divider-line{width:40px;height:1px;background:rgba(201,168,76,0.3);}
 .ent-divider-gem{color:var(--gold);font-size:0.45rem;}
@@ -1983,6 +1983,31 @@ body { font-size: 1.08em; }
   .ent-grid-sponsors{ grid-template-columns:1fr !important; }
 }
 
+
+/* ══ ENTOURAGE UMBRELLA GROUP TITLES ══ */
+.ent-group-title{
+  font-family:'Cinzel Decorative',serif;
+  font-size:1.05rem;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--burg);
+  text-align:center;
+  margin:56px 0 28px;
+  position:relative;
+  padding-bottom:14px;
+}
+.ent-group-title:first-of-type{margin-top:8px;}
+.ent-group-title::before{
+  content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  width:90px;height:2px;
+  background:linear-gradient(to right,transparent,var(--gold),transparent);
+}
+.ent-group-title::after{
+  content:'◆';position:absolute;bottom:-5px;left:50%;transform:translateX(-50%);
+  color:var(--gold);font-size:0.6rem;
+  background:var(--cream);padding:0 8px;
+}
+
 </style>
 </head>
 <body>
@@ -2292,7 +2317,7 @@ body { font-size: 1.08em; }
 <section id="details">
   <div class="reveal">
     <p class="sec-label">Join Us in Celebration</p>
-    <h2 class="sec-title" style="color:var(--burg)">The Celebration</h2>
+    <h2 class="sec-title" style="color:var(--burg)">Wedding Celebration</h2>
     <div class="sec-rule"><div class="sec-rule-line rev"></div><span class="sec-rule-gem">◆</span><div class="sec-rule-line"></div></div>
     <div class="details-grid">
       <div class="detail-card tilt-card">
@@ -2526,6 +2551,56 @@ body { font-size: 1.08em; }
     <h2 class="sec-title" style="color:var(--burg)">Our Entourage</h2>
     <div class="sec-rule"><div class="sec-rule-line rev"></div><span class="sec-rule-gem">◆</span><div class="sec-rule-line"></div></div>
 
+    <!-- ═══ PARENTS ═══ -->
+    <div class="ent-group-title">Parents</div>
+    <div class="ent-section">
+      <p class="ent-role">Parents of the Groom</p>
+      <div class="ent-divider"><div class="ent-divider-line"></div><span class="ent-divider-gem">◆</span><div class="ent-divider-line"></div></div>
+      <div class="ent-grid" style="display:grid;grid-template-columns:1fr;max-width:640px;margin:0 auto 32px;">
+        <div class="ent-card tilt-card ent-card-pair"><div class="ent-icon-frame"><span class="ent-card-icon">👨‍👩‍👦</span></div><div class="ent-icon-divider"></div><p class="ent-card-name">Mr. Romulo P. Batas &amp; Mrs. Judith A. Batas</p><p class="ent-card-role">Parents of the Groom</p></div>
+      </div>
+      <p class="ent-role">Parents of the Bride</p>
+      <div class="ent-divider"><div class="ent-divider-line"></div><span class="ent-divider-gem">◆</span><div class="ent-divider-line"></div></div>
+      <div class="ent-grid" style="display:grid;grid-template-columns:1fr;max-width:640px;margin:0 auto;">
+        <div class="ent-card tilt-card ent-card-pair"><div class="ent-icon-frame"><span class="ent-card-icon">👨‍👩‍👦</span></div><div class="ent-icon-divider"></div><p class="ent-card-name">Mr. Ronel C. Cucharo &amp; Mrs. Gracela M. Cucharo</p><p class="ent-card-role">Parents of the Bride</p></div>
+      </div>
+    </div>
+
+    <!-- ═══ PRINCIPAL SPONSORS ═══ -->
+    <div class="ent-group-title">Principal Sponsors</div>
+    <div class="ent-section">
+      <div class="ent-grid ent-grid-sponsors" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:1180px;margin:0 auto;">
+        <div class="ent-card tilt-card ent-card-pair"><div class="ent-icon-frame"><span class="ent-card-icon">💍</span></div><div class="ent-icon-divider"></div><p class="ent-card-name">Engr. Ruel C. Dumadag &amp; Mrs. Visminda Dumadag</p><p class="ent-card-role">Principal Sponsor</p></div>
+        <div class="ent-card tilt-card ent-card-pair"><div class="ent-icon-frame"><span class="ent-card-icon">💍</span></div><div class="ent-icon-divider"></div><p class="ent-card-name">Engr. Krist Andrew Almario &amp; Mrs. Gwendyl Joyce N. Cabote-Almario</p><p class="ent-card-role">Principal Sponsor</p></div>
+        <div class="ent-card tilt-card ent-card-pair"><div class="ent-icon-frame"><span class="ent-card-icon">💍</span></div><div class="ent-icon-divider"></div><p class="ent-card-name">Dir. Cyr C. Gonesto &amp; Mrs. Analyn E. Gonesto</p><p class="ent-card-role">Principal Sponsor</p></div>
+        <div class="ent-card tilt-card ent-card-pair"><div class="ent-icon-frame"><span class="ent-card-icon">💍</span></div><div class="ent-icon-divider"></div><p class="ent-card-name">Engr. Christian Rey M. Balingit &amp; Mrs. Mary Joy B. Balingit</p><p class="ent-card-role">Principal Sponsor</p></div>
+        <div class="ent-card tilt-card ent-card-pair"><div class="ent-icon-frame"><span class="ent-card-icon">💍</span></div><div class="ent-icon-divider"></div><p class="ent-card-name">Mr. Earl Owen R. Aala &amp; Mrs. Gay E. Aala</p><p class="ent-card-role">Principal Sponsor</p></div>
+        <div class="ent-card tilt-card ent-card-pair"><div class="ent-icon-frame"><span class="ent-card-icon">💍</span></div><div class="ent-icon-divider"></div><p class="ent-card-name">Engr. Carlo Luige B. Quezon &amp; Engr. Liezl Joy E. Quezon</p><p class="ent-card-role">Principal Sponsor</p></div>
+        <div class="ent-card tilt-card ent-card-pair"><div class="ent-icon-frame"><span class="ent-card-icon">💍</span></div><div class="ent-icon-divider"></div><p class="ent-card-name">Mr. Juan G. Panuncio &amp; Mrs. Mercedita D. Panuncio</p><p class="ent-card-role">Principal Sponsor</p></div>
+        <div class="ent-card tilt-card ent-card-pair"><div class="ent-icon-frame"><span class="ent-card-icon">💍</span></div><div class="ent-icon-divider"></div><p class="ent-card-name">Mr. Elmer O. Fuerzas &amp; Mrs. Kathlyn Lee F. Fuerzas</p><p class="ent-card-role">Principal Sponsor</p></div>
+        <div class="ent-card tilt-card ent-card-pair"><div class="ent-icon-frame"><span class="ent-card-icon">💍</span></div><div class="ent-icon-divider"></div><p class="ent-card-name">Mr. Keith Joshua R. Miparanum &amp; Mrs. Charlette Donna D. Juaton-Miparanum</p><p class="ent-card-role">Principal Sponsor</p></div>
+        <div class="ent-card tilt-card ent-card-pair"><div class="ent-icon-frame"><span class="ent-card-icon">💍</span></div><div class="ent-icon-divider"></div><p class="ent-card-name">Mr. Renato L. Diaz &amp; Mrs. Mercy S. Diaz</p><p class="ent-card-role">Principal Sponsor</p></div>
+        <div class="ent-card tilt-card ent-card-pair"><div class="ent-icon-frame"><span class="ent-card-icon">💍</span></div><div class="ent-icon-divider"></div><p class="ent-card-name">Mr. Felix Palaca &amp; Mrs. Josefina B. Palaca</p><p class="ent-card-role">Principal Sponsor</p></div>
+        <div class="ent-card tilt-card ent-card-pair"><div class="ent-icon-frame"><span class="ent-card-icon">💍</span></div><div class="ent-icon-divider"></div><p class="ent-card-name">Mr. Bernard Alan C. Flores &amp; Mrs. Maria Susete B. Flores</p><p class="ent-card-role">Principal Sponsor</p></div>
+        <div class="ent-card tilt-card ent-card-pair"><div class="ent-icon-frame"><span class="ent-card-icon">💍</span></div><div class="ent-icon-divider"></div><p class="ent-card-name">Mr. Norbert John C. Visto &amp; Mrs. Pamela Marie A. Visto</p><p class="ent-card-role">Principal Sponsor</p></div>
+        <div class="ent-card tilt-card ent-card-pair"><div class="ent-icon-frame"><span class="ent-card-icon">💍</span></div><div class="ent-icon-divider"></div><p class="ent-card-name">Mr. Victoriano Y. Vicada &amp; Mrs. Villa C. Vicada</p><p class="ent-card-role">Principal Sponsor</p></div>
+        <div class="ent-card tilt-card ent-card-pair"><div class="ent-icon-frame"><span class="ent-card-icon">💍</span></div><div class="ent-icon-divider"></div><p class="ent-card-name">Mr. Orlando C. Manceras &amp; Mrs. Teresita F. Manceras</p><p class="ent-card-role">Principal Sponsor</p></div>
+        <div class="ent-card tilt-card ent-card-pair"><div class="ent-icon-frame"><span class="ent-card-icon">💍</span></div><div class="ent-icon-divider"></div><p class="ent-card-name">Mr. Ralex B. Borres &amp; Mrs. Imelda G. Borres</p><p class="ent-card-role">Principal Sponsor</p></div>
+      </div>
+    </div>
+
+    <!-- ═══ SECONDARY SPONSORS ═══ -->
+    <div class="ent-group-title">Secondary Sponsors</div>
+    <div class="ent-section">
+      <div class="ent-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:900px;margin:0 auto;">
+        <div class="ent-card tilt-card ent-card-pair"><div class="ent-icon-frame"><span class="ent-card-icon">👰</span></div><div class="ent-icon-divider"></div><p class="ent-card-name">Mr. Jemuelle P. Frando &amp; Mrs. Jenny Love T. Frando</p><p class="ent-card-role">Veil Sponsor</p></div>
+        <div class="ent-card tilt-card ent-card-pair"><div class="ent-icon-frame"><span class="ent-card-icon">🪢</span></div><div class="ent-icon-divider"></div><p class="ent-card-name">Mr. Jade Anthony A. Tiu &amp; Mrs. Vanessa R. Tiu</p><p class="ent-card-role">Cord Sponsor</p></div>
+        <div class="ent-card tilt-card ent-card-pair" style="grid-column:1 / -1;justify-self:center;width:100%;max-width:640px;"><div class="ent-icon-frame"><span class="ent-card-icon">🕯️</span></div><div class="ent-icon-divider"></div><p class="ent-card-name">Engr. Deacon R. Rodriguez &amp; Mrs. Noveh Ann C. Rodriguez</p><p class="ent-card-role">Candle Sponsor</p></div>
+      </div>
+    </div>
+
+    <!-- ═══ BRIDAL PARTY ═══ -->
+    <div class="ent-group-title">Bridal Party</div>
     <div class="ent-section">
       <p class="ent-role">Best Man</p>
       <div class="ent-divider"><div class="ent-divider-line"></div><span class="ent-divider-gem">◆</span><div class="ent-divider-line"></div></div>
@@ -2571,16 +2646,8 @@ body { font-size: 1.08em; }
       </div>
     </div>
 
-    <div class="ent-section">
-      <p class="ent-role">Secondary Sponsors</p>
-      <div class="ent-divider"><div class="ent-divider-line"></div><span class="ent-divider-gem">◆</span><div class="ent-divider-line"></div></div>
-      <div class="ent-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:900px;margin:0 auto;">
-        <div class="ent-card tilt-card ent-card-pair"><div class="ent-icon-frame"><span class="ent-card-icon">👰</span></div><div class="ent-icon-divider"></div><p class="ent-card-name">Mr. Jemuelle P. Frando &amp; Mrs. Jenny Love T. Frando</p><p class="ent-card-role">Veil Sponsor</p></div>
-        <div class="ent-card tilt-card ent-card-pair"><div class="ent-icon-frame"><span class="ent-card-icon">🪢</span></div><div class="ent-icon-divider"></div><p class="ent-card-name">Mr. Jade Anthony A. Tiu &amp; Mrs. Vanessa R. Tiu</p><p class="ent-card-role">Cord Sponsor</p></div>
-        <div class="ent-card tilt-card ent-card-pair" style="grid-column:1 / -1;justify-self:center;width:100%;max-width:640px;"><div class="ent-icon-frame"><span class="ent-card-icon">🕯️</span></div><div class="ent-icon-divider"></div><p class="ent-card-name">Engr. Deacon R. Rodriguez &amp; Mrs. Noveh Ann C. Rodriguez</p><p class="ent-card-role">Candle Sponsor</p></div>
-      </div>
-    </div>
-
+    <!-- ═══ BEARERS ═══ -->
+    <div class="ent-group-title">Bearers</div>
     <div class="ent-section">
       <p class="ent-role">Flower Girls</p>
       <div class="ent-divider"><div class="ent-divider-line"></div><span class="ent-divider-gem">◆</span><div class="ent-divider-line"></div></div>
@@ -2592,7 +2659,7 @@ body { font-size: 1.08em; }
       </div>
     </div>
 
-    <div class="ent-section">
+    <div class="ent-section" style="margin-bottom:0;">
       <p class="ent-role">Ring, Coin &amp; Bible Bearers</p>
       <div class="ent-divider"><div class="ent-divider-line"></div><span class="ent-divider-gem">◆</span><div class="ent-divider-line"></div></div>
       <div class="ent-grid">
@@ -2600,29 +2667,6 @@ body { font-size: 1.08em; }
         <div class="ent-card tilt-card"><div class="ent-icon-frame"><span class="ent-card-icon">🪙</span></div><div class="ent-icon-divider"></div><p class="ent-card-name" style="font-size:1.32rem !important;">Asher Vien D. Batas</p><p class="ent-card-role">Coin Bearer</p></div>
         <div class="ent-card tilt-card"><div class="ent-icon-frame"><span class="ent-card-icon">📖</span></div><div class="ent-icon-divider"></div><p class="ent-card-name" style="font-size:1.32rem !important;">Joshua Aiden R. Tiu</p><p class="ent-card-role">Bible Bearer</p></div>
       </div>
-    </div>
-
-    <div class="ent-section" style="margin-bottom:0;">
-      <p class="ent-role">Principal Sponsors</p>
-      <div class="ent-divider"><div class="ent-divider-line"></div><span class="ent-divider-gem">◆</span><div class="ent-divider-line"></div></div>
-      <div class="ent-grid ent-grid-sponsors" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:1180px;margin:0 auto;">
-        <div class="ent-card tilt-card ent-card-pair"><div class="ent-icon-frame"><span class="ent-card-icon">💍</span></div><div class="ent-icon-divider"></div><p class="ent-card-name">Engr. Ruel C. Dumadag &amp; Mrs. Visminda Dumadag</p><p class="ent-card-role">Principal Sponsor</p></div>
-        <div class="ent-card tilt-card ent-card-pair"><div class="ent-icon-frame"><span class="ent-card-icon">💍</span></div><div class="ent-icon-divider"></div><p class="ent-card-name">Engr. Krist Andrew Almario &amp; Mrs. Gwendyl Joyce N. Cabote-Almario</p><p class="ent-card-role">Principal Sponsor</p></div>
-        <div class="ent-card tilt-card ent-card-pair"><div class="ent-icon-frame"><span class="ent-card-icon">💍</span></div><div class="ent-icon-divider"></div><p class="ent-card-name">Dir. Cyr C. Gonesto &amp; Mrs. Analyn E. Gonesto</p><p class="ent-card-role">Principal Sponsor</p></div>
-        <div class="ent-card tilt-card ent-card-pair"><div class="ent-icon-frame"><span class="ent-card-icon">💍</span></div><div class="ent-icon-divider"></div><p class="ent-card-name">Engr. Christian Rey M. Balingit &amp; Mrs. Mary Joy B. Balingit</p><p class="ent-card-role">Principal Sponsor</p></div>
-        <div class="ent-card tilt-card ent-card-pair"><div class="ent-icon-frame"><span class="ent-card-icon">💍</span></div><div class="ent-icon-divider"></div><p class="ent-card-name">Mr. Earl Owen R. Aala &amp; Mrs. Gay E. Aala</p><p class="ent-card-role">Principal Sponsor</p></div>
-        <div class="ent-card tilt-card ent-card-pair"><div class="ent-icon-frame"><span class="ent-card-icon">💍</span></div><div class="ent-icon-divider"></div><p class="ent-card-name">Engr. Carlo Luige B. Quezon &amp; Engr. Liezl Joy E. Quezon</p><p class="ent-card-role">Principal Sponsor</p></div>
-        <div class="ent-card tilt-card ent-card-pair"><div class="ent-icon-frame"><span class="ent-card-icon">💍</span></div><div class="ent-icon-divider"></div><p class="ent-card-name">Mr. Juan G. Panuncio &amp; Mrs. Mercedita D. Panuncio</p><p class="ent-card-role">Principal Sponsor</p></div>
-        <div class="ent-card tilt-card ent-card-pair"><div class="ent-icon-frame"><span class="ent-card-icon">💍</span></div><div class="ent-icon-divider"></div><p class="ent-card-name">Mr. Elmer O. Fuerzas &amp; Mrs. Kathlyn Lee F. Fuerzas</p><p class="ent-card-role">Principal Sponsor</p></div>
-        <div class="ent-card tilt-card ent-card-pair"><div class="ent-icon-frame"><span class="ent-card-icon">💍</span></div><div class="ent-icon-divider"></div><p class="ent-card-name">Mr. Keith Joshua R. Miparanum &amp; Mrs. Charlette Donna D. Juaton-Miparanum</p><p class="ent-card-role">Principal Sponsor</p></div>
-        <div class="ent-card tilt-card ent-card-pair"><div class="ent-icon-frame"><span class="ent-card-icon">💍</span></div><div class="ent-icon-divider"></div><p class="ent-card-name">Mr. Renato L. Diaz &amp; Mrs. Mercy S. Diaz</p><p class="ent-card-role">Principal Sponsor</p></div>
-        <div class="ent-card tilt-card ent-card-pair"><div class="ent-icon-frame"><span class="ent-card-icon">💍</span></div><div class="ent-icon-divider"></div><p class="ent-card-name">Mr. Felix Palaca &amp; Mrs. Josefina B. Palaca</p><p class="ent-card-role">Principal Sponsor</p></div>
-        <div class="ent-card tilt-card ent-card-pair"><div class="ent-icon-frame"><span class="ent-card-icon">💍</span></div><div class="ent-icon-divider"></div><p class="ent-card-name">Mr. Bernard Alan C. Flores &amp; Mrs. Maria Susete B. Flores</p><p class="ent-card-role">Principal Sponsor</p></div>
-        <div class="ent-card tilt-card ent-card-pair"><div class="ent-icon-frame"><span class="ent-card-icon">💍</span></div><div class="ent-icon-divider"></div><p class="ent-card-name">Mr. Norbert John C. Visto &amp; Mrs. Pamela Marie A. Visto</p><p class="ent-card-role">Principal Sponsor</p></div>
-        <div class="ent-card tilt-card ent-card-pair"><div class="ent-icon-frame"><span class="ent-card-icon">💍</span></div><div class="ent-icon-divider"></div><p class="ent-card-name">Mr. Victoriano Y. Vicada &amp; Mrs. Villa C. Vicada</p><p class="ent-card-role">Principal Sponsor</p></div>
-        <div class="ent-card tilt-card ent-card-pair"><div class="ent-icon-frame"><span class="ent-card-icon">💍</span></div><div class="ent-icon-divider"></div><p class="ent-card-name">Mr. Orlando C. Manceras &amp; Mrs. Teresita F. Manceras</p><p class="ent-card-role">Principal Sponsor</p></div>
-        <div class="ent-card tilt-card ent-card-pair"><div class="ent-icon-frame"><span class="ent-card-icon">💍</span></div><div class="ent-icon-divider"></div><p class="ent-card-name">Mr. Ralex B. Borres &amp; Mrs. Imelda G. Borres</p><p class="ent-card-role">Principal Sponsor</p></div>
-            </div>
     </div>
   </div>
 </section>
