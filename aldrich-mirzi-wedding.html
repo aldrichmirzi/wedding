@@ -2008,6 +2008,13 @@ body { font-size: 1.08em; }
   background:var(--cream);padding:0 8px;
 }
 
+
+/* ══ DISABLE CUSTOM CURSOR ON MOBILE/TOUCH DEVICES ══ */
+@media (max-width: 900px), (hover: none), (pointer: coarse) {
+  *, *::before, *::after { cursor: auto !important; }
+  #custom-cursor, #cursor-trail { display: none !important; }
+}
+
 </style>
 </head>
 <body>
@@ -3123,6 +3130,8 @@ document.getElementById('photo-input').addEventListener('change',function(e){
   const cursor=document.getElementById('custom-cursor');
   const trail=document.getElementById('cursor-trail');
   if(!cursor||!trail)return;
+  const isTouch = window.matchMedia('(hover: none), (pointer: coarse)').matches || window.innerWidth <= 900;
+  if(isTouch){ cursor.style.display='none'; trail.style.display='none'; return; }
   document.addEventListener('mousemove',e=>{
     cursor.style.left=e.clientX+'px';cursor.style.top=e.clientY+'px';
     setTimeout(()=>{ trail.style.left=e.clientX+'px'; trail.style.top=e.clientY+'px'; },80);
