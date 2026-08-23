@@ -14,7 +14,7 @@
   --white:#FFFFFF;--ink:#1C1008;--ink-mid:#4A3828;--ink-light:#8A7060;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
+html{scroll-behavior:smooth;overflow-x:hidden;max-width:100%;}
 body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden;}
 ::-webkit-scrollbar{width:6px;}
 ::-webkit-scrollbar-track{background:var(--cream3);}
@@ -2015,6 +2015,42 @@ body { font-size: 1.08em; }
   #custom-cursor, #cursor-trail { display: none !important; }
 }
 
+
+/* ══ MOBILE READABILITY — BOLD LIGHT/THIN TEXTS ══ */
+@media(max-width:768px){
+  .hero-fullnames{ color:rgba(255,255,255,0.85) !important; font-weight:500 !important; }
+  .hero-venue-text{ color:rgba(255,255,255,0.75) !important; }
+  .hero-date-text{ color:rgba(255,255,255,0.95) !important; }
+  .hero-eyebrow{ font-weight:400 !important; color:var(--gold-light) !important; }
+  .sec-sub{ color:var(--ink-mid) !important; font-weight:400 !important; }
+  .d-info{ color:var(--ink-mid) !important; }
+  .rsvp-desc{ color:rgba(255,255,255,0.8) !important; }
+  .rsvp-note{ color:rgba(255,255,255,0.55) !important; }
+  .gift-text{ color:var(--ink-mid) !important; }
+  .prog-desc{ color:rgba(255,255,255,0.65) !important; }
+  .mvc-addr{ color:var(--ink-mid) !important; }
+}
+
+
+/* ══ GOOGLE MAPS EMBED ══ */
+.map-embed-wrap{
+  width:100%;
+  border-radius:2px;
+  overflow:hidden;
+  border:1px solid rgba(201,168,76,0.25);
+  box-shadow:0 8px 24px rgba(107,27,42,0.08);
+}
+.map-embed-wrap iframe{ display:block; width:100%; }
+@media(max-width:600px){ .map-embed-wrap iframe{ height:300px; } }
+
+
+/* ══ MOBILE SAFETY NET — PREVENT ENTOURAGE OVERFLOW ══ */
+#entourage{ overflow-x:hidden; }
+#entourage .ent-grid, #entourage .ent-card{ max-width:100%; box-sizing:border-box; }
+@media(max-width:480px){
+  #entourage .ent-card-pair{ font-size:0.95em; }
+}
+
 </style>
 </head>
 <body>
@@ -2201,8 +2237,8 @@ body { font-size: 1.08em; }
     <li><a href="#details">Details</a></li>
     <li><a href="#venuemap">Venue</a></li>
     <li><a href="#dresscode">Attire</a></li>
-    <li><a href="#gallery">Gallery</a></li>
-    <li><a href="#teaser">Video</a></li>
+    <!-- <li><a href="#gallery">Gallery</a></li> -->
+    <!-- <li><a href="#teaser">Video</a></li> -->
     <li><a href="#entourage">Entourage</a></li>
     <li><a href="#rsvp">RSVP</a></li>
     <li><a href="#program">Program</a></li>
@@ -2246,8 +2282,8 @@ body { font-size: 1.08em; }
   <a href="#details" onclick="closeMobileNav()">Details</a>
   <a href="#venuemap" onclick="closeMobileNav()">Venue</a>
   <a href="#dresscode" onclick="closeMobileNav()">Attire</a>
-  <a href="#teaser" onclick="closeMobileNav()">Video</a>
-  <a href="#gallery" onclick="closeMobileNav()">Gallery</a>
+  <!-- <a href="#teaser" onclick="closeMobileNav()">Video</a> -->
+  <!-- <a href="#gallery" onclick="closeMobileNav()">Gallery</a> -->
   <a href="#entourage" onclick="closeMobileNav()">Entourage</a>
   <a href="#rsvp" onclick="closeMobileNav()">RSVP</a>
   <a href="#program" onclick="closeMobileNav()">Program</a>
@@ -2323,8 +2359,8 @@ body { font-size: 1.08em; }
 <!-- EVENT DETAILS -->
 <section id="details">
   <div class="reveal">
-    <p class="sec-label">Join Us in Celebration</p>
-    <h2 class="sec-title" style="color:var(--burg)">Wedding Celebration</h2>
+    <p class="sec-label">Join us as we Celebrate</p>
+    <h2 class="sec-title" style="color:var(--burg)">Our Most Special Day</h2>
     <div class="sec-rule"><div class="sec-rule-line rev"></div><span class="sec-rule-gem">◆</span><div class="sec-rule-line"></div></div>
     <div class="details-grid">
       <div class="detail-card tilt-card">
@@ -2372,78 +2408,12 @@ body { font-size: 1.08em; }
     </div>
     <div class="map-svg-wrap">
       <p class="map-svg-title">Route Overview — Church to Reception</p>
-      <svg id="routeMap" viewBox="0 0 800 340" xmlns="http://www.w3.org/2000/svg">
-        <!-- Background -->
-        <rect width="800" height="340" fill="#F7EFE4" rx="4"/>
-        <!-- Road grid (decorative) -->
-        <line x1="0" y1="170" x2="800" y2="170" stroke="#E0D4C4" stroke-width="8"/>
-        <line x1="200" y1="0" x2="200" y2="340" stroke="#E0D4C4" stroke-width="6"/>
-        <line x1="500" y1="0" x2="500" y2="340" stroke="#E0D4C4" stroke-width="6"/>
-        <line x1="0" y1="80" x2="800" y2="80" stroke="#E8DED0" stroke-width="3"/>
-        <line x1="0" y1="260" x2="800" y2="260" stroke="#E8DED0" stroke-width="3"/>
-        <line x1="100" y1="0" x2="100" y2="340" stroke="#E8DED0" stroke-width="3"/>
-        <line x1="350" y1="0" x2="350" y2="340" stroke="#E8DED0" stroke-width="3"/>
-        <line x1="650" y1="0" x2="650" y2="340" stroke="#E8DED0" stroke-width="3"/>
-        <!-- Main road highlight -->
-        <line x1="0" y1="170" x2="800" y2="170" stroke="#D4C4B0" stroke-width="12"/>
-        <line x1="0" y1="170" x2="800" y2="170" stroke="#EDE0CC" stroke-width="8"/>
-        <!-- Road dashes -->
-        <line x1="0" y1="170" x2="100" y2="170" stroke="white" stroke-width="2" stroke-dasharray="20,15"/>
-        <line x1="120" y1="170" x2="380" y2="170" stroke="white" stroke-width="2" stroke-dasharray="20,15"/>
-        <line x1="420" y1="170" x2="800" y2="170" stroke="white" stroke-width="2" stroke-dasharray="20,15"/>
-
-        <!-- Animated route path -->
-        <path id="routePath" d="M 160 170 Q 250 170 300 170 Q 380 170 420 170 Q 480 170 540 170 Q 600 170 640 170" stroke="#6B1B2A" stroke-width="4" fill="none" stroke-dasharray="10,6" opacity="0.8">
-          <animate attributeName="stroke-dashoffset" from="480" to="0" dur="3s" repeatCount="indefinite"/>
-        </path>
-
-        <!-- Church pin -->
-        <g id="churchPin" transform="translate(160,130)">
-          <circle cx="0" cy="0" r="28" fill="#6B1B2A" opacity="0.15"/>
-          <circle cx="0" cy="0" r="20" fill="#6B1B2A"/>
-          <text x="0" y="7" text-anchor="middle" font-size="16">⛪</text>
-          <!-- Pulse ring -->
-          <circle cx="0" cy="0" r="20" fill="none" stroke="#6B1B2A" stroke-width="2" opacity="0.6">
-            <animate attributeName="r" from="20" to="38" dur="2s" repeatCount="indefinite"/>
-            <animate attributeName="opacity" from="0.6" to="0" dur="2s" repeatCount="indefinite"/>
-          </circle>
-        </g>
-        <text x="160" y="100" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="11" fill="#6B1B2A" font-weight="500">Sacred Heart</text>
-        <text x="160" y="113" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="10" fill="#8A7060">Quasi-Parish</text>
-        <text x="160" y="207" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#C9A84C" letter-spacing="2">2:00 PM</text>
-
-        <!-- Animated car -->
-        <g id="carGroup">
-          <animateMotion dur="3s" repeatCount="indefinite" rotate="auto">
-            <mpath href="#routePath"/>
-          </animateMotion>
-          <rect x="-12" y="-8" width="24" height="14" rx="3" fill="#C9A84C"/>
-          <rect x="-8" y="-14" width="16" height="10" rx="2" fill="#E2C97A"/>
-          <circle cx="-7" cy="7" r="4" fill="#3D0D18"/>
-          <circle cx="7" cy="7" r="4" fill="#3D0D18"/>
-        </g>
-
-        <!-- Reception pin -->
-        <g id="resortPin" transform="translate(640,130)">
-          <circle cx="0" cy="0" r="28" fill="#1B5E3B" opacity="0.15"/>
-          <circle cx="0" cy="0" r="20" fill="#1B5E3B"/>
-          <text x="0" y="7" text-anchor="middle" font-size="16">🥂</text>
-          <circle cx="0" cy="0" r="20" fill="none" stroke="#1B5E3B" stroke-width="2" opacity="0.6">
-            <animate attributeName="r" from="20" to="38" dur="2s" begin="1s" repeatCount="indefinite"/>
-            <animate attributeName="opacity" from="0.6" to="0" dur="2s" begin="1s" repeatCount="indefinite"/>
-          </circle>
-        </g>
-        <text x="640" y="100" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="11" fill="#1B5E3B" font-weight="500">Palmeras</text>
-        <text x="640" y="113" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="10" fill="#8A7060">Private Resort</text>
-        <text x="640" y="207" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" fill="#C9A84C" letter-spacing="2">4:00 PM</text>
-
-        <!-- Distance label -->
-        <rect x="330" y="148" width="140" height="22" rx="11" fill="white" opacity="0.8"/>
-        <text x="400" y="163" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" fill="#4A3828" letter-spacing="1">Tagum City, Davao del Norte</text>
-
-        <!-- Tagum City label -->
-        <text x="400" y="300" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="13" fill="#8A7060" opacity="0.5">Tagum City</text>
-      </svg>
+      <div class="map-embed-wrap">
+        <iframe
+          src="https://www.google.com/maps?saddr=Sacred+Heart+of+Jesus+Quasi-Parish,+Tagum+City,+Davao+del+Norte&daddr=Palmeras+Private+Resort,+Tagum+City,+Davao+del+Norte&output=embed"
+          width="100%" height="380" style="border:0;" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade" title="Route from Sacred Heart of Jesus Quasi-Parish to Palmeras Private Resort"></iframe>
+      </div>
       <div class="map-legend">
         <div class="ml-item"><div class="ml-dot" style="background:#6B1B2A;"></div>Sacred Heart of Jesus Quasi-Parish — 2:00 PM</div>
         <div class="ml-item"><div class="ml-dot" style="background:#1B5E3B;"></div>Palmeras Private Resort — 4:00 PM</div>
@@ -2480,26 +2450,38 @@ body { font-size: 1.08em; }
       </div>
     </div>
     <div class="dc-grid" style="grid-template-columns:1fr 1fr;max-width:600px;margin:0 auto;">
-      <div class="dc-card tilt-card"><span class="dc-card-icon">🤵</span><p class="dc-card-title">Gentlemen</p><p class="dc-card-body">Formal Barong Tagalog<br>or Long-sleeved Polo<br>with dress pants<br><br>Suit &amp; tie also welcome<br><br>Colors: <strong style="color:var(--gold-light);">Burgundy<br>&amp; Emerald Green</strong></p></div>
-      <div class="dc-card tilt-card"><span class="dc-card-icon">👗</span><p class="dc-card-title">Ladies</p><p class="dc-card-body">Formal gown or<br>cocktail dress<br><br>Elegant midi or<br>maxi dress also lovely<br><br>Colors: <strong style="color:var(--gold-light);">Burgundy<br>&amp; Emerald Green</strong></p></div>
+      <div class="dc-card tilt-card"><span class="dc-card-icon">🤵</span><p class="dc-card-title">Gentlemen</p><p class="dc-card-body" style="text-align:left;">
+      • Black suit with burgundy accents<br>
+      • Dark suit with burgundy tie or pocket square<br>
+      • Emerald green suit with burgundy accents<br>
+      • Burgundy long sleeve with black pants<br>
+      • Emerald green long sleeve with black pants
+      </p></div>
+      <div class="dc-card tilt-card"><span class="dc-card-icon">👗</span><p class="dc-card-title">Ladies</p><p class="dc-card-body" style="text-align:left;">
+      • Burgundy long gown<br>
+      • Emerald green long gown<br>
+      • Burgundy cocktail dress<br>
+      • Emerald green cocktail dress<br>
+      • Burgundy semi-formal dress
+      </p></div>
     </div>
     <div class="dc-donot">
       <p class="dc-donot-title">Please Kindly Avoid</p>
       <div class="dc-donot-list">
         <span class="dc-donot-item">White or Ivory</span>
-        <span class="dc-donot-item">Casual Wear</span>
-        <span class="dc-donot-item">Shorts or Sandals</span>
-        <span class="dc-donot-item">Sleeveless for Church</span>
-        <span class="dc-donot-item">Very Light Pastels</span>
-        <span class="dc-donot-item">Printed T-Shirts</span>
+        <span class="dc-donot-item">Shorts</span>
+        <span class="dc-donot-item">Slippers</span>
+        <span class="dc-donot-item">Very Light Pastel Colors</span>
+        <span class="dc-donot-item">T-Shirts</span>
       </div>
     </div>
   </div>
 </section>
 
-<div class="wave-divider" style="background:var(--burg-dark);"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,50 C300,0 900,60 1200,20 L1200,60 L0,60 Z" fill="#3D0D18"/></svg></div>
-<!-- GALLERY -->
-<section id="gallery">
+<div class="wave-divider" style="background:var(--burg-dark);"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,30 C200,60 400,0 600,30 C800,60 1000,0 1200,30 L1200,60 L0,60 Z" fill="#FDF8F2"/></svg></div>
+
+
+<section id="gallery" style="display:none;"> <!-- Hidden: unhide by removing display:none -->
   <div class="reveal" style="position:relative;">
     <p class="sec-label" style="color:var(--gold);">Moments Together</p>
     <h2 class="sec-title" style="color:var(--white);">Our Gallery</h2>
@@ -2524,11 +2506,10 @@ body { font-size: 1.08em; }
 <!-- Lightbox -->
 <div id="lightbox"><span id="lightbox-close" onclick="closeLightbox()">✕</span><img id="lightbox-img" src="" alt=""></div>
 
-<div class="wave-divider" style="background:var(--burg-dark);"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,30 C200,60 400,0 600,30 C800,60 1000,0 1200,30 L1200,60 L0,60 Z" fill="#FDF8F2"/></svg></div>
 
-<div class="wave-divider" style="background:var(--burg-dark);"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,20 C400,60 800,0 1200,50 L1200,60 L0,60 Z" fill="#1C1008"/></svg></div>
-<!-- PRENUP TEASER VIDEO -->
-<section id="teaser">
+
+
+<section id="teaser" style="display:none;"> <!-- Hidden: unhide by removing display:none -->
   <div class="reveal teaser-inner">
     <p class="sec-label" style="color:var(--gold-light);">Before The Big Day</p>
     <h2 class="sec-title" style="color:var(--white);">Prenup Teaser</h2>
@@ -2549,7 +2530,7 @@ body { font-size: 1.08em; }
     <p class="teaser-caption">A glimpse of our love story — before forever begins. 💍</p>
   </div>
 </section>
-<div class="wave-divider" style="background:var(--ink);"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,50 C300,0 900,60 1200,20 L1200,60 L0,60 Z" fill="#FDF8F2"/></svg></div>
+
 
 <!-- ENTOURAGE -->
 <section id="entourage">
@@ -2617,8 +2598,8 @@ body { font-size: 1.08em; }
     <div class="ent-section">
       <p class="ent-role">Best Man</p>
       <div class="ent-divider"><div class="ent-divider-line"></div><span class="ent-divider-gem">◆</span><div class="ent-divider-line"></div></div>
-      <div style="display:flex;justify-content:center;margin:0 auto 32px;">
-        <div class="ent-card tilt-card" style="width:340px;flex-shrink:0;"><div class="ent-icon-frame"><span class="ent-card-icon">🤵</span></div><div class="ent-icon-divider"></div><p class="ent-card-name" style="font-size:1.32rem !important;">Carl Patrick B. Montinola</p><p class="ent-card-role">Best Man</p></div>
+      <div style="display:flex;justify-content:center;margin:0 auto 32px;padding:0 12px;width:100%;box-sizing:border-box;">
+        <div class="ent-card tilt-card" style="width:100%;max-width:340px;"><div class="ent-icon-frame"><span class="ent-card-icon">🤵</span></div><div class="ent-icon-divider"></div><p class="ent-card-name" style="font-size:1.32rem !important;">Carl Patrick B. Montinola</p><p class="ent-card-role">Best Man</p></div>
       </div>
       <p class="ent-role">Groomsmen</p>
       <div class="ent-divider"><div class="ent-divider-line"></div><span class="ent-divider-gem">◆</span><div class="ent-divider-line"></div></div>
@@ -2694,9 +2675,9 @@ body { font-size: 1.08em; }
       <span class="sec-rule-gem">◆</span>
       <div class="sec-rule-line" style="background:linear-gradient(to left,transparent,rgba(201,168,76,0.5));"></div>
     </div>
-    <p class="rsvp-desc">Your presence is the greatest gift you could give us. Kindly let us know if you will be joining us as we begin this beautiful journey together.</p>
+    <p class="rsvp-desc">To help us lovingly prepare our seats and meals, kindly let us know if you can celebrate with us as we begin this beautiful journey together by August 31, 2026.</p>
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSc4phMm0tsrtgOYh7C-0CgsGJ4GBN0Sxv83ax7EyAyXlT37Ug/viewform?usp=publish-editor" target="_blank" class="rsvp-btn">Confirm Attendance</a>
-    <p class="rsvp-note">Kindly RSVP on or before August 25, 2026</p>
+    <p class="rsvp-note">Kindly RSVP on or before August 31, 2026</p>
     <div class="rsvp-counter-wrap">
       <p class="rsvp-counter-title">Current RSVP Count</p>
       <div class="rsvp-counter-grid">
@@ -2748,7 +2729,7 @@ body { font-size: 1.08em; }
         <div class="prog-dot"></div>
         <p class="prog-time">3:00 PM</p>
         <p class="prog-event">Newlywed Photo Session</p>
-        <p class="prog-desc">Photo opportunity with the couple, family &amp; entourage</p>
+        <p class="prog-desc">Photo opportunity with the couple, family, &amp; entourage</p>
       </div>
       <div class="prog-item">
         <div class="prog-dot"></div>
@@ -2760,19 +2741,13 @@ body { font-size: 1.08em; }
         <div class="prog-dot"></div>
         <p class="prog-time">4:00 PM</p>
         <p class="prog-event">Reception Begins</p>
-        <p class="prog-desc">Cocktail hour, dinner, and celebrations begin</p>
+        <p class="prog-desc">The Celebration begins.</p>
       </div>
       <div class="prog-item">
         <div class="prog-dot"></div>
-        <p class="prog-time">5:00 PM</p>
+        <p class="prog-time">4:00 PM</p>
         <p class="prog-event">Grand Entrance &amp; First Dance</p>
         <p class="prog-desc">The newlyweds make their grand entrance</p>
-      </div>
-      <div class="prog-item">
-        <div class="prog-dot"></div>
-        <p class="prog-time">5:30 PM</p>
-        <p class="prog-event">Dinner &amp; Program</p>
-        <p class="prog-desc">Toasts, messages, and dinner with family &amp; friends</p>
       </div>
       <div class="prog-item">
         <div class="prog-dot"></div>
