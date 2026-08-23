@@ -283,10 +283,45 @@ section{padding:100px 24px;}
 .tl-title{font-family:'Playfair Display',serif;font-style:italic;font-size:1.3rem;color:var(--burg);margin-bottom:8px;}
 .tl-text{font-family:'EB Garamond',serif;font-style:italic;font-size:1rem;color:var(--ink-light);line-height:1.8;}
 .tl-placeholder{
-  max-width:680px;margin:0 auto;text-align:center;
-  background:var(--white);border:1px dashed rgba(107,27,42,0.2);padding:60px 40px;
+  max-width:720px;margin:0 auto;position:relative;
+  background:linear-gradient(160deg, #FFFDF8 0%, #FBF4E5 55%, #F7EEDC 100%);
+  border:1px solid rgba(201,168,76,0.4);
+  padding:64px 56px;
+  box-shadow:0 20px 50px rgba(107,27,42,0.1), inset 0 1px 0 rgba(255,255,255,0.8);
 }
-.tl-placeholder p{font-family:'EB Garamond',serif;font-style:italic;font-size:1.15rem;color:var(--ink-light);line-height:1.8;}
+.tl-placeholder::before,.tl-placeholder::after{
+  content:'';position:absolute;width:32px;height:32px;
+  border-color:var(--gold);border-style:solid;opacity:0.6;
+}
+.tl-placeholder::before{top:14px;left:14px;border-width:2px 0 0 2px;}
+.tl-placeholder::after{bottom:14px;right:14px;border-width:0 2px 2px 0;}
+.story-icon-badge{
+  width:70px;height:70px;margin:0 auto 32px;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:50%;font-size:1.8rem;
+  background:radial-gradient(circle at 32% 28%, rgba(255,255,255,0.95), rgba(250,244,232,0.75));
+  box-shadow:0 0 0 1.5px rgba(201,168,76,0.55), 0 6px 16px rgba(107,27,42,0.12), inset 0 1px 2px rgba(255,255,255,0.6);
+}
+.tl-placeholder p{
+  font-family:'EB Garamond',serif;font-style:italic;
+  font-size:1.22rem;color:var(--ink-mid);line-height:2;
+  text-align:left;margin-bottom:26px;
+  position:relative;
+}
+.tl-placeholder p:last-child{margin-bottom:0;}
+.tl-placeholder p:first-of-type::first-letter{
+  font-family:'Playfair Display',serif;font-style:normal;font-weight:600;
+  font-size:3.2rem;line-height:0.7;
+  float:left;margin:6px 8px 0 0;
+  color:var(--burg);
+}
+.story-divider{
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  margin:8px 0 26px;
+}
+.story-divider-line{width:36px;height:1px;background:linear-gradient(to right,transparent,rgba(201,168,76,0.5));}
+.story-divider-line.rev{background:linear-gradient(to left,transparent,rgba(201,168,76,0.5));}
+.story-divider-gem{color:var(--gold);font-size:0.5rem;}
 
 /* ══ DETAILS ══ */
 #details{background:var(--cream2);padding:100px 24px;position:relative;overflow:hidden;}
@@ -2054,7 +2089,7 @@ body { font-size: 1.08em; }
 
 /* ══ DRESS CODE IMAGE ══ */
 .dc-image-wrap{
-  max-width:480px;margin:0 auto;
+  max-width:480px;margin:0 auto 48px;
   border:1px solid rgba(201,168,76,0.3);
   box-shadow:0 16px 48px rgba(0,0,0,0.4);
   border-radius:4px;overflow:hidden;
@@ -2355,12 +2390,13 @@ body { font-size: 1.08em; }
     <div class="ribbon-wrap"><span class="ribbon">How It All Began</span></div>
     <h2 class="sec-title" style="color:var(--burg)">Our Story</h2>
     <div class="sec-rule"><div class="sec-rule-line rev"></div><span class="sec-rule-gem">◆</span><div class="sec-rule-line"></div></div>
-    <div class="tl-placeholder" style="text-align:left;">
-      <span style="font-size:2.5rem;display:block;margin-bottom:20px;text-align:center;">💌</span>
-      <p style="margin-bottom:18px;">Our story began long before we knew it would. We were batchmates in elementary, though we never spoke to each other back then. After graduation, we each went our separate ways in high school, never imagining that our paths would cross again almost ten years later.</p>
-      <p style="margin-bottom:18px;">In 2018, a simple hello became the beginning of something neither of us expected. What began with a single message soon turned into countless late-night talks, laughter, and the surprising feeling that we had known each other for much longer than we actually had. Somewhere between those conversations, we fell in love.</p>
-      <p style="margin-bottom:18px;">Over the years, we have shared countless beautiful memories, grown together, and learned that love is not only about the happiest moments, but also about choosing each other through life's most difficult seasons. We have experienced joy, faced challenges, and endured a heartbreaking loss that brought us even closer and reminded us how precious it is to have someone to hold on to. Through it all, we found in each other a best friend, a safe place, and a partner for life.</p>
-      <p>What began unexpectedly became the love we now know we never want to live without. Looking back, we believe our story was never simply about finding each other — it was about finding our way back to each other at exactly the right time. And today, as we begin this new chapter, we are certain that this is only the beginning of our forever.</p>
+    <div class="tl-placeholder">
+      <div class="story-icon-badge">💌</div>
+      <p>Our story began long before we knew it would. We were batchmates in elementary, though we never spoke to each other back then. After graduation, we each went our separate ways in high school, never imagining that our paths would cross again almost ten years later.</p>
+      <p>In 2018, a simple hello became the beginning of something neither of us expected. What began with a single message soon turned into countless late-night talks, laughter, and the surprising feeling that we had known each other for much longer than we actually had. Somewhere between those conversations, we fell in love.</p>
+      <div class="story-divider"><div class="story-divider-line rev"></div><span class="story-divider-gem">◆</span><div class="story-divider-line"></div></div>
+      <p>Over the years, we have shared countless beautiful memories, grown together, and learned that love is not only about the happiest moments, but also about choosing each other through life's most difficult seasons. We have experienced joy, faced challenges, and endured a heartbreaking loss that brought us even closer and reminded us how precious it is to have someone to hold on to. Through it all, we found in each other a best friend, a safe place, and a partner for life.</p>
+      <p style="font-style:italic;color:var(--burg);font-size:1.28rem;text-align:center;padding-top:8px;">What began unexpectedly became the love we now know we never want to live without. Looking back, we believe our story was never simply about finding each other — it was about finding our way back to each other at exactly the right time. And today, as we begin this new chapter, we are certain that this is only the beginning of our forever.</p>
     </div>
   </div>
 </section>
@@ -2408,13 +2444,13 @@ body { font-size: 1.08em; }
         <p class="mvc-tag">01 — Ceremony</p>
         <p class="mvc-name">Sacred Heart of Jesus Quasi-Parish</p>
         <p class="mvc-addr">CRCM+6V9, Tagum City<br>Davao del Norte, Philippines<br>2:00 PM · September 8, 2026</p>
-        <a class="mvc-btn" href="https://maps.google.com/?q=CRCM+6V9,+Tagum,+Davao+del+Norte" target="_blank">Get Directions →</a>
+        <a class="mvc-btn" href="https://maps.app.goo.gl/Cg3aDQVn7EKK1xMw6" target="_blank">Get Directions →</a>
       </div>
       <div class="map-venue-card em">
         <p class="mvc-tag">02 — Reception</p>
         <p class="mvc-name">Palmeras Private Resort</p>
         <p class="mvc-addr">CQGP+QJ Tagum City<br>Davao del Norte, Philippines<br>4:00 PM · September 8, 2026</p>
-        <a class="mvc-btn" href="https://maps.google.com/?q=CQGP+QJ+Tagum,+Davao+del+Norte" target="_blank">Get Directions →</a>
+        <a class="mvc-btn" href="https://maps.app.goo.gl/GDNyE8oXpP1GGAZS8" target="_blank">Get Directions →</a>
       </div>
     </div>
     <div class="map-svg-wrap">
@@ -2470,7 +2506,7 @@ body { font-size: 1.08em; }
         <span class="dc-donot-item">Shorts</span>
         <span class="dc-donot-item">Slippers</span>
         <span class="dc-donot-item">Very Light Pastel Colors</span>
-        <span class="dc-donot-item">T-Shirts</span>
+        <span class="dc-donot-item">T-shirt</span>
       </div>
     </div>
   </div>
@@ -2795,19 +2831,9 @@ body { font-size: 1.08em; }
         <p class="gift-text">Kitchenware, appliances, or household items would be wonderfully useful as we build our new home together. 🏡</p>
       </div>
       <div class="gift-card tilt-card">
-        <span class="gift-icon">✈️</span>
-        <h3 class="gift-title">Travel for Two</h3>
-        <p class="gift-text">A trip abroad with accommodation for our honeymoon would be the most unforgettable gift — any destination welcome! 😄🌍</p>
-      </div>
-      <div class="gift-card tilt-card">
-        <span class="gift-icon">🚗</span>
-        <h3 class="gift-title">Car</h3>
-        <p class="gift-text">A brand new car would be a wonderful blessing for our family's journey ahead. Any brand welcome! 😄</p>
-      </div>
-      <div class="gift-card tilt-card">
-        <span class="gift-icon">🏡</span>
-        <h3 class="gift-title">House &amp; Lot</h3>
-        <p class="gift-text">A cozy home to build our life and family in — the ultimate gift of love and security. Davao area preferred! 😄</p>
+        <span class="gift-icon">💵</span>
+        <h3 class="gift-title">Monetary Gift</h3>
+        <p class="gift-text">A monetary gift towards our new life together would be deeply cherished and appreciated. 🙏</p>
       </div>
     </div>
     <p class="gift-note">We are grateful for any gift — big or small! Your generosity means the world to us. 🙏💚😄</p>
