@@ -2313,15 +2313,28 @@ body { font-size: 1.08em; }
   <!-- Content -->
   <p class="ws-pre">You are invited</p>
   <div class="ws-monogram">
-    <svg width="88" height="99" viewBox="0 0 64 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="88" height="119" viewBox="0 -14 64 86" fill="none" xmlns="http://www.w3.org/2000/svg">
       <!-- Crown -->
-      <g transform="translate(32,10)">
-        <path d="M-13 5 L-13 -3 L-7 3 L0 -8 L7 3 L13 -3 L13 5 Z" fill="url(#crownGoldGrad)" stroke="#8A6A1F" stroke-width="0.5"/>
-        <rect x="-13" y="5" width="26" height="3.5" rx="1" fill="url(#crownGoldGrad)" stroke="#8A6A1F" stroke-width="0.5"/>
-        <circle cx="-13" cy="-3" r="1.6" fill="#B04458"/>
-        <circle cx="0" cy="-8" r="2" fill="#B04458"/>
-        <circle cx="13" cy="-3" r="1.6" fill="#B04458"/>
-        <circle cx="0" cy="0" r="1.3" fill="#1B5E3B"/>
+      <g transform="translate(32,20)">
+        <!-- Finial orb + cross -->
+        <path d="M0 -29 L0 -22 M-2.4 -25.5 L2.4 -25.5" stroke="#C9A84C" stroke-width="1" stroke-linecap="round"/>
+        <circle cx="0" cy="-25.5" r="2" fill="url(#crownGoldGrad)" stroke="#8A6A1F" stroke-width="0.4"/>
+        <!-- Crown body -->
+        <path d="M-15 4 L-15 -6 L-11.25 4 L-7.5 -14 L-3.75 4 L0 -20 L3.75 4 L7.5 -14 L11.25 4 L15 -6 L15 4 Z" fill="url(#crownGoldGrad)" stroke="#8A6A1F" stroke-width="0.6" stroke-linejoin="round"/>
+        <path d="M-15 4 L-15 -6 L-11.25 4 L-7.5 -14 L-3.75 4 L0 -20 L3.75 4 L7.5 -14 L11.25 4 L15 -6 L15 4 Z" fill="rgba(255,255,255,0.12)" opacity="0.5"/>
+        <!-- Jewels on tips -->
+        <circle cx="-15" cy="-6" r="1.5" fill="#F5EFE0" stroke="#C9A84C" stroke-width="0.3"/>
+        <circle cx="-7.5" cy="-14" r="1.9" fill="#B04458" stroke="#7A1428" stroke-width="0.3"/>
+        <circle cx="0" cy="-20" r="2.3" fill="#1B5E3B" stroke="#0A3322" stroke-width="0.3"/>
+        <circle cx="0" cy="-20.7" r="0.7" fill="rgba(255,255,255,0.55)"/>
+        <circle cx="7.5" cy="-14" r="1.9" fill="#B04458" stroke="#7A1428" stroke-width="0.3"/>
+        <circle cx="15" cy="-6" r="1.5" fill="#F5EFE0" stroke="#C9A84C" stroke-width="0.3"/>
+        <!-- Base band -->
+        <rect x="-16" y="4" width="32" height="7.5" rx="2" fill="url(#crownGoldGrad)" stroke="#8A6A1F" stroke-width="0.6"/>
+        <rect x="-15" y="5" width="30" height="1.6" rx="0.8" fill="rgba(255,255,255,0.3)"/>
+        <circle cx="-9.5" cy="8.5" r="1" fill="#1B5E3B" stroke="#0A3322" stroke-width="0.2"/>
+        <circle cx="9.5" cy="8.5" r="1" fill="#1B5E3B" stroke="#0A3322" stroke-width="0.2"/>
+        <path d="M0 5.4 L2.3 8 L0 10.6 L-2.3 8 Z" fill="#B04458" stroke="#7A1428" stroke-width="0.35"/>
       </g>
       <defs>
         <linearGradient id="crownGoldGrad" x1="0" y1="0" x2="0" y2="1">
@@ -3105,6 +3118,7 @@ function enterSite(){
   const name=document.getElementById('guestNameInput').value.trim();
   document.getElementById('welcome-screen').classList.add('hide');
   if(name) showGuestWelcome(name);
+  playMusicOnEntry();
 }
 function showGuestWelcome(name){
   document.getElementById('guestNameDisplay').textContent=name;
@@ -3169,6 +3183,15 @@ document.getElementById('lightbox').addEventListener('click',e=>{if(e.target===e
 // ── MUSIC PLAYER (MP3 Audio) ──
 let isPlaying=false;let isMinimized=false;
 const weddingAudio=document.getElementById('weddingAudio');
+
+function playMusicOnEntry(){
+  if(isPlaying) return;
+  weddingAudio.play().then(()=>{
+    document.getElementById('mpPlayBtn').textContent='⏸';
+    document.getElementById('mpVinyl').classList.add('spinning');
+    isPlaying=true;
+  }).catch(()=>{ /* autoplay blocked by browser — guest can press ▶ manually */ });
+}
 
 function toggleMusic(){
   const btn=document.getElementById('mpPlayBtn');
