@@ -2391,7 +2391,6 @@ body { font-size: 1.08em; }
     <li><a href="#program">Program</a></li>
     <li><a href="#gifts">Gifts</a></li>
     <!-- <li><a href="#guestbook">Guestbook</a></li> -->
-    <li><a href="#wishtree">Wishes</a></li>
     <!-- <li><a href="#photobooth">Photo Booth</a></li> -->
     <li><a href="#faq">FAQ</a></li>
   </ul>
@@ -2436,7 +2435,6 @@ body { font-size: 1.08em; }
   <a href="#program" onclick="closeMobileNav()">Program</a>
   <a href="#gifts" onclick="closeMobileNav()">Gifts</a>
   <!-- <a href="#guestbook" onclick="closeMobileNav()">Guestbook</a> -->
-  <a href="#wishtree" onclick="closeMobileNav()">Wish Tree</a>
   <!-- <a href="#photobooth" onclick="closeMobileNav()">Photo Booth</a> -->
   <a href="#faq" onclick="closeMobileNav()">FAQ</a>
 </div>
@@ -2938,40 +2936,7 @@ body { font-size: 1.08em; }
   </div>
 </section>
 
-<div class="wave-divider" style="background:var(--cream2);"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,20 C400,60 800,0 1200,50 L1200,60 L0,60 Z" fill="#3D0D18"/></svg></div>
 <div class="wave-divider" style="background:var(--cream2);"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,20 C400,60 800,0 1200,50 L1200,60 L0,60 Z" fill="#FDF8F2"/></svg></div>
-<!-- WISH TREE -->
-<section id="wishtree">
-  <div class="reveal wt-inner">
-    <!-- Floating leaves background -->
-    <div class="wt-leaf" style="top:10%;left:5%;animation-duration:6s;animation-delay:0s;">🍃</div>
-    <div class="wt-leaf" style="top:20%;right:8%;animation-duration:8s;animation-delay:1s;">🌿</div>
-    <div class="wt-leaf" style="bottom:15%;left:10%;animation-duration:7s;animation-delay:2s;">🍀</div>
-    <div class="wt-leaf" style="bottom:25%;right:6%;animation-duration:9s;animation-delay:0.5s;">🍃</div>
-    <div class="wt-leaf" style="top:50%;left:2%;animation-duration:10s;animation-delay:3s;">🌿</div>
-    <div class="wt-leaf" style="top:40%;right:3%;animation-duration:7s;animation-delay:1.5s;">🍃</div>
-
-    <div class="ribbon-wrap"><span class="ribbon em">Leave a Wish</span></div>
-    <h2 class="sec-title" style="color:var(--em);">Wish Tree</h2>
-    <div class="sec-rule"><div class="sec-rule-line rev"></div><span class="sec-rule-gem">◆</span><div class="sec-rule-line"></div></div>
-    <p class="sec-sub" style="margin-bottom:36px;">Leave your heartfelt wishes for the couple — they will treasure every word. 🌿</p>
-
-    <div class="wt-form">
-      <div class="wt-row">
-        <input class="wt-input" id="wt-name" type="text" placeholder="Your name..." maxlength="40">
-        <input class="wt-input" id="wt-relation" type="text" placeholder="Your relation (e.g. Friend)..." maxlength="40">
-      </div>
-      <textarea class="wt-textarea" id="wt-wish" rows="3" placeholder="Write your wish for Aldrich & Mirzi..."></textarea>
-      <button class="wt-submit" onclick="submitWish()">🌿 Leave Your Wish</button>
-    </div>
-
-    <p class="wt-counter">Wishes so far: <span id="wishCount">0</span></p>
-    <div class="wt-wall" id="wishWall">
-      <div class="wt-empty">Be the first to leave a wish! 🌿</div>
-    </div>
-  </div>
-</section>
-<div class="wave-divider" style="background:var(--cream);"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,40 C300,0 900,60 1200,20 L1200,60 L0,60 Z" fill="#2A0810"/></svg></div>
 <!-- PHOTO BOOTH -->
 <section id="photobooth" style="display:none;"> <!-- Hidden: reception already has a physical photo booth. Remove style="display:none;" to unhide. -->
   <div class="reveal pb-inner">
@@ -3437,64 +3402,12 @@ async function fetchRSVPCount() {
     document.getElementById('rsvpAttending').textContent = data.attending || 0;
     document.getElementById('rsvpGuests').textContent = data.guests || 0;
     if(noteEl) noteEl.textContent = 'Last updated: ' + new Date().toLocaleTimeString();
-
-    // Pull "Message for the couple" entries from the sheet into the Wish Tree
-    if(Array.isArray(data.wishes)) {
-      const leaves = ['🍃','🌿','🍀','🌱','🌾'];
-      const colors = ['var(--burg)','var(--em)','var(--gold)'];
-      sheetWishes = data.wishes.map((w, i) => ({
-        name: w.name || 'Guest',
-        relation: '',
-        wish: w.message,
-        leaf: leaves[i % leaves.length],
-        color: colors[i % colors.length]
-      }));
-      renderWishes();
-    }
   } catch(e) {
     if(noteEl) noteEl.textContent = 'Could not load RSVP data.';
   }
 }
 fetchRSVPCount();
 setInterval(fetchRSVPCount, 60000); // refresh every minute
-
-// ══ WISH TREE ══
-let localWishes = [];
-let sheetWishes = [];
-function submitWish() {
-  const name = document.getElementById('wt-name').value.trim();
-  const relation = document.getElementById('wt-relation').value.trim();
-  const wish = document.getElementById('wt-wish').value.trim();
-  if(!name || !wish){ alert('Palihug butangi ang imong ngalan ug wish. 🌿'); return; }
-  const leaves = ['🍃','🌿','🍀','🌱','🌾'];
-  localWishes.unshift({
-    name, relation, wish,
-    leaf: leaves[Math.floor(Math.random() * leaves.length)],
-    color: ['var(--burg)','var(--em)','var(--gold)'][Math.floor(Math.random()*3)]
-  });
-  renderWishes();
-  document.getElementById('wt-name').value = '';
-  document.getElementById('wt-relation').value = '';
-  document.getElementById('wt-wish').value = '';
-  
-}
-function renderWishes() {
-  const wall = document.getElementById('wishWall');
-  const counter = document.getElementById('wishCount');
-  const allWishes = [...localWishes, ...sheetWishes];
-  if(counter) counter.textContent = allWishes.length;
-  if(!allWishes.length) {
-    wall.innerHTML = '<div class="wt-empty">Be the first to leave a wish! 🌿</div>';
-    return;
-  }
-  wall.innerHTML = allWishes.map(w => `
-    <div class="wt-card">
-      <p class="wt-card-name" style="color:${w.color}">${w.name}${w.relation ? ' · ' + w.relation : ''}</p>
-      <p class="wt-card-wish">${w.wish}</p>
-      <span class="wt-card-leaf">${w.leaf}</span>
-    </div>
-  `).join('');
-}
 
 // ══ PHOTO BOOTH ══
 let pbUserImage = null;
