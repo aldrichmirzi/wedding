@@ -2111,47 +2111,73 @@ body { font-size: 1.08em; }
 
 /* ══ HASHTAG SECTION ══ */
 .dc-hashtag-wrap{
-  max-width:600px;margin:0 auto 48px;
-  background:rgba(255,255,255,0.05);
-  border:1px solid rgba(201,168,76,0.3);
-  padding:40px 36px;text-align:center;
+  max-width:640px;margin:0 auto 48px;
+  background:radial-gradient(ellipse 90% 100% at 50% 0%, rgba(139,42,60,0.28) 0%, rgba(107,27,42,0.12) 55%, transparent 85%);
+  border:none;
+  padding:56px 40px 48px;text-align:center;
   position:relative;overflow:hidden;
 }
-.dc-hashtag-wrap::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(to right,transparent,var(--gold),transparent);
+.dc-hashtag-floral{position:absolute;opacity:0.14;width:170px;height:170px;pointer-events:none;}
+.dc-hashtag-floral.tl{top:-20px;left:-20px;}
+.dc-hashtag-floral.br{bottom:-20px;right:-20px;transform:rotate(180deg);}
+.dc-hashtag-rule{
+  display:flex;align-items:center;justify-content:center;gap:14px;
+  margin-bottom:24px;position:relative;z-index:1;
 }
-.dc-hashtag-icon{
-  font-size:2.2rem;display:block;margin-bottom:16px;
+.dc-hashtag-rule::before,.dc-hashtag-rule::after{
+  content:'';width:60px;height:1px;
+  background:linear-gradient(to right,transparent,var(--gold));
 }
+.dc-hashtag-rule::after{ background:linear-gradient(to left,transparent,var(--gold)); }
+.dc-hashtag-diamond{
+  width:7px;height:7px;background:var(--gold);
+  transform:rotate(45deg);flex-shrink:0;
+}
+.dc-hashtag-badge{
+  width:64px;height:64px;margin:0 auto 20px;
+  border-radius:50%;position:relative;z-index:1;
+  display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(circle,rgba(201,168,76,0.16) 0%,rgba(201,168,76,0.04) 70%);
+  border:1px solid rgba(201,168,76,0.35);
+}
+.dc-hashtag-badge::before{
+  content:'';position:absolute;inset:-9px;border-radius:50%;
+  border:1px dashed rgba(201,168,76,0.25);
+}
+.dc-hashtag-badge svg{width:26px;height:26px;}
 .dc-hashtag-title{
   font-family:'Playfair Display',serif;font-style:italic;
-  font-size:1.4rem;color:var(--white);margin-bottom:10px;
+  font-size:1.5rem;color:var(--white);margin-bottom:10px;
+  position:relative;z-index:1;
 }
 .dc-hashtag-sub{
-  font-family:'Jost',sans-serif;font-weight:400;
-  font-size:0.88rem;color:rgba(255,255,255,0.65);
-  margin-bottom:24px;
+  font-family:'EB Garamond',serif;font-style:italic;
+  font-size:0.98rem;color:rgba(255,255,255,0.6);
+  margin-bottom:28px;position:relative;z-index:1;
 }
 .dc-hashtag-pills{
-  display:flex;flex-wrap:wrap;justify-content:center;gap:12px;
+  display:flex;flex-wrap:wrap;justify-content:center;gap:14px;
+  position:relative;z-index:1;
 }
 .dc-hashtag-pill{
   font-family:'Jost',sans-serif;font-weight:700;
-  font-size:0.95rem;letter-spacing:0.3px;
+  font-size:0.92rem;letter-spacing:0.3px;
   color:var(--gold-light);
-  background:rgba(201,168,76,0.1);
-  border:1px solid rgba(201,168,76,0.5);
-  padding:10px 22px;border-radius:30px;
+  background:rgba(201,168,76,0.07);
+  border:1px solid rgba(201,168,76,0.4);
+  padding:11px 24px;border-radius:30px;
   transition:all 0.3s;
 }
 .dc-hashtag-pill:hover{
-  background:rgba(201,168,76,0.2);
+  background:rgba(201,168,76,0.18);
+  border-color:rgba(201,168,76,0.7);
   transform:translateY(-2px);
+  box-shadow:0 6px 18px rgba(201,168,76,0.15);
 }
 @media(max-width:600px){
-  .dc-hashtag-wrap{ padding:32px 22px; }
+  .dc-hashtag-wrap{ padding:44px 22px 40px; }
   .dc-hashtag-pill{ font-size:0.82rem; padding:9px 16px; }
+  .dc-hashtag-floral{ width:120px;height:120px; }
 }
 
 </style>
@@ -2285,15 +2311,31 @@ body { font-size: 1.08em; }
   <div class="ws-particle" style="width:4px;height:4px;background:#C9A84C;top:60%;right:12%;animation-duration:5.5s;animation-delay:3s;"></div>
 
   <!-- Content -->
+  <p class="ws-pre">You are invited</p>
   <div class="ws-monogram">
-    <svg width="88" height="88" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="32" cy="32" r="30" stroke="rgba(107,27,42,0.15)" stroke-width="0.8" stroke-dasharray="4 3"/>
-      <circle cx="32" cy="32" r="24" stroke="rgba(201,168,76,0.2)" stroke-width="0.6" stroke-dasharray="2 4"/>
-      <circle cx="32" cy="32" r="18" fill="rgba(107,27,42,0.08)"/>
-      <text x="32" y="38" text-anchor="middle" font-family="Playfair Display,serif" font-style="italic" font-size="13" fill="#6B1B2A" letter-spacing="-1">A&amp;M</text>
+    <svg width="88" height="99" viewBox="0 0 64 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Crown -->
+      <g transform="translate(32,10)">
+        <path d="M-13 5 L-13 -3 L-7 3 L0 -8 L7 3 L13 -3 L13 5 Z" fill="url(#crownGoldGrad)" stroke="#8A6A1F" stroke-width="0.5"/>
+        <rect x="-13" y="5" width="26" height="3.5" rx="1" fill="url(#crownGoldGrad)" stroke="#8A6A1F" stroke-width="0.5"/>
+        <circle cx="-13" cy="-3" r="1.6" fill="#B04458"/>
+        <circle cx="0" cy="-8" r="2" fill="#B04458"/>
+        <circle cx="13" cy="-3" r="1.6" fill="#B04458"/>
+        <circle cx="0" cy="0" r="1.3" fill="#1B5E3B"/>
+      </g>
+      <defs>
+        <linearGradient id="crownGoldGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#F0D989"/>
+          <stop offset="55%" stop-color="#C9A84C"/>
+          <stop offset="100%" stop-color="#A3822F"/>
+        </linearGradient>
+      </defs>
+      <circle cx="32" cy="40" r="30" stroke="rgba(107,27,42,0.15)" stroke-width="0.8" stroke-dasharray="4 3"/>
+      <circle cx="32" cy="40" r="24" stroke="rgba(201,168,76,0.2)" stroke-width="0.6" stroke-dasharray="2 4"/>
+      <circle cx="32" cy="40" r="18" fill="rgba(107,27,42,0.08)"/>
+      <text x="32" y="46" text-anchor="middle" font-family="Playfair Display,serif" font-style="italic" font-size="13" fill="#6B1B2A" letter-spacing="-1">A&amp;M</text>
     </svg>
   </div>
-  <p class="ws-pre">You are invited</p>
 
   <h2 class="ws-title">Aldrich <em>&amp;</em> Mirzi</h2>
   <p style="font-family:'Jost',sans-serif;font-weight:600;font-size:0.72rem;letter-spacing:2px;color:var(--gold-deep);text-align:center;margin:4px 0 14px;line-height:1.6;">INVITES YOUR PRESENCE TO CELEBRATE THIS BEAUTIFUL MOMENT WITH THEM</p>
@@ -2559,7 +2601,15 @@ body { font-size: 1.08em; }
     </div>
 
     <div class="dc-hashtag-wrap">
-      <span class="dc-hashtag-icon">📸</span>
+      <svg class="dc-hashtag-floral tl" viewBox="0 0 300 300" fill="none"><path d="M10 290 Q50 200 150 150 Q200 50 290 10" stroke="#C9A84C" stroke-width="1" fill="none"/><circle cx="60" cy="240" r="14" stroke="#C9A84C" stroke-width="0.8" fill="none"/><circle cx="150" cy="150" r="12" stroke="#C9A84C" stroke-width="0.8" fill="none"/><circle cx="240" cy="60" r="11" stroke="#C9A84C" stroke-width="0.8" fill="none"/></svg>
+      <svg class="dc-hashtag-floral br" viewBox="0 0 300 300" fill="none"><path d="M10 290 Q50 200 150 150 Q200 50 290 10" stroke="#C9A84C" stroke-width="1" fill="none"/><circle cx="60" cy="240" r="14" stroke="#C9A84C" stroke-width="0.8" fill="none"/><circle cx="150" cy="150" r="12" stroke="#C9A84C" stroke-width="0.8" fill="none"/><circle cx="240" cy="60" r="11" stroke="#C9A84C" stroke-width="0.8" fill="none"/></svg>
+      <div class="dc-hashtag-rule"><span class="dc-hashtag-diamond"></span></div>
+      <div class="dc-hashtag-badge">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z" stroke="#C9A84C" stroke-width="1.2" stroke-linejoin="round"/>
+          <circle cx="12" cy="14" r="3.5" stroke="#C9A84C" stroke-width="1.2"/>
+        </svg>
+      </div>
       <p class="dc-hashtag-title">Help Us Capture the Moment</p>
       <p class="dc-hashtag-sub">Share your photos with our official hashtag</p>
       <div class="dc-hashtag-pills">
