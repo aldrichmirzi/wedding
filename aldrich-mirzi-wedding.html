@@ -3437,6 +3437,20 @@ async function fetchRSVPCount() {
     document.getElementById('rsvpAttending').textContent = data.attending || 0;
     document.getElementById('rsvpGuests').textContent = data.guests || 0;
     if(noteEl) noteEl.textContent = 'Last updated: ' + new Date().toLocaleTimeString();
+
+    // Pull "Message for the couple" entries from the sheet into the Wish Tree
+    if(Array.isArray(data.wishes)) {
+      const leaves = ['🍃','🌿','🍀','🌱','🌾'];
+      const colors = ['var(--burg)','var(--em)','var(--gold)'];
+      sheetWishes = data.wishes.map((w, i) => ({
+        name: w.name || 'Guest',
+        relation: '',
+        wish: w.message,
+        leaf: leaves[i % leaves.length],
+        color: colors[i % colors.length]
+      }));
+      renderWishes();
+    }
   } catch(e) {
     if(noteEl) noteEl.textContent = 'Could not load RSVP data.';
   }
@@ -3445,14 +3459,15 @@ fetchRSVPCount();
 setInterval(fetchRSVPCount, 60000); // refresh every minute
 
 // ══ WISH TREE ══
-let wishes = [];
+let localWishes = [];
+let sheetWishes = [];
 function submitWish() {
   const name = document.getElementById('wt-name').value.trim();
   const relation = document.getElementById('wt-relation').value.trim();
   const wish = document.getElementById('wt-wish').value.trim();
   if(!name || !wish){ alert('Palihug butangi ang imong ngalan ug wish. 🌿'); return; }
   const leaves = ['🍃','🌿','🍀','🌱','🌾'];
-  wishes.unshift({
+  localWishes.unshift({
     name, relation, wish,
     leaf: leaves[Math.floor(Math.random() * leaves.length)],
     color: ['var(--burg)','var(--em)','var(--gold)'][Math.floor(Math.random()*3)]
@@ -3466,12 +3481,13 @@ function submitWish() {
 function renderWishes() {
   const wall = document.getElementById('wishWall');
   const counter = document.getElementById('wishCount');
-  if(counter) counter.textContent = wishes.length;
-  if(!wishes.length) {
+  const allWishes = [...localWishes, ...sheetWishes];
+  if(counter) counter.textContent = allWishes.length;
+  if(!allWishes.length) {
     wall.innerHTML = '<div class="wt-empty">Be the first to leave a wish! 🌿</div>';
     return;
   }
-  wall.innerHTML = wishes.map(w => `
+  wall.innerHTML = allWishes.map(w => `
     <div class="wt-card">
       <p class="wt-card-name" style="color:${w.color}">${w.name}${w.relation ? ' · ' + w.relation : ''}</p>
       <p class="wt-card-wish">${w.wish}</p>
