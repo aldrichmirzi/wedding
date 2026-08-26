@@ -2390,6 +2390,7 @@ body { font-size: 1.08em; }
     <li><a href="#rsvp">RSVP</a></li>
     <li><a href="#program">Program</a></li>
     <li><a href="#gifts">Gifts</a></li>
+    <li><a href="#wishtree">Wishes</a></li>
     <!-- <li><a href="#guestbook">Guestbook</a></li> -->
     <!-- <li><a href="#photobooth">Photo Booth</a></li> -->
     <li><a href="#faq">FAQ</a></li>
@@ -2434,6 +2435,7 @@ body { font-size: 1.08em; }
   <a href="#rsvp" onclick="closeMobileNav()">RSVP</a>
   <a href="#program" onclick="closeMobileNav()">Program</a>
   <a href="#gifts" onclick="closeMobileNav()">Gifts</a>
+  <a href="#wishtree" onclick="closeMobileNav()">Wishes</a>
   <!-- <a href="#guestbook" onclick="closeMobileNav()">Guestbook</a> -->
   <!-- <a href="#photobooth" onclick="closeMobileNav()">Photo Booth</a> -->
   <a href="#faq" onclick="closeMobileNav()">FAQ</a>
@@ -2937,6 +2939,29 @@ body { font-size: 1.08em; }
 </section>
 
 <div class="wave-divider" style="background:var(--cream2);"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,20 C400,60 800,0 1200,50 L1200,60 L0,60 Z" fill="#FDF8F2"/></svg></div>
+<!-- WISHES FOR THE COUPLE (read-only, pulled from RSVP messages) -->
+<section id="wishtree">
+  <div class="reveal wt-inner">
+    <!-- Floating leaves background -->
+    <div class="wt-leaf" style="top:10%;left:5%;animation-duration:6s;animation-delay:0s;">🍃</div>
+    <div class="wt-leaf" style="top:20%;right:8%;animation-duration:8s;animation-delay:1s;">🌿</div>
+    <div class="wt-leaf" style="bottom:15%;left:10%;animation-duration:7s;animation-delay:2s;">🍀</div>
+    <div class="wt-leaf" style="bottom:25%;right:6%;animation-duration:9s;animation-delay:0.5s;">🍃</div>
+    <div class="wt-leaf" style="top:50%;left:2%;animation-duration:10s;animation-delay:3s;">🌿</div>
+    <div class="wt-leaf" style="top:40%;right:3%;animation-duration:7s;animation-delay:1.5s;">🍃</div>
+
+    <div class="ribbon-wrap"><span class="ribbon em">Messages of Love</span></div>
+    <h2 class="sec-title" style="color:var(--em);">Wishes For The Couple</h2>
+    <div class="sec-rule"><div class="sec-rule-line rev"></div><span class="sec-rule-gem">◆</span><div class="sec-rule-line"></div></div>
+    <p class="sec-sub" style="margin-bottom:36px;">Heartfelt messages from our family and friends. 🌿</p>
+
+    <p class="wt-counter">Wishes so far: <span id="wishCount">0</span></p>
+    <div class="wt-wall" id="wishWall">
+      <div class="wt-empty">Messages will appear here once guests RSVP. 🌿</div>
+    </div>
+  </div>
+</section>
+<div class="wave-divider" style="background:var(--cream);"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,40 C300,0 900,60 1200,20 L1200,60 L0,60 Z" fill="#FDF8F2"/></svg></div>
 <!-- PHOTO BOOTH -->
 <section id="photobooth" style="display:none;"> <!-- Hidden: reception already has a physical photo booth. Remove style="display:none;" to unhide. -->
   <div class="reveal pb-inner">
@@ -3402,9 +3427,31 @@ async function fetchRSVPCount() {
     document.getElementById('rsvpAttending').textContent = data.attending || 0;
     document.getElementById('rsvpGuests').textContent = data.guests || 0;
     if(noteEl) noteEl.textContent = 'Last updated: ' + new Date().toLocaleTimeString();
+
+    // Pull "Message for the couple" entries from the sheet into the Wishes display
+    if(Array.isArray(data.wishes)) renderWishes(data.wishes);
   } catch(e) {
     if(noteEl) noteEl.textContent = 'Could not load RSVP data.';
   }
+}
+function renderWishes(wishes) {
+  const wall = document.getElementById('wishWall');
+  const counter = document.getElementById('wishCount');
+  if(!wall) return;
+  if(counter) counter.textContent = wishes.length;
+  if(!wishes.length) {
+    wall.innerHTML = '<div class="wt-empty">Messages will appear here once guests RSVP. 🌿</div>';
+    return;
+  }
+  const leaves = ['🍃','🌿','🍀','🌱','🌾'];
+  const colors = ['var(--burg)','var(--em)','var(--gold)'];
+  wall.innerHTML = wishes.map((w, i) => `
+    <div class="wt-card">
+      <p class="wt-card-name" style="color:${colors[i % colors.length]}">${w.name || 'Guest'}</p>
+      <p class="wt-card-wish">${w.message}</p>
+      <span class="wt-card-leaf">${leaves[i % leaves.length]}</span>
+    </div>
+  `).join('');
 }
 fetchRSVPCount();
 setInterval(fetchRSVPCount, 60000); // refresh every minute
